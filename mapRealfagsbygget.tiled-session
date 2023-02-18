@@ -1,0 +1,34 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "Rbygg.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/jimmy/Desktop/Programming/Thesis",
+    "last.imagePath": "C:/Users/jimmy/Desktop",
+    "map.fixedSize": false,
+    "map.lastUsedExportFilter": "JavaScript-kartfiler (*.js)",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": null,
+    "openFiles": [
+    ],
+    "project": "mapRealfagsbygget.tiled-project",
+    "recentFiles": [
+        "Rbygg.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    },
+    "tileset.transparentColor": "#ffffff",
+    "tileset.useTransparentColor": true
+}
