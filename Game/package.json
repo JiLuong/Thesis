@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "cp kaboom.d.ts ./node_modules/kaboom/dist/",
     "start": "ng serve",
     "prebuild": "cp kaboom.d.ts ./node_modules/kaboom/dist/",
     "build": "ng build",
