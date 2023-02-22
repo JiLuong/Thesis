@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "cp kaboom.d.ts ./node_modules/kaboom/dist/",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
