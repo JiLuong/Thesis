@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "https://silly-douhua-cdfe30.netlify.app/",
   "scripts": {
+    "postinstall": "cd Game && npm install",
     "build": "npm --prefix Game run build"
   },
   "repository": {
