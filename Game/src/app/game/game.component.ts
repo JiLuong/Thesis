@@ -78,7 +78,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   initPlayer() {
     const k = this.k;
-    k.debug.inspect = true;
+    // k.debug.inspect = true;
     // Create player
     this.fixedmap = k.add([k.sprite('map'), k.pos(-512, -512)]);
     this.player = k.add([
