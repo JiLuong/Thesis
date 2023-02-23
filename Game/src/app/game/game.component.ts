@@ -19,7 +19,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private canvas = {} as ElementRef;
   private levelMap = new LevelMap();
   private player: any;
-  private playerBody: any;
+  private playerSprite: any;
   private fixedmap: any;
   private camera: any;
   private k: any;
@@ -80,11 +80,14 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     const k = this.k;
     // k.debug.inspect = true;
     // Create player
-    this.fixedmap = k.add([k.sprite('map'), k.pos(-512, -512)]);
+    this.fixedmap = k.add([k.sprite('map'), k.pos(0, 0)]);
     this.player = k.add([
-      k.sprite('avatar'), // sprite() component makes it render as a sprite
-      k.origin('center'), // origin() component defines the pivot point (defaults to "topleft")
-      k.pos(120, 80), // pos() component gives it position, also enables movement
+      k.rect(80,110),
+      k.origin('center'),
+      k.pos(this.levelMap.realfagsbygget.start.x, this.levelMap.realfagsbygget.start.y),
+      k.opacity(0),
+      k.area(),
+      k.solid(),
       {
         movement: {
           left: false,
@@ -96,37 +99,35 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         speed: 400,
       },
     ]);
-    this.playerBody = k.add([
-      k.rect(80,110),
-      k.origin('center'),
-      k.pos(120, 90),
+    this.playerSprite = k.add([
+      k.sprite('avatar'), // sprite() component makes it render as a sprite
+      k.origin('center'), // origin() component defines the pivot point (defaults to "topleft")
+      k.pos(120, 80), // pos() component gives it position, also enables movement
       k.follow(this.player, k.vec2(0,5)),
-      k.opacity(0),
-      k.area(),
-      k.solid(),
     ]);
+   
 
     // Player loop
-    this.player.play('idle');
-    this.player.onUpdate(() => {
+    this.playerSprite.play('idle');
+    this.playerSprite.onUpdate(() => {
       // Update player
       let speed = this.player.speed;
       const movement = Object.values(this.player.movement).filter(
         (v) => v
       ).length;
       if (movement > 1) speed *= 0.71;
-      if (movement > 0 && this.player.curAnim() !== 'run')
-        this.player.play('run');
-      else if (movement == 0 && this.player.curAnim() !== 'idle')
-        this.player.play('idle');
+      if (movement > 0 && this.playerSprite.curAnim() !== 'run')
+        this.playerSprite.play('run');
+      else if (movement == 0 && this.playerSprite.curAnim() !== 'idle')
+        this.playerSprite.play('idle');
       if (this.player.movement.left) {
         this.player.move(-speed, 0);
-        this.player.flipX(true);
+        this.playerSprite.flipX(true);
       }
 
       if (this.player.movement.right) {
         this.player.move(speed, 0);
-        this.player.flipX(false);
+        this.playerSprite.flipX(false);
       }
       if (this.player.movement.up) this.player.move(0, -speed);
       if (this.player.movement.down) this.player.move(0, speed);
@@ -137,19 +138,22 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
 
   initLevelCollisions() {
-    /* const k = this.k;
+     const k = this.k;
     // Generate level map collisions
-    for (let i = 0; i < this.levelMap.realfagsbygget.length; i++) {
-      const rect = this.levelMap.realfagsbygget[i];
+    for (let i = 0; i < this.levelMap.realfagsbygget.collisions.length; i++) {
+      const rect = this.levelMap.realfagsbygget.collisions[i];
       k.add([
         k.pos(rect.x, rect.y),
         k.rect(rect.width, rect.height),
         k.rotate(rect.rotation),
-        k.outline(1),
+        k.opacity(0),
         k.area(),
         k.solid(),
+        {
+          id: rect.id,
+        }
       ]);
-    } */
+    } 
   }
 
   initInputController() {

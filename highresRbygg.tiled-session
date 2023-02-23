@@ -1,0 +1,74 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "Alle Filer (*)",
+    "fileStates": {
+        "Game/src/app/test.js": {
+            "scale": 0.33,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2572.727272727273,
+                "y": 1409.0909090909092
+            }
+        },
+        "Rbygghighres.tsx": {
+            "scaleInEditor": 0.25
+        },
+        "mapHighResRealfagsbygget..js": {
+            "scale": 0.75,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 885.3333333333333,
+                "y": 57.33333333333337
+            }
+        },
+        "mapHighResRealfagsbygget.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 126,
+                "y": 1204
+            }
+        },
+        "mapRealfagsbygget..js": {
+            "scale": 0.838671875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 0,
+                "y": 0
+            }
+        },
+        "mapRealfagsbygget.tmx": {
+            "scale": 0.838671875,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": -5.96180717279924,
+                "y": -2.3847228691197415
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Users/jimmy/Desktop/Programming/Thesis",
+    "last.imagePath": "C:/Users/jimmy/Desktop/Programming/Thesis/Game/src/assets",
+    "map.fixedSize": false,
+    "map.height": 150,
+    "map.lastUsedExportFilter": "JavaScript-kartfiler (*.js)",
+    "map.lastUsedFormat": "js",
+    "map.width": 200,
+    "openFiles": [
+    ],
+    "project": "highresRbygg.tiled-project",
+    "recentFiles": [
+        "Game/src/app/test.js",
+        "mapHighResRealfagsbygget..js",
+        "Rbygghighres.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
