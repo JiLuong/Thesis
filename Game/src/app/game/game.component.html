@@ -1,1 +1,9 @@
+
+<ng-container *ngIf="modalvisibile">
+    <div class="container">
+        <app-modal></app-modal>     
+        <button class="modalClose" (click)="closeModal()">[X]</button>
+    </div>
+</ng-container>
+
 <canvas #mycanvas id="myCanvas" width="1500" height="800"></canvas>

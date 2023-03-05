@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import kaboom from 'kaboom';
 import LevelMap from '../level-map';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-game',
@@ -25,6 +26,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private mapOverlap: any;
   private camera: any;
   private k: any;
+
+  public modalvisibile = false;
+
+
+  constructor(private taskService: TaskService){}
 
   ngOnDestroy(): void {
     console.log('hehdestroy');
@@ -135,6 +141,21 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }
       if (this.player.movement.up) this.player.move(0, -speed);
       if (this.player.movement.down) this.player.move(0, speed);
+
+      let isColliding = false;
+      for (let i = 0; i < this.interactables.length; i++) {
+        const element = this.interactables[i];
+        if (this.player.isColliding(element)) {
+          isColliding = true;
+          /* console.log('Element class:', element.class); */
+          if (this.taskService.currentInteractable != element.class) {
+            this.taskService.currentInteractable = element.class;
+          } 
+        }
+      }
+      if (!isColliding && this.taskService.currentInteractable!="") {
+        this.taskService.currentInteractable = "";
+      }
     });
   }
 
@@ -156,28 +177,33 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       ]);
     }
   }
-  initLevelInteractables(){
+  initLevelInteractables() {
     const k = this.k;
-    for (let i = 0; i < this.levelMap.realfagsbygget.interactables.length; i++) {
+    for (
+      let i = 0;
+      i < this.levelMap.realfagsbygget.interactables.length;
+      i++
+    ) {
       const interactable = this.levelMap.realfagsbygget.interactables[i];
       const interactableEntity = k.add([
         k.pos(interactable.x, interactable.y),
         k.rect(interactable.width, interactable.height),
         k.rotate(interactable.rotation),
         k.opacity(0),
-        k.outline(1,k.color(0, 0, 255)),
+        k.area(),
         {
           class: interactable.class,
-        }
+        },
       ]);
       this.interactables.push(interactableEntity);
     }
-
   }
   initInputController() {
     // Controles / user input
     window.addEventListener('keydown', (event) => {
       const { key } = event;
+      if (this.modalvisibile) return; 
+  
       if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = true;
         this.player.facing = 0;
@@ -200,8 +226,18 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.player.movement.right = false;
       } else if (key === 'ArrowDown' || key === 's') {
         this.player.movement.down = false;
+      } else if (key === ' ') {
+        if (this.taskService.currentInteractable!="") {
+          this.modalvisibile = true;
+        }
+      } else if (key === 'Escape') {
+        this.closeModal();
       }
     });
+  }
+
+  closeModal() {
+    this.modalvisibile = false;
   }
 
   render() {

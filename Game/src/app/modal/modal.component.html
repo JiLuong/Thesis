@@ -1,0 +1,35 @@
+<div class="container">
+    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
+    'input'
+    ">
+        <div class="inputs" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
+            <div class="taskdescription">
+                {{task.description}}
+            </div>
+            <img src={{task.image}} />
+            <div class="userinteraction">
+                <p *ngFor="let input of task.inputs">
+                    {{input.variable}} = <input type="text" id={{input.variable}} /> {{input.unit}}
+                </p>
+             
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
+    'slider'
+    ">
+        <div class="slider" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
+            <img src={{task.image}} />
+            <div class="taskdescription">
+                {{task.description}}
+            </div>
+            <div class="userinteraction">
+                <p *ngFor="let input of task.inputs">
+                    {{input.variable}} = <input type="text" id={{input.variable}} /> {{input.unit}}
+                </p>
+             
+            </div>
+        </div>
+    </ng-container>
+</div>
