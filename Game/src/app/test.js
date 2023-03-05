@@ -35,8 +35,30 @@
                  "rotation":0,
                  "visible":true,
                  "width":93.939393939394,
-                 "x":1719,
-                 "y":1850
+                 "x":1399,
+                 "y":1876
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"Interactables",
+         "objects":[
+                {
+                 "class":"0",
+                 "height":50,
+                 "id":111,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":104,
+                 "x":1638,
+                 "y":1674
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -885,8 +907,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":111,
+ "nextlayerid":8,
+ "nextobjectid":112,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

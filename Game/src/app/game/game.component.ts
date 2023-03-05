@@ -20,6 +20,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private levelMap = new LevelMap();
   private player: any;
   private playerSprite: any;
+  private interactables: any[] = [];
   private fixedmap: any;
   private camera: any;
   private k: any;
@@ -32,8 +33,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.initGame();
     this.initPlayer();
     this.initLevelCollisions();
+    this.initLevelInteractables();
     this.initInputController();
-
     // Create camera
     this.camera = this.player.pos;
     this.render();
@@ -155,7 +156,24 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       ]);
     } 
   }
+  initLevelInteractables(){
+    const k = this.k;
+    for (let i = 0; i < this.levelMap.realfagsbygget.interactables.length; i++) {
+      const interactable = this.levelMap.realfagsbygget.interactables[i];
+      const interactableEntity = k.add([
+        k.pos(interactable.x, interactable.y),
+        k.rect(interactable.width, interactable.height),
+        k.rotate(interactable.rotation),
+        k.opacity(0),
+        k.outline(1,k.color(0, 0, 255)),
+        {
+          class: interactable.class,
+        }
+      ]);
+      this.interactables.push(interactableEntity);
+    }
 
+  }
   initInputController() {
     // Controles / user input
     window.addEventListener('keydown', (event) => {
