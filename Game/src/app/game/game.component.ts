@@ -22,6 +22,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private playerSprite: any;
   private interactables: any[] = [];
   private fixedmap: any;
+  private mapOverlap: any;
   private camera: any;
   private k: any;
 
@@ -52,7 +53,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
     this.k.cam;
     // Load sprites and assets
-    this.k.loadBean();
     this.k.loadSprite('map', '/assets/Rbygghighres.png');
     this.k.loadSprite('avatar', '/assets/spriteShadowDarker777.png', {
       // The image contains 25 frames layed out horizontally, slice it into individual frames
@@ -75,17 +75,21 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         },
       },
     });
+    this.k.loadSprite('overlaps', '/assets/RbygghighresOverlaps.png');
   }
 
   initPlayer() {
     const k = this.k;
-    // k.debug.inspect = true;
+    /* k.debug.inspect = true; */
     // Create player
     this.fixedmap = k.add([k.sprite('map'), k.pos(0, 0)]);
     this.player = k.add([
-      k.rect(80,110),
+      k.rect(80, 110),
       k.origin('center'),
-      k.pos(this.levelMap.realfagsbygget.start.x, this.levelMap.realfagsbygget.start.y),
+      k.pos(
+        this.levelMap.realfagsbygget.start.x,
+        this.levelMap.realfagsbygget.start.y
+      ),
       k.opacity(0),
       k.area(),
       k.solid(),
@@ -96,7 +100,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           up: false,
           down: false,
         },
-        facing: 0,
         speed: 400,
       },
     ]);
@@ -104,9 +107,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       k.sprite('avatar'), // sprite() component makes it render as a sprite
       k.origin('center'), // origin() component defines the pivot point (defaults to "topleft")
       k.pos(120, 80), // pos() component gives it position, also enables movement
-      k.follow(this.player, k.vec2(0,5)),
+      k.follow(this.player, k.vec2(0, 1.25)),
     ]);
-   
+    this.mapOverlap = k.add([k.sprite('overlaps'), k.pos(0, 0)]);
 
     // Player loop
     this.playerSprite.play('idle');
@@ -121,25 +124,22 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.playerSprite.play('run');
       else if (movement == 0 && this.playerSprite.curAnim() !== 'idle')
         this.playerSprite.play('idle');
+
       if (this.player.movement.left) {
         this.player.move(-speed, 0);
         this.playerSprite.flipX(true);
       }
-
       if (this.player.movement.right) {
         this.player.move(speed, 0);
         this.playerSprite.flipX(false);
       }
       if (this.player.movement.up) this.player.move(0, -speed);
       if (this.player.movement.down) this.player.move(0, speed);
-     
-      // .angle is a property provided by rotate() component, here we're incrementing the angle by 120 degrees per second, dt() is the time elapsed since last frame in seconds
-      this.player.angle += 120 * k.dt();
     });
   }
 
   initLevelCollisions() {
-     const k = this.k;
+    const k = this.k;
     // Generate level map collisions
     for (let i = 0; i < this.levelMap.realfagsbygget.collisions.length; i++) {
       const rect = this.levelMap.realfagsbygget.collisions[i];
@@ -152,9 +152,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         k.solid(),
         {
           id: rect.id,
-        }
+        },
       ]);
-    } 
+    }
   }
   initLevelInteractables(){
     const k = this.k;
