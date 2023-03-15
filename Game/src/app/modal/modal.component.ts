@@ -4,20 +4,22 @@ import { TaskService } from '../task.service';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit {
-  constructor(public taskService: TaskService){}
-  ngOnInit(): void { 
-    console.log(this.taskService.currentInteractable)
+  public sliderValue: number = 0;
+
+  constructor(public taskService: TaskService) {}
+
+  ngOnInit(): void {
+    console.log(this.taskService.currentInteractable);
   }
 
   open() {
-    console.log("Open")
+    console.log('Open');
   }
 
   close() {
-    console.log("Closed")
+    console.log('Closed');
   }
-
 }

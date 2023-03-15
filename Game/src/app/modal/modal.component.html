@@ -2,7 +2,8 @@
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
     'input'
     ">
-        <div class="inputs" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
+    <div>input working</div>
+        <div class="input" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <div class="taskdescription">
                 {{task.description}}
             </div>
@@ -19,6 +20,7 @@
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
     'slider'
     ">
+    <div>slider working</div>
         <div class="slider" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <img src={{task.image}} />
             <div class="taskdescription">
@@ -26,7 +28,27 @@
             </div>
             <div class="userinteraction">
                 <p *ngFor="let input of task.inputs">
-                    {{input.variable}} = <input type="text" id={{input.variable}} /> {{input.unit}}
+                    {{input.variable}} = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}} id={{input.variable}} [(ngModel)]="sliderValue"/> {{sliderValue}} {{input.unit}}
+                </p>
+             
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
+    'checkbox'
+    ">  
+    <div>
+        checkbox working
+    </div>
+        <div class="input" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
+            <div class="taskdescription">
+                {{task.description}}
+            </div>
+            <img src={{task.image}} />
+            <div class="userinteraction">
+                <p *ngFor="let input of task.inputs">
+                    <input type="checkbox" id={{input.variable}} /> {{input.variable}} <img src={{input.image}} />
                 </p>
              
             </div>

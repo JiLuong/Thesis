@@ -29,8 +29,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   public modalvisibile = false;
 
-
-  constructor(private taskService: TaskService){}
+  constructor(private taskService: TaskService) {}
 
   ngOnDestroy(): void {
     console.log('hehdestroy');
@@ -45,6 +44,10 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Create camera
     this.camera = this.player.pos;
     this.render();
+
+    (window as any).sqrt = Math.sqrt;
+    (window as any).sin = Math.sin;
+    (window as any).cos = Math.cos;
   }
 
   initGame() {
@@ -147,14 +150,17 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         const element = this.interactables[i];
         if (this.player.isColliding(element)) {
           isColliding = true;
-          /* console.log('Element class:', element.class); */
+
           if (this.taskService.currentInteractable != element.class) {
             this.taskService.currentInteractable = element.class;
-          } 
+          }
+          if (!this.taskService.currentTask.includes(element.class)) {
+            this.taskService.currentInteractable = '';
+          }
         }
       }
-      if (!isColliding && this.taskService.currentInteractable!="") {
-        this.taskService.currentInteractable = "";
+      if (!isColliding && this.taskService.currentInteractable != '') {
+        this.taskService.currentInteractable = '';
       }
     });
   }
@@ -202,8 +208,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Controles / user input
     window.addEventListener('keydown', (event) => {
       const { key } = event;
-      if (this.modalvisibile) return; 
-  
+      if (this.modalvisibile) return;
+
       if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = true;
         this.player.facing = 0;
@@ -227,7 +233,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       } else if (key === 'ArrowDown' || key === 's') {
         this.player.movement.down = false;
       } else if (key === ' ') {
-        if (this.taskService.currentInteractable!="") {
+        if (this.taskService.currentInteractable != '') {
           this.modalvisibile = true;
         }
       } else if (key === 'Escape') {
@@ -238,6 +244,15 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   closeModal() {
     this.modalvisibile = false;
+  }
+  submitTask() {
+    if (
+      this.taskService.checkTaskAnswer(this.taskService.currentInteractable)
+    ) {
+      this.closeModal();
+    } else {
+      console.log('Wrong answer!');
+    }
   }
 
   render() {
