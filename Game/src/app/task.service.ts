@@ -28,8 +28,8 @@ export class TaskService {
         { variable: 'Fz', unit: 'F' },
       ],
       check: [
-        { variable: 'Fx', input: Math.sqrt(3) / 2 },
-        { variable: 'Fz', input: 1 / 2 },
+        { variable: 'Fx', input: 1 / 2 },
+        { variable: 'Fz', input: Math.sqrt(3) / 2 },
       ],
     },
     '1-c': {
@@ -106,14 +106,14 @@ export class TaskService {
       check: [
         { variable: 'N(L/3)', input: 1 / 2 },
         { variable: 'V(L/3)', input: Math.sqrt(3) / 6 },
-        { variable: 'M(L/3)', input: Math.sqrt(3) / 3 },
+        { variable: 'M(L/3)', input: Math.sqrt(3) / 18 },
       ],
     },
     '2-d': {
       requirement: '2-c',
       type: 'checkbox',
       description: '2d) Identify the axial-, shear- and moment diagrams:',
-      image: '', // Ha flere bilder for hver type diagram Bilde 1x, Bilde 2x, Bilde 3x tilknyttet hver options
+      image: '', 
       inputs: [
         { variable: 'checkbox1N', image: '../assets/oppgavetest.png' },
         { variable: 'checkbox2N', image: '../assets/oppgavetest.png' },

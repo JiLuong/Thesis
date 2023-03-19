@@ -41,14 +41,14 @@
     <div>
         checkbox working
     </div>
-        <div class="input" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
+        <div class="checkbox" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <div class="taskdescription">
                 {{task.description}}
             </div>
             <img src={{task.image}} />
             <div class="userinteraction">
                 <p *ngFor="let input of task.inputs">
-                    <input type="checkbox" id={{input.variable}} /> {{input.variable}} <img src={{input.image}} />
+                    <input type="checkbox" id={{input.variable}} /> {{input.display}} <img src={{input.image}} />
                 </p>
              
             </div>
