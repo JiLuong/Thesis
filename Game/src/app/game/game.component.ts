@@ -238,6 +238,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         }
       } else if (key === 'Escape') {
         this.closeModal();
+      } else if (key === "Enter"){
+        this.submitTask();
       }
     });
   }
