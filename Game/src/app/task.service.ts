@@ -171,7 +171,7 @@ export class TaskService {
       description:
         '3a) Find the length L of the beam in meters by defining it as the number of sies in a regular hexagon.',
       image: '',
-      inputs: [{ variable: 'L', unit: 'meters', min: 1, max: 10, step: 1 }],
+      inputs: [{ variable: 'L', unit: ' meters', min: 1, max: 10, step: 1 }],
       check: [{ variable: 'L', input: 6 }],
     },
     '3-b': {

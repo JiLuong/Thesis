@@ -28,7 +28,7 @@
             </div>
             <div class="userinteraction">
                 <p *ngFor="let input of task.inputs">
-                    {{input.variable}} = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}} id={{input.variable}} [(ngModel)]="sliderValue"/> {{sliderValue}} {{input.unit}}
+                    {{input.variable}} = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}} id={{input.variable}} [(ngModel)]="sliderValue"/> {{sliderValue}}{{input.unit}}
                 </p>
              
             </div>
