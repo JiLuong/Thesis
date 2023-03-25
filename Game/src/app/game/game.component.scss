@@ -8,7 +8,7 @@
 .taskContainer {
   width: 1250px;
   height: 650px;
-  outline: 8px solid #6dd4eb;
+  outline: 8px solid #9ffdfd7d;
   outline-offset: -20px;
   background-color: #51acc1;
   background-image: linear-gradient(
@@ -123,15 +123,33 @@
 .taskList {
   width: 400px;
   height: 400px;
-  outline: 8px solid #dc5d41;
+  outline: 8px solid rgba(255, 255, 255, 0.3803921569);
   outline-offset: -20px;
-  background-color: rgba(247, 59, 59);
+  background-color: rgb(219 222 191);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
   transition: opacity 0.5s ease-in-out;
+  background-image: linear-gradient(#ffffff 1.4px, transparent 0px);
+  background-size: 100% 2em;
+  background-position-y: 4.25rem;
+  line-height: 1.8em;
+  font-size: 22px;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #ff000066;
+    left: 2em;
+    z-index: 20;
+  }
+}
+.taskListContent {
+  margin-left: 3.2rem;
 }
 
 .mapbtn {

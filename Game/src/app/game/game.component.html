@@ -55,11 +55,13 @@
 <ng-container *ngIf="taskListVisible">
     <div class="taskList" [ngStyle]="{'opacity': opacityToggler ? '0.3' : '1'}">   
         <button class="modalClose" (click)="closeModal()">[ X ]</button>
-        <p>Tasklist:</p>
-        <div class="" *ngFor="let task of this.taskService.currentTask">
-            <div class="" *ngFor="let loc of [this.taskService.tasks[task]]">
-                <p> - {{task | convertToSpaces:"-"}} : {{loc.location}}</p>
-            </div>    
+        <div class="taskListContent">
+            <p>Tasklist:</p>
+            <div class="" *ngFor="let task of this.taskService.currentTask">
+                <div class="" *ngFor="let loc of [this.taskService.tasks[task]]">
+                    <p> &nbsp; ‣ {{task | convertToSpaces:"-"}} : {{loc.location}}</p>
+                </div>    
+            </div>
         </div>
     </div>
 </ng-container>
