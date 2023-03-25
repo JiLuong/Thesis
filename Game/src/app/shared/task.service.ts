@@ -7,8 +7,37 @@ export class TaskService {
   public currentTask = ['1-a', '2-a', '3-a', '4-a', '5-a'];
   public solvedTasks: string[] = [];
   public currentInteractable = '';
+  public bookTheories = {
+    'b-1': {
+      title: 'Second moment of area',
+      content: 'lelelelele',
+      image: '',
+    },
+    'b-2': {
+      title: 'Second moment of area',
+      content: 'lelelelele',
+      image: '',
+    },
+  };
+  public interactableTheories = {
+    't-1': {
+      type: 'slider',
+      title: 'Second moment of area',
+      content: 'lelelelele',
+      image: '',
+      inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],
+    },
+    't-2': {
+      type: 'slider',
+      title: 'Second moment of area',
+      content: 'lelelelele',
+      image: '',
+      inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],
+    },
+  };
   public tasks = {
     '1-a': {
+      location: 'xx',
       requirement: '',
       type: 'slider',
       description:
@@ -18,6 +47,7 @@ export class TaskService {
       check: [{ variable: 'θ', input: 60 }],
     },
     '1-b': {
+      location: 'yy',
       requirement: '1-a',
       type: 'input',
       description:
@@ -33,6 +63,7 @@ export class TaskService {
       ],
     },
     '1-c': {
+      location: 'zz',
       requirement: '1-b',
       type: 'input',
       description: '1c) Determine the design yielding stress f_d.',
@@ -41,6 +72,7 @@ export class TaskService {
       check: [{ variable: 'f_d', input: 338 }],
     },
     '1-d': {
+      location: 'aa',
       requirement: '1-c',
       type: 'checkbox',
       description:
@@ -59,6 +91,7 @@ export class TaskService {
       ],
     },
     '2-a': {
+      location: 'bb',
       requirement: '',
       type: 'checkbox',
       description:
@@ -76,6 +109,7 @@ export class TaskService {
       ],
     },
     '2-b': {
+      location: 'cc',
       requirement: '2-a',
       type: 'input',
       description:
@@ -93,6 +127,7 @@ export class TaskService {
       ],
     },
     '2-c': {
+      location: 'dd',
       requirement: '2-b',
       type: 'input',
       description:
@@ -110,6 +145,7 @@ export class TaskService {
       ],
     },
     '2-d': {
+      location: 'ee',
       requirement: '2-c',
       type: 'checkbox',
       description: '2d) Identify the axial-, shear- and moment diagrams:',
@@ -138,6 +174,7 @@ export class TaskService {
       ],
     },
     '2-e': {
+      location: 'ff',
       requirement: '2-d',
       type: 'checkbox',
       description:
@@ -167,6 +204,7 @@ export class TaskService {
       ],
     },
     '3-a': {
+      location: 'gg',
       type: 'slider',
       description:
         '3a) Find the length L of the beam in meters by defining it as the number of sies in a regular hexagon.',
@@ -175,6 +213,7 @@ export class TaskService {
       check: [{ variable: 'L', input: 6 }],
     },
     '3-b': {
+      location: 'hh',
       requirement: '3-a',
       type: 'input',
       description:
@@ -184,6 +223,7 @@ export class TaskService {
       check: [{ variable: 'F', input: 57 }],
     },
     '4-a': {
+      location: 'jj',
       requirement: '',
       type: 'slider',
       description:
@@ -193,6 +233,7 @@ export class TaskService {
       check: [{ variable: 'w(x)', input: 19 }],
     },
     '5-a': {
+      location: 'kk',
       requirement: '',
       type: 'input',
       description:
@@ -212,6 +253,7 @@ export class TaskService {
       ],
     },
     '5-b': {
+      location: 'll',
       requirement: '5-a',
       type: 'input',
       description:
@@ -231,6 +273,7 @@ export class TaskService {
       ],
     },
     '5-c': {
+      location: 'mm',
       requirement: '5-b',
       type: 'input',
       description:
@@ -254,6 +297,7 @@ export class TaskService {
       ],
     },
     '5-d': {
+      location: 'nn',
       requirement: '5-c',
       type: 'input',
       description:
@@ -273,6 +317,7 @@ export class TaskService {
       ],
     },
     '5-e': {
+      location: 'rr',
       requirement: '5-d',
       type: 'checkbox',
       description: '5e) Will the beam fail under the given conditions?',

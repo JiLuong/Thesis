@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import kaboom from 'kaboom';
 import LevelMap from '../level-map';
-import { TaskService } from '../task.service';
+import { TaskService } from '../shared/task.service';
 
 @Component({
   selector: 'app-game',
@@ -27,9 +27,13 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private camera: any;
   private k: any;
 
-  public modalvisibile = false;
+  public modalVisible = false;
+  public mapVisible = false;
+  public taskListVisible = false;
 
-  constructor(private taskService: TaskService) {}
+  public opacityToggler = false;
+
+  constructor(public taskService: TaskService) {}
 
   ngOnDestroy(): void {
     console.log('hehdestroy');
@@ -208,7 +212,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Controles / user input
     window.addEventListener('keydown', (event) => {
       const { key } = event;
-      if (this.modalvisibile) return;
+      if (this.modalVisible) return;
 
       if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = true;
@@ -234,7 +238,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.player.movement.down = false;
       } else if (key === ' ') {
         if (this.taskService.currentInteractable != '') {
-          this.modalvisibile = true;
+          this.modalVisible = true;
+          this.taskListVisible = false;
+          this.mapVisible = false;
         }
       } else if (key === 'Escape') {
         this.closeModal();
@@ -243,7 +249,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
 
   closeModal() {
-    this.modalvisibile = false;
+    this.modalVisible = false;
+    this.mapVisible = false;
+    this.taskListVisible = false;
   }
   submitTask() {
     if (
@@ -255,6 +263,18 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  toggleMap() {
+    this.mapVisible = !this.mapVisible;
+    this.taskListVisible = false;
+    this.modalVisible = false;
+  }
+
+  toggleTaskList() {
+    this.taskListVisible = !this.taskListVisible;
+    this.mapVisible = false;
+    this.modalVisible = false;
+  }
+
   render() {
     const k = this.k;
     // Game loop
@@ -264,6 +284,18 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         k.lerp(this.camera.y, this.player.pos.y, 0.03)
       );
       k.camPos(this.camera);
+
+      //Popups transparency for when the character is moving
+      const movement = Object.values(this.player.movement).filter(
+        (v) => v
+      ).length;
+      if (this.mapVisible || this.taskListVisible) {
+        if (movement > 0 && !this.opacityToggler) {
+          this.opacityToggler = true;
+        } else if (movement == 0 && this.opacityToggler) {
+          this.opacityToggler = false;
+        }
+      }
     });
   }
 }

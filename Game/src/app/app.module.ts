@@ -6,9 +6,15 @@ import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
 import { ModalComponent } from './modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
 
 @NgModule({
-  declarations: [AppComponent, GameComponent, ModalComponent],
+  declarations: [
+    AppComponent,
+    GameComponent,
+    ModalComponent,
+    ConvertToSpacesPipe,
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
