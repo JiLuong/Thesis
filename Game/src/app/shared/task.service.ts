@@ -52,7 +52,7 @@ export class TaskService {
       type: 'input',
       description:
         '1b) Find the horizontal and vertical components of the force F.',
-      image: '../assets/oppgavetest.png', //Dekomposering av F
+      image: '../assets/fig1-b.png',
       inputs: [
         { variable: 'Fx', unit: 'F' },
         { variable: 'Fz', unit: 'F' },
@@ -79,10 +79,9 @@ export class TaskService {
         '1d) Which of the following ratios is a reasonable criteria for maximum allowable deflection:',
       image: '',
       inputs: [
-        // Ha flere options L/25, L/250, L/2500
-        { variable: 'checkbox1', display: 'L/25' },
-        { variable: 'checkbox2', display: 'L/250' },
-        { variable: 'checkbox3', display: 'L/2500' },
+        { variable: 'checkbox1', display: 'L/25', picture: '' },
+        { variable: 'checkbox2', display: 'L/250', picture: '' },
+        { variable: 'checkbox3', display: 'L/2500', picture: '' },
       ],
       check: [
         { variable: 'checkbox1', input: false },
@@ -96,11 +95,11 @@ export class TaskService {
       type: 'checkbox',
       description:
         '2a) Which of the following free body diagrams describe our system.',
-      image: '', // Ha flere bilder Bilde 1, Bilde 2, Bilde 3 tilknyttet hver options
+      image: '',
       inputs: [
-        { variable: 'checkbox1', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox2', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox3', image: '../assets/oppgavetest.png' },
+        { variable: 'checkbox1', picture: '../assets/fig2-b.png' },
+        { variable: 'checkbox2', picture: '../assets/fig2-b.png' },
+        { variable: 'checkbox3', picture: '../assets/fig2-b.png' },
       ],
       check: [
         { variable: 'checkbox1', input: false },
@@ -114,7 +113,7 @@ export class TaskService {
       type: 'input',
       description:
         '2b) Calculate the forces at the beam supports A and B using the equations of equilibrium.',
-      image: '', // Ha riktig bilde (Free body diagram) tilgjengelig
+      image: '../assets/fig2-b.png',
       inputs: [
         { variable: 'A_x', unit: 'F' },
         { variable: 'A_z', unit: 'F' },
@@ -123,7 +122,7 @@ export class TaskService {
       check: [
         { variable: 'A_x', input: 1 / 2 },
         { variable: 'A_z', input: Math.sqrt(3) / 6 },
-        { variable: 'V_z', input: Math.sqrt(3) / 3 },
+        { variable: 'B_z', input: Math.sqrt(3) / 3 },
       ],
     },
     '2-c': {
@@ -132,7 +131,7 @@ export class TaskService {
       type: 'input',
       description:
         '2c) Find the internal forces of the beam using the intersection method. What are the internal forces of the beam at point L/3 from A',
-      image: '', //Bilde av intersections (From A to F OG B to F)
+      image: '../assets/fig2-c.png',
       inputs: [
         { variable: 'N(L/3)', unit: 'F' },
         { variable: 'V(L/3)', unit: 'F' },
@@ -148,18 +147,19 @@ export class TaskService {
       location: 'ee',
       requirement: '2-c',
       type: 'checkbox',
-      description: '2d) Identify the axial-, shear- and moment diagrams:',
-      image: '', 
+      description:
+        '2d) Identify the correct axial-, shear- and moment diagrams:',
+      image: '',
       inputs: [
-        { variable: 'checkbox1N', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox2N', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox3N', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox1V', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox2V', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox3V', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox1M', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox2M', image: '../assets/oppgavetest.png' },
-        { variable: 'checkbox3M', image: '../assets/oppgavetest.png' },
+        { variable: 'checkbox1N', picture: '../assets/pic2-d_1Nf.png' },
+        { variable: 'checkbox2N', picture: '../assets/pic2-d_2Nf.png' },
+        { variable: 'checkbox3N', picture: '../assets/pic2-d_3Nt.png' },
+        { variable: 'checkbox1V', picture: '../assets/pic2-d_1Vt.png' },
+        { variable: 'checkbox2V', picture: '../assets/pic2-d_2Vf.png' },
+        { variable: 'checkbox3V', picture: '../assets/pic2-d_3Vf.png' },
+        { variable: 'checkbox1M', picture: '../assets/pic2-d_1Mf.png' },
+        { variable: 'checkbox2M', picture: '../assets/pic2-d_2Mt.png' },
+        { variable: 'checkbox3M', picture: '../assets/pic2-d_3Mf.png' },
       ],
       check: [
         { variable: 'checkbox1N', input: false },
@@ -183,16 +183,19 @@ export class TaskService {
       inputs: [
         {
           variable: 'checkbox1',
+          picture: '',
           display:
             'There are no axial forces right to the point load because of the roller support.',
         },
         {
           variable: 'checkbox2',
+          picture: '',
           display:
             'The symbols in the shear-diagram reflect the direction and intensity of the vertical forces.',
         },
         {
           variable: 'checkbox3',
+          picture: '',
           display:
             'Because the beam is subjected t a point-load the moment diagram is linear.',
         },
@@ -207,9 +210,9 @@ export class TaskService {
       location: 'gg',
       type: 'slider',
       description:
-        '3a) Find the length L of the beam in meters by defining it as the number of sies in a regular hexagon.',
+        '3a) Find the length L of the beam in meters by defining it as the number of sides in a regular hexagon.',
       image: '',
-      inputs: [{ variable: 'L', unit: 'meters', min: 1, max: 10, step: 1 }],
+      inputs: [{ variable: 'L', unit: ' meters', min: 1, max: 10, step: 1 }],
       check: [{ variable: 'L', input: 6 }],
     },
     '3-b': {
@@ -218,8 +221,8 @@ export class TaskService {
       type: 'input',
       description:
         '3b) Find the force F in kilo Newtons when it is defined by the integral of a derivated function with boundaries from 1 to 3 where the function of variable x is described by x cubed plus two times x squared plus seven and a half times x.',
-      image: '', //Bilde av intersections (From A to F OG B to F)
-      inputs: [{ variable: 'F', unit: 'kilo Newtons' }],
+      image: '',
+      inputs: [{ variable: 'F', unit: ' kilo Newtons' }],
       check: [{ variable: 'F', input: 57 }],
     },
     '4-a': {
@@ -228,7 +231,7 @@ export class TaskService {
       type: 'slider',
       description:
         '4) Given the following system. Calculate the deformation of the beam in the vertical direction at the point load. Use I_y = 50 ∙ 10⁶ mm⁴.',
-      image: '', //Bilde av systemet og formlene
+      image: '../assets/fig4-a.png',
       inputs: [{ variable: 'w(x)', unit: ',3 mm', min: 1, max: 30, step: 1 }],
       check: [{ variable: 'w(x)', input: 19 }],
     },
@@ -238,7 +241,7 @@ export class TaskService {
       type: 'input',
       description:
         "5a) Determine the center of mass in the beam's cross-section.",
-      image: '../assets/oppgavetest.png', //Bilde av Figur
+      image: '../assets/fig5-a.png',
       inputs: [
         { variable: 'Zc1', unit: 'mm' },
         { variable: 'Zc2', unit: 'mm' },
@@ -266,10 +269,10 @@ export class TaskService {
         { variable: 'I_y', unit: 'mm⁴' },
       ],
       check: [
-        { variable: 'Zc1', input: 28945312.5 },
-        { variable: 'Zc2', input: 4570312.5 },
-        { variable: 'Zc3', input: 21289062.5 },
-        { variable: 'Zc', input: 54804687.5 },
+        { variable: 'I_y,1', input: 28945312.5 },
+        { variable: 'I_y,2', input: 4570312.5 },
+        { variable: 'I_y,3', input: 21289062.5 },
+        { variable: 'I_y', input: 54804687.5 },
       ],
     },
     '5-c': {
@@ -325,31 +328,37 @@ export class TaskService {
       inputs: [
         {
           variable: 'checkbox1',
+          picture: '',
           display:
             "Yes. The beam's deformation is greater than the deflection criteria",
         },
         {
           variable: 'checkbox2',
+          picture: '',
           display:
             'Yes. The maximum moments and shear forces in the beam are greater than the point load',
         },
         {
           variable: 'checkbox3',
+          picture: '',
           display:
             'Yes. The loading on the beam results in internal stresses greater than the design yielding stress',
         },
         {
           variable: 'checkbox4',
+          picture: '',
           display:
             "No. The beam's deformation is less than the deflection criteria",
         },
         {
           variable: 'checkbox5',
+          picture: '',
           display:
             'No. The maximum moments and shear forces in the beam are less than the point load',
         },
         {
           variable: 'checkbox6',
+          picture: '',
           display:
             'No. The loading on the beam results in internal stresses lower than the design yielding stress',
         },

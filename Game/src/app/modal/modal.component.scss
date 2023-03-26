@@ -1,14 +1,48 @@
+* {
+  font-size: 26px;
+}
+
 .container {
-  width: 100%;
+  width: 93%;
+  height: 93%;
+  margin-left: 50px;
+  margin-top: 50px;
+  color: white;
+}
+img {
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+.figure {
   height: 100%;
+  margin-right: 15px;
+  margin-top: 15px;
 }
 
-.input {
+input[type="text"] {
+  width: 110px;
+}
+input[type="range"] {
+  width: 200px;
 }
 
+.taskContent {
+  display: flex;
+  flex-direction: row;
+}
+
+.input,
 .slider {
 }
 
-.checkbox{
-  
+.checkbox {
+}
+
+.userinteraction {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 550px;
+}
+.userinteraction > p {
+  max-height: 20%;
 }

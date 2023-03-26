@@ -68,7 +68,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Load sprites and assets
     this.k.loadSprite('map', '/assets/Rbygghighres.png');
     this.k.loadSprite('avatar', '/assets/spriteShadowDarker777.png', {
-      // The image contains 25 frames layed out horizontally, slice it into individual frames
+      // The avater image contains X frames layed out horizontally, slice it into individual frames
       sliceX: 9,
       // Define animations
       anims: {
@@ -244,7 +244,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         }
       } else if (key === 'Escape') {
         this.closeModal();
-      } else if (key === "Enter"){
+      } else if (key === 'Enter') {
         this.submitTask();
       }
     });
@@ -260,7 +260,10 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       this.taskService.checkTaskAnswer(this.taskService.currentInteractable)
     ) {
       this.closeModal();
+      //User feedback on correct
     } else {
+      //User feedback on incorrect
+      //Sound + visuals?
       console.log('Wrong answer!');
     }
   }
