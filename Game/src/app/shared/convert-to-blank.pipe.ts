@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
-  name: 'convertToSpaces',
+  name: 'convertToBlank',
 })
-export class ConvertToSpacesPipe implements PipeTransform {
+export class ConvertToBlankPipe implements PipeTransform {
   transform(value: any, character: string) {
     return value.replace(character, '');
   }

@@ -97,9 +97,9 @@ export class TaskService {
         '2a) Which of the following free body diagrams describe our system.',
       image: '',
       inputs: [
-        { variable: 'checkbox1', picture: '../assets/fig2-b.png' },
-        { variable: 'checkbox2', picture: '../assets/fig2-b.png' },
-        { variable: 'checkbox3', picture: '../assets/fig2-b.png' },
+        { variable: 'checkbox1', picture: '../assets/pic2-b_1f.png' },
+        { variable: 'checkbox2', picture: '../assets/pic2-b_2f.png' },
+        { variable: 'checkbox3', picture: '../assets/pic2-b_t.png' },
       ],
       check: [
         { variable: 'checkbox1', input: false },
@@ -230,7 +230,7 @@ export class TaskService {
       requirement: '',
       type: 'slider',
       description:
-        '4) Given the following system. Calculate the deformation of the beam in the vertical direction at the point load. Use I_y = 50 ∙ 10⁶ mm⁴.',
+        '4) Given the following system. Calculate the deformation of the beam in the vertical direction at the point load. Use I_y = 50 ∙ 10⁶ mm⁴. Assume that P is the vertical component of F.',
       image: '../assets/fig4-a.png',
       inputs: [{ variable: 'w(x)', unit: ',3 mm', min: 1, max: 30, step: 1 }],
       check: [{ variable: 'w(x)', input: 19 }],
@@ -243,16 +243,16 @@ export class TaskService {
         "5a) Determine the center of mass in the beam's cross-section.",
       image: '../assets/fig5-a.png',
       inputs: [
-        { variable: 'Zc1', unit: 'mm' },
-        { variable: 'Zc2', unit: 'mm' },
-        { variable: 'Zc3', unit: 'mm' },
-        { variable: 'Zc', unit: 'mm' },
+        { variable: 'Zc1', unit: ' mm' },
+        { variable: 'Zc2', unit: ' mm' },
+        { variable: 'Zc3', unit: ' mm' },
+        { variable: '~Zc', unit: ' mm' },
       ],
       check: [
         { variable: 'Zc1', input: 12.5 },
         { variable: 'Zc2', input: 100 },
         { variable: 'Zc3', input: 200 },
-        { variable: 'Zc', input: 87.5 },
+        { variable: '~Zc', input: 87.5 },
       ],
     },
     '5-b': {
@@ -261,18 +261,18 @@ export class TaskService {
       type: 'input',
       description:
         "5b) Find the second moment of area for this section using Steiner's theorem.",
-      image: '../assets/oppgavetest.png', //Bilde av tverrsnittet fra LF opg 5a) i tillegg til numerering av 1,2 og 3
+      image: '../assets/fig5-b.png',
       inputs: [
-        { variable: 'I_y,1', unit: 'mm⁴' },
-        { variable: 'I_y,2', unit: 'mm⁴' },
-        { variable: 'I_y,3', unit: 'mm⁴' },
-        { variable: 'I_y', unit: 'mm⁴' },
+        { variable: 'I_y,1', unit: ' mm⁴' },
+        { variable: 'I_y,2', unit: ' mm⁴' },
+        { variable: 'I_y,3', unit: ' mm⁴' },
+        { variable: '~¨I_y', unit: ' mm⁴' },
       ],
       check: [
         { variable: 'I_y,1', input: 28945312.5 },
         { variable: 'I_y,2', input: 4570312.5 },
         { variable: 'I_y,3', input: 21289062.5 },
-        { variable: 'I_y', input: 54804687.5 },
+        { variable: '~¨I_y', input: 54804687.5 },
       ],
     },
     '5-c': {
@@ -281,7 +281,7 @@ export class TaskService {
       type: 'input',
       description:
         '5c) Doublecheck the second moment of area for the cross-section by calculating its mathematical definition. Fill in the missing boundaries of the following integral:',
-      image: '', //Bilde av integralet med variabler v1, v2, v3, ...
+      image: '../assets/fig5-c.png',
       inputs: [
         { variable: 'v1', unit: '' },
         { variable: 'v2', unit: '' },
@@ -304,8 +304,8 @@ export class TaskService {
       requirement: '5-c',
       type: 'input',
       description:
-        '5d) Identify the maximum and minimum normal stresses in the beam at points 2 meters and 4 meters along its length using I_y = 54,8 ∙ 10⁶ mm⁴.',
-      image: '', //Bilde av Sideprofilen til tverrsnittet med aksial og momentbidrag i spenning
+        "5d) Identify the maximum and minimum normal stresses in the beam at points 2 meters and 4 meters along its length using I_y = 54,8 ∙ 10⁶ mm⁴. Hint: Use Navier's equation σ = σ_N + σ_M",
+      image: '../assets/fig5-d.png',
       inputs: [
         { variable: 'σ_max(L=2)', unit: ',25 N/mm²  (Compression)' },
         { variable: 'σ_min(L=2)', unit: ',87 N/mm²  (Tension)' },
@@ -324,7 +324,7 @@ export class TaskService {
       requirement: '5-d',
       type: 'checkbox',
       description: '5e) Will the beam fail under the given conditions?',
-      image: '', //Bilde av selve bjelken
+      image: '../assets/fig5-e.png',
       inputs: [
         {
           variable: 'checkbox1',

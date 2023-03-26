@@ -10,7 +10,7 @@
                 <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} />
                 <div class="userinteraction">
                     <p *ngFor="let input of task.inputs">
-                        {{input.variable}} = <input class="inputText" type="text" id={{input.variable}} />{{input.unit}}
+                        {{input.variable | convertToDoubleSpace:"~"|convertToSpace:"¨"}} = <input class="inputText" type="text" id={{input.variable}} />{{input.unit}}
                     </p>
                 </div>
             </div>
@@ -43,13 +43,14 @@
             <div class="taskdescription">
                 {{task.description}}
             </div>
-<!--KanDenneSlettes--><img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} />
-            <div class="userinteraction">
-                <p *ngFor="let input of task.inputs">
-                    <input type="checkbox" id={{input.variable}} /> {{input.display}} <img *ngIf="input.picture !==''" src={{input.picture}} />
-                </p>
-             
-            </div>
+                <!-- <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} /> -->
+                <div class="userinteraction">
+                    <p *ngFor="let input of task.inputs">
+                        <input type="checkbox" id={{input.variable}} /> {{input.display}} <img *ngIf="input.picture !==''" src={{input.picture}} />
+                    </p>
+                
+                </div>
+            
         </div>
     </ng-container>
 
