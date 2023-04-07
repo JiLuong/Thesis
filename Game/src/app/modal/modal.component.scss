@@ -45,3 +45,68 @@ input[type="range"] {
   width: 1145px;
   margin-top: 12px;
 }
+
+
+.rectangle1, .rectangle2 {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    background-color: #201f1e;
+    text-align: center;
+    font-size: 18px;
+}
+
+.rectangle1 {
+  margin-right: 10px;
+}
+
+.rectangle2 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.demomonstration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 400px;
+  margin-left: 60px;
+
+    .rectangles{
+      display: flex;
+      align-items: center;
+      margin-left: 50px;
+
+        p{
+          left: 55px;
+          position: absolute;
+        }
+        }
+        .divider {
+          margin-left: 3px;
+          border-style: dashed;
+          border-width: 1px;
+          z-index: -2;
+          position: absolute;
+        }
+        .output{
+          display: flex;
+          justify-content: space-between;
+          gap: 110px;
+          margin-right: 87px;
+          margin-top: 10px;
+          font-size: 27px;
+          font-weight: bold;
+        }
+}
+
+.interaction{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+    .formula{
+      font-size: 40px;
+      margin-right: 90px;
+    }
+}

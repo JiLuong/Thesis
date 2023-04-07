@@ -5,55 +5,36 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
   public currentTask = ['1-a', '2-a', '3-a', '4-a', '5-a'];
-  public allTheories = ['b-1', 'b-2', 'b-3', 'b-4', 'b-5','t-1', 't-2', 't-3'];
+  public allTheories = ['b-1', 'b-2', 'b-3', 'b-4', 'b-5','d-1', 'd-2', 'd-3'];
   public solvedTasks: string[] = [];
   public currentInteractable = '';
   public theories = {
     'b-1': {
       type: 'book',
       title: 'Theory 1 Second moment of area',
-      content: 'lelelelele',
       doc: '../assets/docus/2StatiskLikevekt.pdf',
     },
     'b-2': {
       type: 'book',
       title: 'Theory 2 Second moment of area',
-      content: 'lelelelele',
-      doc: '../assets/docus/2StatiskLikevekt.pdf',
+      doc: '../assets/docus/6Lastvirkningsdiagram.pdf',
     },
     'b-3': {
       type: 'book',
       title: 'Theory 3 Second moment of area',
-      content: 'lelelelele',
-      doc: '../assets/docus/2StatiskLikevekt.pdf',
+      doc: '../assets/docus/7IntroduksjonTilFasthetslære.pdf',
     },
     'b-4': {
       type: 'book',
       title: 'Theory 4 Second moment of area',
-      content: 'lelelelele',
-      doc: '../assets/docus/2StatiskLikevekt.pdf',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
-    't-1': {
+    'd-1': {
       type: 'demo',
-      title: 'Demo 1 Second moment of area',
-      content: 'lelelelele',
-      image: '',
-      inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],
+      title: 'Demonstration: Variable second moment of area with origin through neutral axis',
+      values: [{ variable: 'θ', unit: '°', min: 100, max: 300}],
     },
-    't-2': {
-      type: 'demo',
-      title: 'Demo 2 Second moment of area',
-      content: 'lelelelele',
-      image: '',
-      inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],
-    },
-    't-3': {
-      type: 'demo',
-      title: 'Demo 3 Second moment of area',
-      content: 'lelelelele',
-      image: '',
-      inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],
-    },
+    
   };
   public tasks = {
     '1-a': {

@@ -1,79 +1,95 @@
 <div class="container">
-    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
-    'input'
-    ">
+    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='input'">
         <div class="input" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <div class="taskdescription">
                 {{task.description}}
             </div>
             <div class="taskContent">
-                <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} />
+                <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''"
+                    src={{task.image}} />
                 <div class="userinteraction">
                     <p *ngFor="let input of task.inputs">
-                        {{input.variable | convertToDoubleSpace:"~"|convertToSpace:"¨"}} = <input class="inputText" type="text" id={{input.variable}} />{{input.unit}}
+                        {{input.variable | convertToDoubleSpace:"~"|convertToSpace:"¨"}} = <input class="inputText"
+                            type="text" id={{input.variable}} />{{input.unit}}
                     </p>
                 </div>
             </div>
         </div>
     </ng-container>
 
-    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
-    'slider'
-    ">
+    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='slider'">
         <div class="slider" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <div class="taskdescription">
                 {{task.description}}
             </div>
             <div class="taskContent">
-                <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} />
+                <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''"
+                    src={{task.image}} />
                 <div class="userinteraction">
                     <p *ngFor="let input of task.inputs">
-                        {{input.variable}} = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}} id={{input.variable}} [(ngModel)]="sliderValue"/>{{sliderValue}}{{input.unit}}
+                        {{input.variable}} = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}}
+                            id={{input.variable}} [(ngModel)]="sliderValue" />{{sliderValue}}{{input.unit}}
                     </p>
-                
+
                 </div>
             </div>
         </div>
     </ng-container>
 
-    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
-    'checkbox'
-    ">  
+    <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='checkbox'">
         <div class="checkbox" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <div class="taskdescription">
                 {{task.description}}
             </div>
-                <!-- <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} /> -->
-                <div class="userinteraction">
-                    <p *ngFor="let input of task.inputs">
-                        <input type="checkbox" id={{input.variable}} /> {{input.display}} <img *ngIf="input.picture !==''" src={{input.picture}} />
-                    </p>
-                
+            <!-- <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} /> -->
+            <div class="userinteraction">
+                <p *ngFor="let input of task.inputs">
+                    <input type="checkbox" id={{input.variable}} /> {{input.display}} <img *ngIf="input.picture !==''"
+                        src={{input.picture}} />
+                </p>
+
+            </div>
+
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type =='book'">
+
+        <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
+            <div>
+                {{theory.title}}
+                <iframe class="docuView" [src]="getTrustedUrl(theory?.doc)"></iframe>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type == 'demo'">
+        <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
+            {{theory.title}}
+            <div class="demomonstration">
+                <div class="rectangles">
+                    <p>N.A.</p>
+                    <div class="rectangle1" [style.width.px]="100" [style.height.px]="rectangleValue">
+                        Element 1 100 x {{rectangleValue}} [mm]
+                    </div>
+                    <div class="rectangle2" [style.width.px]="rectangleValue" [style.height.px]="100">
+                        Element 2 {{rectangleValue}} x 100 [mm]
+                    </div>
                 </div>
-            
-        </div>
-    </ng-container>
 
-    <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type ==
-    'book'
-    ">  
-    
-        <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
-            <div class=""theorytitle>
-                {{theory.title}}
-                <iframe class="docuView" [src]="getTrustedUrl(theory?.doc)" ></iframe>  
+                <div class="divider" [style.width.px]="rectangleValue+220"></div>
+                
+                <div class="output">
+                    <div> Element 1: <br> {{ (1/12 * 100 * rectangleValue*rectangleValue*rectangleValue).toFixed(0) }} mm⁴</div>
+                    <div> Element 2: <br> {{ (1/12 * rectangleValue *100*100*100).toFixed(0) }} mm⁴ </div>
+                </div>
             </div>
-        </div>
-    </ng-container>
 
-    <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type ==
-    'demo'
-    ">  
-        <p>demo theory working</p>
-        <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
-            <div class=""theorytitle>
-                {{theory.title}}
+            <div class="interaction">
+                <div>Adjust this parameter <input type="range" min=100 max=300 [(ngModel)]="rectangleValue" /> {{rectangleValue}} mm </div>
+                <div class="formula"> I<sub>y</sub> = ⅟₁₂ · w · h³ </div>
             </div>
+
         </div>
     </ng-container>
 

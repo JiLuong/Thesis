@@ -295,7 +295,7 @@
           y: 2276,
         },
         {
-          class: "t-1",
+          class: "d-1",
           height: 50,
           id: 131,
           name: "",
@@ -306,7 +306,7 @@
           y: 2374,
         },
         {
-          class: "t-2",
+          class: "d-2",
           height: 50,
           id: 132,
           name: "",
@@ -317,7 +317,7 @@
           y: 2376,
         },
         {
-          class: "t-3",
+          class: "d-3",
           height: 50,
           id: 133,
           name: "",
@@ -328,7 +328,7 @@
           y: 2376,
         },
         {
-          class: "t-4",
+          class: "d-4",
           height: 50,
           id: 134,
           name: "",
