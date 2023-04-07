@@ -30,8 +30,14 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   public modalVisible = false;
   public mapVisible = false;
   public taskListVisible = false;
+  public newestTask = false;
+
+  public correctAnswerSubmitted = false;
+  public wrongAnswerSubmitted = false;
 
   public opacityToggler = false;
+
+  public playerSpeed = 400;
 
   constructor(public taskService: TaskService) {}
 
@@ -42,7 +48,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.initGame();
     this.initPlayer();
-    this.initLevelCollisions();
+    this.initLevelMapCollisions();
     this.initLevelInteractables();
     this.initInputController();
     // Create camera
@@ -52,6 +58,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     (window as any).sqrt = Math.sqrt;
     (window as any).sin = Math.sin;
     (window as any).cos = Math.cos;
+    //
+    console.log(this.newestTask)
+    console.log(this.taskService.currentTask)
+    console.log(this.taskService.solvedTasks)
+    console.log(this.taskService.currentInteractable)
   }
 
   initGame() {
@@ -113,7 +124,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           up: false,
           down: false,
         },
-        speed: 400,
+        speed: this.playerSpeed,
       },
     ]);
     this.playerSprite = k.add([
@@ -156,11 +167,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           isColliding = true;
 
           if (this.taskService.currentInteractable != element.class) {
-            this.taskService.currentInteractable = element.class;
+            this.taskService.currentInteractable = element.class;           
           }
-          if (!this.taskService.currentTask.includes(element.class)) {
+          /* if (!this.taskService.currentTask.includes(element.class)||this.taskService.solvedTasks.includes(element.class)) {
             this.taskService.currentInteractable = '';
-          }
+          } */
+          
         }
       }
       if (!isColliding && this.taskService.currentInteractable != '') {
@@ -169,7 +181,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  initLevelCollisions() {
+  initLevelMapCollisions() {
     const k = this.k;
     // Generate level map collisions
     for (let i = 0; i < this.levelMap.realfagsbygget.collisions.length; i++) {
@@ -214,7 +226,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       const { key } = event;
       if (this.modalVisible) return;
 
-      if (key === 'ArrowLeft' || key === 'a') {
+      if (key === ' ') {
+        if (this.taskService.currentTask.includes(this.taskService.currentInteractable)||this.taskService.solvedTasks.includes(this.taskService.currentInteractable)) {
+          this.player.speed = 0 ;  
+        }
+      } else if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = true;
         this.player.facing = 0;
       } else if (key === 'ArrowUp' || key === 'w') {
@@ -224,11 +240,25 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.player.facing = 1;
       } else if (key === 'ArrowDown' || key === 's') {
         this.player.movement.down = true;
-      }
+      } 
+    
     });
     window.addEventListener('keyup', (event) => {
       const { key } = event;
-      if (key === 'ArrowLeft' || key === 'a') {
+      
+      if (key === ' ') {
+        if (this.taskService.currentTask.includes(this.taskService.currentInteractable)||this.taskService.solvedTasks.includes(this.taskService.currentInteractable)) {
+          this.modalVisible = true;
+          this.taskListVisible = false;
+          this.mapVisible = false;
+          this.player.speed = 0 ;
+          this.newestTask = true;
+        }
+        if (this.taskService.solvedTasks.includes(this.taskService.currentInteractable)) {
+          this.newestTask = false;
+        }
+
+      } else if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = false;
       } else if (key === 'ArrowUp' || key === 'w') {
         this.player.movement.up = false;
@@ -236,16 +266,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.player.movement.right = false;
       } else if (key === 'ArrowDown' || key === 's') {
         this.player.movement.down = false;
-      } else if (key === ' ') {
-        if (this.taskService.currentInteractable != '') {
-          this.modalVisible = true;
-          this.taskListVisible = false;
-          this.mapVisible = false;
-        }
       } else if (key === 'Escape') {
         this.closeModal();
       } else if (key === 'Enter') {
-        this.submitTask();
+        if (this.newestTask) {
+          this.submitTask();
+        }
       }
     });
   }
@@ -254,16 +280,25 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.modalVisible = false;
     this.mapVisible = false;
     this.taskListVisible = false;
+    this.player.speed = this.playerSpeed ;
   }
   submitTask() {
     if (
       this.taskService.checkTaskAnswer(this.taskService.currentInteractable)
     ) {
-      this.closeModal();
-      //User feedback on correct
+      //Soundeffect: Correct
+      this.correctAnswerSubmitted = true;
+      setTimeout(() => {
+        this.correctAnswerSubmitted = false;
+        this.closeModal();
+      }, 900);
+    
     } else {
-      //User feedback on incorrect
-      //Sound + visuals?
+      //Soundeffect: Wrong
+      this.wrongAnswerSubmitted = true;
+      setTimeout(() => {
+        this.wrongAnswerSubmitted = false;
+      }, 500);
       console.log('Wrong answer!');
     }
   }

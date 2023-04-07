@@ -67,6 +67,32 @@
   opacity: 1;
   right: 0;
 }
+
+@mixin glowAnimation($color1,$color2,$color3,$animationName ) {
+
+  @keyframes #{$animationName} {
+    0% {
+      box-shadow: 0 0 17px $color1;
+    }
+    50% {
+      box-shadow: 0 0 30px $color2;
+    }
+    100% {
+      box-shadow: 0 0 17px $color3;
+    }
+  }
+}
+
+.correctAnswer {
+  @include glowAnimation(rgb(0, 247, 0),green,rgb(0, 167, 0),glowCorrect);
+  animation: glowCorrect 0.7s ease-in-out;
+}
+
+.wrongAnswer {
+  @include glowAnimation(red,rgb(255, 94, 0),red,glowWrong);
+  animation: glowWrong 0.5s ease-in-out;
+}
+
 .modalClose {
   cursor: pointer;
   position: absolute;
@@ -83,6 +109,7 @@
   box-shadow: 2px 3px #00000033;
   z-index: 15;
 }
+
 .modalClose:hover {
   transform: scale(1.1);
   box-shadow: 0 0 rgb(0, 0, 0);

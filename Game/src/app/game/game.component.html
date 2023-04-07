@@ -6,11 +6,15 @@
 </div>
 
 <ng-container *ngIf="modalVisible">
-    <div class="taskContainer">
-        <app-modal></app-modal>   
-        <button class="modalClose" (click)="closeModal()">[ x ]</button>
-        <button class="submit" (click)="submitTask()"><span>Submit</span></button>
-    </div>
+    
+    <div [ngClass]="{'taskContainer': true, 'show': modalVisible, 'correctAnswer': correctAnswerSubmitted, 'wrongAnswer': wrongAnswerSubmitted}">
+            <app-modal></app-modal>   
+            <button class="modalClose" (click)="closeModal()">[ x ]</button>
+            <div *ngIf="newestTask">
+                <button class="submit" (click)="submitTask()"><span>Submit</span></button>
+            </div>
+        </div>
+    
 </ng-container>
 
 <ng-container *ngIf="mapVisible">
