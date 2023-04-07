@@ -22,6 +22,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private player: any;
   private playerSprite: any;
   private interactables: any[] = [];
+  private theories: any[] = [];
   private fixedmap: any;
   private mapOverlap: any;
   private camera: any;
@@ -42,7 +43,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   constructor(public taskService: TaskService) {}
 
   ngOnDestroy(): void {
-    console.log('hehdestroy');
+    console.log('Destroy');
   }
 
   ngAfterViewInit(): void {
@@ -50,6 +51,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.initPlayer();
     this.initLevelMapCollisions();
     this.initLevelInteractables();
+    this.initLevelTheories();
     this.initInputController();
     // Create camera
     this.camera = this.player.pos;
@@ -58,11 +60,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     (window as any).sqrt = Math.sqrt;
     (window as any).sin = Math.sin;
     (window as any).cos = Math.cos;
-    //
-    console.log(this.newestTask)
-    console.log(this.taskService.currentTask)
-    console.log(this.taskService.solvedTasks)
-    console.log(this.taskService.currentInteractable)
+    
   }
 
   initGame() {
@@ -162,23 +160,27 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
       let isColliding = false;
       for (let i = 0; i < this.interactables.length; i++) {
-        const element = this.interactables[i];
-        if (this.player.isColliding(element)) {
+        const interactableElement = this.interactables[i];
+        if (this.player.isColliding(interactableElement)) {
           isColliding = true;
-
-          if (this.taskService.currentInteractable != element.class) {
-            this.taskService.currentInteractable = element.class;           
-          }
-          /* if (!this.taskService.currentTask.includes(element.class)||this.taskService.solvedTasks.includes(element.class)) {
-            this.taskService.currentInteractable = '';
-          } */
-          
+          if (this.taskService.currentInteractable != interactableElement.class) {
+            this.taskService.currentInteractable = interactableElement.class;           
+          }          
         }
       }
       if (!isColliding && this.taskService.currentInteractable != '') {
         this.taskService.currentInteractable = '';
       }
+
+      for (let j = 0; j < this.theories.length; j++) {
+        const theoryElement = this.theories[j];
+        if (this.player.isColliding(theoryElement)) {
+          this.taskService.currentInteractable = theoryElement.class;
+          
+        }
+      }
     });
+
   }
 
   initLevelMapCollisions() {
@@ -220,6 +222,29 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       this.interactables.push(interactableEntity);
     }
   }
+
+  initLevelTheories() {
+    const k = this.k;
+    for (
+      let i = 0;
+      i < this.levelMap.realfagsbygget.theories.length;
+      i++
+    ) {
+      const theory = this.levelMap.realfagsbygget.theories[i];
+      const theoryEntities = k.add([
+        k.pos(theory.x, theory.y),
+        k.rect(theory.width, theory.height),
+        k.rotate(theory.rotation),
+        k.opacity(0),
+        k.area(),
+        {
+          class: theory.class,
+        },
+      ]);
+      this.theories.push(theoryEntities);
+    }
+  }
+
   initInputController() {
     // Controles / user input
     window.addEventListener('keydown', (event) => {
@@ -245,7 +270,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
     window.addEventListener('keyup', (event) => {
       const { key } = event;
-      
       if (key === ' ') {
         if (this.taskService.currentTask.includes(this.taskService.currentInteractable)||this.taskService.solvedTasks.includes(this.taskService.currentInteractable)) {
           this.modalVisible = true;
@@ -257,7 +281,10 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         if (this.taskService.solvedTasks.includes(this.taskService.currentInteractable)) {
           this.newestTask = false;
         }
-
+        if (this.taskService.allTheories.includes(this.taskService.currentInteractable)) {
+          this.modalVisible = true;
+          //console.log(this.taskService.bookTheories['b-1'])
+        }
       } else if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = false;
       } else if (key === 'ArrowUp' || key === 'w') {

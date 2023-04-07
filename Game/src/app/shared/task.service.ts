@@ -5,31 +5,51 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
   public currentTask = ['1-a', '2-a', '3-a', '4-a', '5-a'];
+  public allTheories = ['b-1', 'b-2', 'b-3', 'b-4', 'b-5','t-1', 't-2', 't-3'];
   public solvedTasks: string[] = [];
   public currentInteractable = '';
-  public bookTheories = {
+  public theories = {
     'b-1': {
-      title: 'Second moment of area',
+      type: 'book',
+      title: 'Theory 1 Second moment of area',
       content: 'lelelelele',
-      image: '',
+      doc: '../assets/docus/2StatiskLikevekt.pdf',
     },
     'b-2': {
-      title: 'Second moment of area',
+      type: 'book',
+      title: 'Theory 2 Second moment of area',
       content: 'lelelelele',
-      image: '',
+      doc: '../assets/docus/2StatiskLikevekt.pdf',
     },
-  };
-  public interactableTheories = {
+    'b-3': {
+      type: 'book',
+      title: 'Theory 3 Second moment of area',
+      content: 'lelelelele',
+      doc: '../assets/docus/2StatiskLikevekt.pdf',
+    },
+    'b-4': {
+      type: 'book',
+      title: 'Theory 4 Second moment of area',
+      content: 'lelelelele',
+      doc: '../assets/docus/2StatiskLikevekt.pdf',
+    },
     't-1': {
-      type: 'slider',
-      title: 'Second moment of area',
+      type: 'demo',
+      title: 'Demo 1 Second moment of area',
       content: 'lelelelele',
       image: '',
       inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],
     },
     't-2': {
-      type: 'slider',
-      title: 'Second moment of area',
+      type: 'demo',
+      title: 'Demo 2 Second moment of area',
+      content: 'lelelelele',
+      image: '',
+      inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],
+    },
+    't-3': {
+      type: 'demo',
+      title: 'Demo 3 Second moment of area',
       content: 'lelelelele',
       image: '',
       inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],

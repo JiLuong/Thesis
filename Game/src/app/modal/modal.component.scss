@@ -30,13 +30,6 @@ input[type="range"] {
   flex-direction: row;
 }
 
-.input,
-.slider {
-}
-
-.checkbox {
-}
-
 .userinteraction {
   display: flex;
   flex-direction: column;
@@ -45,4 +38,10 @@ input[type="range"] {
 }
 .userinteraction > p {
   max-height: 20%;
+}
+
+.docuView{
+  height: 510px;
+  width: 1145px;
+  margin-top: 12px;
 }
