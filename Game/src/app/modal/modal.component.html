@@ -2,17 +2,17 @@
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
     'input'
     ">
-    <div>input working</div>
         <div class="input" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <div class="taskdescription">
                 {{task.description}}
             </div>
-            <img src={{task.image}} />
-            <div class="userinteraction">
-                <p *ngFor="let input of task.inputs">
-                    {{input.variable}} = <input type="text" id={{input.variable}} /> {{input.unit}}
-                </p>
-             
+            <div class="taskContent">
+                <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} />
+                <div class="userinteraction">
+                    <p *ngFor="let input of task.inputs">
+                        {{input.variable | convertToDoubleSpace:"~"|convertToSpace:"¨"}} = <input class="inputText" type="text" id={{input.variable}} />{{input.unit}}
+                    </p>
+                </div>
             </div>
         </div>
     </ng-container>
@@ -20,17 +20,18 @@
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
     'slider'
     ">
-    <div>slider working</div>
         <div class="slider" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
-            <img src={{task.image}} />
             <div class="taskdescription">
                 {{task.description}}
             </div>
-            <div class="userinteraction">
-                <p *ngFor="let input of task.inputs">
-                    {{input.variable}} = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}} id={{input.variable}} [(ngModel)]="sliderValue"/> {{sliderValue}}{{input.unit}}
-                </p>
-             
+            <div class="taskContent">
+                <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} />
+                <div class="userinteraction">
+                    <p *ngFor="let input of task.inputs">
+                        {{input.variable}} = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}} id={{input.variable}} [(ngModel)]="sliderValue"/>{{sliderValue}}{{input.unit}}
+                    </p>
+                
+                </div>
             </div>
         </div>
     </ng-container>
@@ -38,20 +39,21 @@
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type ==
     'checkbox'
     ">  
-    <div>
-        checkbox working
-    </div>
         <div class="checkbox" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <div class="taskdescription">
                 {{task.description}}
             </div>
-            <img src={{task.image}} />
-            <div class="userinteraction">
-                <p *ngFor="let input of task.inputs">
-                    <input type="checkbox" id={{input.variable}} /> {{input.display}} <img src={{input.image}} />
-                </p>
-             
-            </div>
+                <!-- <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} /> -->
+                <div class="userinteraction">
+                    <p *ngFor="let input of task.inputs">
+                        <input type="checkbox" id={{input.variable}} /> {{input.display}} <img *ngIf="input.picture !==''" src={{input.picture}} />
+                    </p>
+                
+                </div>
+            
         </div>
     </ng-container>
+
+    <!-- Desgin: Blueprint: Task, Description, Location, Submit -->
+    <!-- Use CSS Grid for the footer boxes? -->
 </div>
