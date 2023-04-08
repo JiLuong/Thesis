@@ -53,7 +53,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.initLevelInteractables();
     this.initLevelTheories();
     this.initInputController();
-    // Create camera
     this.camera = this.player.pos;
     this.render();
 
@@ -77,9 +76,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Load sprites and assets
     this.k.loadSprite('map', '/assets/Rbygghighres.png');
     this.k.loadSprite('avatar', '/assets/spriteShadowDarker777.png', {
-      // The avater image contains X frames layed out horizontally, slice it into individual frames
+      // The avatar image contains X frames layed out horizontally. Slicing it into individual frames
       sliceX: 9,
-      // Define animations
       anims: {
         idle: {
           // Starts from frame 0, ends at frame 10
@@ -128,7 +126,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.playerSprite = k.add([
       k.sprite('avatar'), // sprite() component makes it render as a sprite
       k.origin('center'), // origin() component defines the pivot point (defaults to "topleft")
-      k.pos(120, 80), // pos() component gives it position, also enables movement
+      k.pos(120, 80),     // pos() component gives it position, also enables movement
       k.follow(this.player, k.vec2(0, 1.25)),
     ]);
     this.mapOverlap = k.add([k.sprite('overlaps'), k.pos(0, 0)]);
@@ -283,7 +281,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         }
         if (this.taskService.allTheories.includes(this.taskService.currentInteractable)) {
           this.modalVisible = true;
-          //console.log(this.taskService.bookTheories['b-1'])
+          this.taskListVisible = false;
+          this.mapVisible = false;
+          this.newestTask = false;
         }
       } else if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = false;
@@ -326,7 +326,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.wrongAnswerSubmitted = false;
       }, 500);
-      console.log('Wrong answer!');
     }
   }
 
@@ -334,12 +333,14 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.mapVisible = !this.mapVisible;
     this.taskListVisible = false;
     this.modalVisible = false;
+    this.player.speed = this.playerSpeed;
   }
 
   toggleTaskList() {
     this.taskListVisible = !this.taskListVisible;
     this.mapVisible = false;
     this.modalVisible = false;
+    this.player.speed = this.playerSpeed;
   }
 
   render() {
@@ -364,5 +365,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         }
       }
     });
+
+    if (this.taskService.currentTask.length == 0) {
+      //Win
+    }
   }
 }
