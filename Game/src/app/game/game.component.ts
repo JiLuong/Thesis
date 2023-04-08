@@ -22,6 +22,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private player: any;
   private playerSprite: any;
   private interactables: any[] = [];
+  private taskVisuals: any;
+  private theoryVisuals: any;
   private theories: any[] = [];
   private fixedmap: any;
   private mapOverlap: any;
@@ -49,6 +51,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.initGame();
     this.initPlayer();
+    this.initTasks();
+    this.initTheories();
     this.initLevelMapCollisions();
     this.initLevelInteractables();
     this.initLevelTheories();
@@ -96,6 +100,46 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       },
     });
     this.k.loadSprite('overlaps', '/assets/RbygghighresOverlaps.png');
+    
+    //Task sprites
+    for (let i = 0; i < this.levelMap.realfagsbygget.interactables.length; i++) {
+      let taskNumber = this.levelMap.realfagsbygget.interactables[i]
+      this.k.loadSprite('task'+i, '/assets/taskSprites/task'+taskNumber.class+'.png');
+    }
+    //Theory sprites
+    for (let i = 0; i < this.levelMap.realfagsbygget.theories.length; i++) {
+      let theoryNumber = this.levelMap.realfagsbygget.theories[i]
+      this.k.loadSprite('theory'+i, '/assets/theorySprites/theory'+theoryNumber.class+'.png');
+    }
+  }
+  initTasks(){
+    const k = this.k
+    for (let i = 0; i < this.levelMap.realfagsbygget.interactables.length; i++) {
+      this.taskVisuals = this.levelMap.realfagsbygget.interactables [i];
+      k.add([
+        k.sprite('task'+i),
+        k.pos(this.taskVisuals.x, this.taskVisuals.y),
+        k.z(3),
+        {
+          id: this.taskVisuals.id,
+        },
+      ]);
+    }
+  }
+  initTheories(){
+    const k = this.k
+    for (let i = 0; i < this.levelMap.realfagsbygget.theories.length; i++) {
+      this.theoryVisuals = this.levelMap.realfagsbygget.theories [i];
+      k.add([
+        k.sprite('theory'+i),
+        k.pos(this.theoryVisuals.x, this.theoryVisuals.y),
+        /* k.size(this.theoryVisuals.width, this.theoryVisuals.height), */
+        k.z(3),
+        {
+          id: this.theoryVisuals.id,
+        },
+      ]);
+    }
   }
 
   initPlayer() {
@@ -128,8 +172,10 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       k.origin('center'), // origin() component defines the pivot point (defaults to "topleft")
       k.pos(120, 80),     // pos() component gives it position, also enables movement
       k.follow(this.player, k.vec2(0, 1.25)),
+      k.z(4),
+
     ]);
-    this.mapOverlap = k.add([k.sprite('overlaps'), k.pos(0, 0)]);
+    this.mapOverlap = k.add([k.sprite('overlaps'), k.pos(0, 0), k.z(5)]);
 
     // Player loop
     this.playerSprite.play('idle');
@@ -201,11 +247,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
   initLevelInteractables() {
     const k = this.k;
-    for (
-      let i = 0;
-      i < this.levelMap.realfagsbygget.interactables.length;
-      i++
-    ) {
+    for (let i = 0; i < this.levelMap.realfagsbygget.interactables.length; i++) {
       const interactable = this.levelMap.realfagsbygget.interactables[i];
       const interactableEntity = k.add([
         k.pos(interactable.x, interactable.y),
@@ -366,8 +408,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }
     });
 
-    if (this.taskService.currentTask.length == 0) {
+    /* if (this.taskService.currentTask.length == 0) {
       //Win
-    }
+    } */
   }
 }

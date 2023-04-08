@@ -53,7 +53,7 @@ export class TaskService {
       type: 'input',
       description:
         '1b) Find the horizontal and vertical components of the force F.',
-      image: '../assets/fig1-b.png',
+      image: '../assets/taskFigures/fig1-b.png',
       inputs: [
         { variable: 'Fx', unit: 'F' },
         { variable: 'Fz', unit: 'F' },
@@ -98,9 +98,9 @@ export class TaskService {
         '2a) Which of the following free body diagrams describe our system.',
       image: '',
       inputs: [
-        { variable: 'checkbox1', picture: '../assets/pic2-b_1f.png' },
-        { variable: 'checkbox2', picture: '../assets/pic2-b_2f.png' },
-        { variable: 'checkbox3', picture: '../assets/pic2-b_t.png' },
+        { variable: 'checkbox1', picture: '../assets/taskFigures/pic2-b_1f.png' },
+        { variable: 'checkbox2', picture: '../assets/taskFigures/pic2-b_2f.png' },
+        { variable: 'checkbox3', picture: '../assets/taskFigures/pic2-b_t.png' },
       ],
       check: [
         { variable: 'checkbox1', input: false },
@@ -114,7 +114,7 @@ export class TaskService {
       type: 'input',
       description:
         '2b) Calculate the forces at the beam supports A and B using the equations of equilibrium.',
-      image: '../assets/fig2-b.png',
+      image: '../assets/taskFigures/fig2-b.png',
       inputs: [
         { variable: 'A_x', unit: 'F' },
         { variable: 'A_z', unit: 'F' },
@@ -132,7 +132,7 @@ export class TaskService {
       type: 'input',
       description:
         '2c) Find the internal forces of the beam using the intersection method. What are the internal forces of the beam at point L/3 from A',
-      image: '../assets/fig2-c.png',
+      image: '../assets/taskFigures/fig2-c.png',
       inputs: [
         { variable: 'N(L/3)', unit: 'F' },
         { variable: 'V(L/3)', unit: 'F' },
@@ -152,15 +152,15 @@ export class TaskService {
         '2d) Identify the correct axial-, shear- and moment diagrams:',
       image: '',
       inputs: [
-        { variable: 'checkbox1N', picture: '../assets/pic2-d_1Nf.png' },
-        { variable: 'checkbox2N', picture: '../assets/pic2-d_2Nf.png' },
-        { variable: 'checkbox3N', picture: '../assets/pic2-d_3Nt.png' },
-        { variable: 'checkbox1V', picture: '../assets/pic2-d_1Vt.png' },
-        { variable: 'checkbox2V', picture: '../assets/pic2-d_2Vf.png' },
-        { variable: 'checkbox3V', picture: '../assets/pic2-d_3Vf.png' },
-        { variable: 'checkbox1M', picture: '../assets/pic2-d_1Mf.png' },
-        { variable: 'checkbox2M', picture: '../assets/pic2-d_2Mt.png' },
-        { variable: 'checkbox3M', picture: '../assets/pic2-d_3Mf.png' },
+        { variable: 'checkbox1N', picture: '../assets/taskFigures/pic2-d_1Nf.png' },
+        { variable: 'checkbox2N', picture: '../assets/taskFigures/pic2-d_2Nf.png' },
+        { variable: 'checkbox3N', picture: '../assets/taskFigures/pic2-d_3Nt.png' },
+        { variable: 'checkbox1V', picture: '../assets/taskFigures/pic2-d_1Vt.png' },
+        { variable: 'checkbox2V', picture: '../assets/taskFigures/pic2-d_2Vf.png' },
+        { variable: 'checkbox3V', picture: '../assets/taskFigures/pic2-d_3Vf.png' },
+        { variable: 'checkbox1M', picture: '../assets/taskFigures/pic2-d_1Mf.png' },
+        { variable: 'checkbox2M', picture: '../assets/taskFigures/pic2-d_2Mt.png' },
+        { variable: 'checkbox3M', picture: '../assets/taskFigures/pic2-d_3Mf.png' },
       ],
       check: [
         { variable: 'checkbox1N', input: false },
@@ -232,7 +232,7 @@ export class TaskService {
       type: 'slider',
       description:
         '4) Given the following system. Calculate the deformation of the beam in the vertical direction at the point load. Use I_y = 50 ∙ 10⁶ mm⁴. Assume that P is the vertical component of F.',
-      image: '../assets/fig4-a.png',
+      image: '../assets/taskFigures/fig4-a.png',
       inputs: [{ variable: 'w(x)', unit: ',3 mm', min: 1, max: 30, step: 1 }],
       check: [{ variable: 'w(x)', input: 19 }],
     },
@@ -242,7 +242,7 @@ export class TaskService {
       type: 'input',
       description:
         "5a) Determine the center of mass in the beam's cross-section.",
-      image: '../assets/fig5-a.png',
+      image: '../assets/taskFigures/fig5-a.png',
       inputs: [
         { variable: 'Zc1', unit: ' mm' },
         { variable: 'Zc2', unit: ' mm' },
@@ -262,7 +262,7 @@ export class TaskService {
       type: 'input',
       description:
         "5b) Find the second moment of area for this section using Steiner's theorem.",
-      image: '../assets/fig5-b.png',
+      image: '../assets/taskFigures/fig5-b.png',
       inputs: [
         { variable: 'I_y,1', unit: ' mm⁴' },
         { variable: 'I_y,2', unit: ' mm⁴' },
@@ -282,7 +282,7 @@ export class TaskService {
       type: 'input',
       description:
         '5c) Doublecheck the second moment of area for the cross-section by calculating its mathematical definition. Fill in the missing boundaries of the following integral:',
-      image: '../assets/fig5-c.png',
+      image: '../assets/taskFigures/fig5-c.png',
       inputs: [
         { variable: 'v1', unit: '' },
         { variable: 'v2', unit: '' },
@@ -306,7 +306,7 @@ export class TaskService {
       type: 'input',
       description:
         "5d) Identify the maximum and minimum normal stresses in the beam at points 2 meters and 4 meters along its length using I_y = 54,8 ∙ 10⁶ mm⁴. Hint: Use Navier's equation σ = σ_N + σ_M",
-      image: '../assets/fig5-d.png',
+      image: '../assets/taskFigures/fig5-d.png',
       inputs: [
         { variable: 'σ_max(L=2)', unit: ',25 N/mm²  (Compression)' },
         { variable: 'σ_min(L=2)', unit: ',87 N/mm²  (Tension)' },
@@ -325,7 +325,7 @@ export class TaskService {
       requirement: '5-d',
       type: 'checkbox',
       description: '5e) Will the beam fail under the given conditions?',
-      image: '../assets/fig5-e.png',
+      image: '../assets/taskFigures/fig5-e.png',
       inputs: [
         {
           variable: 'checkbox1',
