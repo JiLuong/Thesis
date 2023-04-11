@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
   public currentTask = ['1-a', '2-a', '3-a', '4-a', '5-a'];
-  public allTheories = ['b-1', 'b-2', 'b-3', 'b-4', 'b-5','d-1', 'd-2', 'd-3'];
+  public allTheories = ['b-1', 'b-2', 'b-3', 'b-4', 'b-5', 'b-6','d-1', 'd-2', 'd-3','i-1'];
   public solvedTasks: string[] = [];
   public currentInteractable = '';
   public theories = {
@@ -32,6 +32,13 @@ export class TaskService {
     'd-1': {
       type: 'demo',
       title: 'Demonstration: Variable second moment of area with origin through neutral axis',
+      values: [{ variable: 'θ', unit: '°', min: 100, max: 300}],
+    },
+    'i-1': {
+      type: 'info',
+      title: 'Exercise description',
+      description:'blababla boriiiiing',
+      image: '../assets/theorySprites/theoryi-1.png', //Change image to Figure of the beam
       values: [{ variable: 'θ', unit: '°', min: 100, max: 300}],
     },
     

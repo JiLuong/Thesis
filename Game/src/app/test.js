@@ -328,7 +328,7 @@
           y: 2376,
         },
         {
-          class: "d-4",
+          class: "i-1",
           height: 50,
           id: 134,
           name: "",

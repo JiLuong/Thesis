@@ -1,4 +1,7 @@
 <div class="container">
+
+    <!-- Tasks -->
+
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='input'">
         <div class="input" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
             <div class="taskdescription">
@@ -50,6 +53,19 @@
 
             </div>
 
+        </div>
+    </ng-container>
+
+    <!-- Theories -->
+
+    <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type =='info'">
+
+        <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
+            <div>
+                {{theory.title}}
+                {{theory.description}}
+                <img src={{theory.image}}>                
+            </div>
         </div>
     </ng-container>
 
