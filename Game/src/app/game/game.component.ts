@@ -22,9 +22,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private player: any;
   private playerSprite: any;
   private interactables: any[] = [];
-  private taskSprites:any[] = [];
+  private taskSprites: any[] = [];
   private theorySprites: any[] = [];
-   
+
   private theories: any[] = [];
   private fixedmap: any;
   private mapOverlap: any;
@@ -42,6 +42,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   public opacityToggler = false;
 
   public playerSpeed = 400;
+
+  public victory = false;
 
   constructor(public taskService: TaskService) {}
 
@@ -64,7 +66,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     (window as any).sqrt = Math.sqrt;
     (window as any).sin = Math.sin;
     (window as any).cos = Math.cos;
-    
   }
 
   initGame() {
@@ -101,42 +102,58 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       },
     });
     this.k.loadSprite('overlaps', '/assets/RbygghighresOverlaps.png');
-    
+
     //Task sprites
-    for (let i = 0; i < this.levelMap.realfagsbygget.interactables.length; i++) {
-      let taskNumber = this.levelMap.realfagsbygget.interactables[i]
-      this.k.loadSprite('task'+i, '/assets/taskSprites/task'+taskNumber.class+'.png');
+    for (
+      let i = 0;
+      i < this.levelMap.realfagsbygget.interactables.length;
+      i++
+    ) {
+      let taskNumber = this.levelMap.realfagsbygget.interactables[i];
+      this.k.loadSprite(
+        'task' + i,
+        '/assets/taskSprites/task' + taskNumber.class + '.png'
+      );
     }
     //Theory sprites
     for (let i = 0; i < this.levelMap.realfagsbygget.theories.length; i++) {
-      let theoryNumber = this.levelMap.realfagsbygget.theories[i]
-      this.k.loadSprite('theory'+i, '/assets/theorySprites/theory'+theoryNumber.class+'.png');
+      let theoryNumber = this.levelMap.realfagsbygget.theories[i];
+      this.k.loadSprite(
+        'theory' + i,
+        '/assets/theorySprites/theory' + theoryNumber.class + '.png'
+      );
     }
   }
   initTasks() {
     const k = this.k;
-    for (let i = 0; i < this.levelMap.realfagsbygget.interactables.length; i++) {
+    for (
+      let i = 0;
+      i < this.levelMap.realfagsbygget.interactables.length;
+      i++
+    ) {
       const taskVisuals = this.levelMap.realfagsbygget.interactables[i];
       const taskSprite = k.add([
-        k.sprite('task'+i),
-        k.pos(taskVisuals.x, taskVisuals.y),
+        k.sprite('task' + i),
+        k.pos(taskVisuals.x + taskVisuals.width / 2, taskVisuals.y),
+        k.origin('center'),
         k.z(3),
         {
           id: taskVisuals.id,
           taskClass: taskVisuals.class, // Add class property to sprite object
         },
       ]);
-      this.taskSprites.push(taskSprite); 
-    }    
+      this.taskSprites.push(taskSprite);
+    }
   }
-  
-  initTheories(){
+
+  initTheories() {
     const k = this.k;
     for (let i = 0; i < this.levelMap.realfagsbygget.theories.length; i++) {
       const theoryVisuals = this.levelMap.realfagsbygget.theories[i];
       const theorySprite = k.add([
-        k.sprite('theory'+i),
-        k.pos(theoryVisuals.x, theoryVisuals.y),
+        k.sprite('theory' + i),
+        k.pos(theoryVisuals.x + theoryVisuals.width / 2, theoryVisuals.y),
+        k.origin('center'),
         k.z(3),
         {
           id: theoryVisuals.id,
@@ -173,12 +190,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       },
     ]);
     this.playerSprite = k.add([
-      k.sprite('avatar'), // sprite() component makes it render as a sprite
-      k.origin('center'), // origin() component defines the pivot point (defaults to "topleft")
-      k.pos(120, 80),     // pos() component gives it position, also enables movement
+      k.sprite('avatar'),
+      k.origin('center'),
+      k.pos(120, 80),
       k.follow(this.player, k.vec2(0, 1.25)),
       k.z(4),
-
     ]);
     this.mapOverlap = k.add([k.sprite('overlaps'), k.pos(0, 0), k.z(5)]);
 
@@ -210,25 +226,31 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       let isColliding = false;
       for (let i = 0; i < this.interactables.length; i++) {
         const interactableElement = this.interactables[i];
-        
+
         // Remove color from all TASK sprites
-        const taskSprite = this.taskSprites.find((sprite) => sprite.taskClass === interactableElement.class);
+        const taskSprite = this.taskSprites.find(
+          (sprite) => sprite.taskClass === interactableElement.class
+        );
         if (taskSprite) {
           taskSprite.color = null;
         }
-      
+
         if (this.player.isColliding(interactableElement)) {
           isColliding = true;
-      
+
           // Change color of TASK sprites
-          const indexToModify = this.taskSprites.findIndex((sprite) => sprite.taskClass === interactableElement.class);
+          const indexToModify = this.taskSprites.findIndex(
+            (sprite) => sprite.taskClass === interactableElement.class
+          );
           if (indexToModify !== -1) {
             this.taskSprites[indexToModify].color = k.rgb(180, 180, 180);
           }
-      
-          if (this.taskService.currentInteractable !== interactableElement.class) {
-            this.taskService.currentInteractable = interactableElement.class;           
-          }          
+
+          if (
+            this.taskService.currentInteractable !== interactableElement.class
+          ) {
+            this.taskService.currentInteractable = interactableElement.class;
+          }
         }
       }
 
@@ -241,21 +263,25 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
         // Remove color from all THEORY sprites
         const theorySprite = this.theorySprites[j];
-        if (theorySprite.color !== null && theorySprite.theoryClass !== this.taskService.currentInteractable) {
-            theorySprite.color = null;
+        if (
+          theorySprite.color !== null &&
+          theorySprite.theoryClass !== this.taskService.currentInteractable
+        ) {
+          theorySprite.color = null;
         }
 
         if (this.player.isColliding(theoryElement)) {
           this.taskService.currentInteractable = theoryElement.class;
 
           // Change color of THEORY sprites
-          const indexToModify = this.theorySprites.findIndex((sprite) => sprite.theoryClass === theoryElement.class);
+          const indexToModify = this.theorySprites.findIndex(
+            (sprite) => sprite.theoryClass === theoryElement.class
+          );
           if (indexToModify !== -1) {
-              this.theorySprites[indexToModify].color = k.rgb(180, 180, 180);
+            this.theorySprites[indexToModify].color = k.rgb(180, 180, 180);
           }
         }
       }
-      
     });
   }
 
@@ -279,7 +305,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
   initLevelInteractables() {
     const k = this.k;
-    for (let i = 0; i < this.levelMap.realfagsbygget.interactables.length; i++) {
+    for (
+      let i = 0;
+      i < this.levelMap.realfagsbygget.interactables.length;
+      i++
+    ) {
       const interactable = this.levelMap.realfagsbygget.interactables[i];
       const interactableEntity = k.add([
         k.pos(interactable.x, interactable.y),
@@ -297,11 +327,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   initLevelTheories() {
     const k = this.k;
-    for (
-      let i = 0;
-      i < this.levelMap.realfagsbygget.theories.length;
-      i++
-    ) {
+    for (let i = 0; i < this.levelMap.realfagsbygget.theories.length; i++) {
       const theory = this.levelMap.realfagsbygget.theories[i];
       const theoryEntities = k.add([
         k.pos(theory.x, theory.y),
@@ -324,8 +350,15 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       if (this.modalVisible) return;
 
       if (key === ' ') {
-        if (this.taskService.currentTask.includes(this.taskService.currentInteractable)||this.taskService.solvedTasks.includes(this.taskService.currentInteractable)) {
-          this.player.speed = 0 ;  
+        if (
+          this.taskService.currentTask.includes(
+            this.taskService.currentInteractable
+          ) ||
+          this.taskService.solvedTasks.includes(
+            this.taskService.currentInteractable
+          )
+        ) {
+          this.player.speed = 0;
         }
       } else if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = true;
@@ -337,23 +370,37 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.player.facing = 1;
       } else if (key === 'ArrowDown' || key === 's') {
         this.player.movement.down = true;
-      } 
-    
+      }
     });
     window.addEventListener('keyup', (event) => {
       const { key } = event;
       if (key === ' ') {
-        if (this.taskService.currentTask.includes(this.taskService.currentInteractable)||this.taskService.solvedTasks.includes(this.taskService.currentInteractable)) {
+        if (
+          this.taskService.currentTask.includes(
+            this.taskService.currentInteractable
+          ) ||
+          this.taskService.solvedTasks.includes(
+            this.taskService.currentInteractable
+          )
+        ) {
           this.modalVisible = true;
           this.taskListVisible = false;
           this.mapVisible = false;
-          this.player.speed = 0 ;
+          this.player.speed = 0;
           this.newestTask = true;
         }
-        if (this.taskService.solvedTasks.includes(this.taskService.currentInteractable)) {
+        if (
+          this.taskService.solvedTasks.includes(
+            this.taskService.currentInteractable
+          )
+        ) {
           this.newestTask = false;
         }
-        if (this.taskService.allTheories.includes(this.taskService.currentInteractable)) {
+        if (
+          this.taskService.allTheories.includes(
+            this.taskService.currentInteractable
+          )
+        ) {
           this.modalVisible = true;
           this.taskListVisible = false;
           this.mapVisible = false;
@@ -381,7 +428,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.modalVisible = false;
     this.mapVisible = false;
     this.taskListVisible = false;
-    this.player.speed = this.playerSpeed ;
+    this.player.speed = this.playerSpeed;
   }
   submitTask() {
     if (
@@ -393,7 +440,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.correctAnswerSubmitted = false;
         this.closeModal();
       }, 900);
-    
     } else {
       //Soundeffect: Wrong
       this.wrongAnswerSubmitted = true;
@@ -440,8 +486,14 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }
     });
 
-    /* if (this.taskService.currentTask.length == 0) {
-      //Win
-    } */
+    if (this.taskService.currentTask.length == 0) {
+      //WIN stuff happening. Win screen and redirect to lobby
+
+      this.victory = true;
+      /*setTimeout(() => {
+        // Redirect to lobby
+        window.location.href = "/lobby";
+      }, 3000); */
+    }
   }
 }

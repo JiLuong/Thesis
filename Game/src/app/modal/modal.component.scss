@@ -25,6 +25,12 @@ input[type="range"] {
   width: 200px;
 }
 
+.theoryContent {
+  display: flex;
+  flex-direction: row;
+  margin: 7px 0px;
+}
+
 .taskContent {
   display: flex;
   flex-direction: row;
@@ -40,21 +46,21 @@ input[type="range"] {
   max-height: 20%;
 }
 
-.docuView{
+.docuView {
   height: 510px;
   width: 1145px;
   margin-top: 12px;
 }
 
-
-.rectangle1, .rectangle2 {
+.rectangle1,
+.rectangle2 {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid white;
-    background-color: #201f1e;
-    text-align: center;
-    font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  background-color: #201f1e;
+  text-align: center;
+  font-size: 18px;
 }
 
 .rectangle1 {
@@ -72,41 +78,41 @@ input[type="range"] {
   height: 400px;
   margin-left: 60px;
 
-    .rectangles{
-      display: flex;
-      align-items: center;
-      margin-left: 50px;
+  .rectangles {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
 
-        p{
-          left: 55px;
-          position: absolute;
-        }
-        }
-        .divider {
-          margin-left: 3px;
-          border-style: dashed;
-          border-width: 1px;
-          z-index: -2;
-          position: absolute;
-        }
-        .output{
-          display: flex;
-          justify-content: space-between;
-          gap: 110px;
-          margin-right: 87px;
-          margin-top: 10px;
-          font-size: 27px;
-          font-weight: bold;
-        }
+    p {
+      left: 55px;
+      position: absolute;
+    }
+  }
+  .divider {
+    margin-left: 3px;
+    border-style: dashed;
+    border-width: 1px;
+    z-index: -2;
+    position: absolute;
+  }
+  .output {
+    display: flex;
+    justify-content: space-between;
+    gap: 110px;
+    margin-right: 87px;
+    margin-top: 10px;
+    font-size: 27px;
+    font-weight: bold;
+  }
 }
 
-.interaction{
+.interaction {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-    .formula{
-      font-size: 40px;
-      margin-right: 90px;
-    }
+  .formula {
+    font-size: 40px;
+    margin-right: 90px;
+  }
 }

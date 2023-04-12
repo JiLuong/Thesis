@@ -4,7 +4,7 @@
 
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='input'">
         <div class="input" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
-            <div class="taskdescription">
+            <div class="taskDescription">
                 {{task.description}}
             </div>
             <div class="taskContent">
@@ -22,7 +22,7 @@
 
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='slider'">
         <div class="slider" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
-            <div class="taskdescription">
+            <div class="taskDescription">
                 {{task.description}}
             </div>
             <div class="taskContent">
@@ -41,7 +41,7 @@
 
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='checkbox'">
         <div class="checkbox" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
-            <div class="taskdescription">
+            <div class="taskDescription">
                 {{task.description}}
             </div>
             <!-- <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} /> -->
@@ -61,13 +61,13 @@
     <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type =='info'">
 
         <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
-            <div>
-                {{theory.title}}
-                {{theory.description}}
-                <img src={{theory.image}}>                
-            </div>
+            <div class="taskDescription"> {{theory.description}} </div>
+            <div class="theoryContent"> {{theory.content}} </div>
+            <img src={{theory.image}}>                
         </div>
     </ng-container>
+
+    
 
     <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type =='book'">
 

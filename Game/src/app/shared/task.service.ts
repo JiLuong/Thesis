@@ -5,7 +5,18 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
   public currentTask = ['1-a', '2-a', '3-a', '4-a', '5-a'];
-  public allTheories = ['b-1', 'b-2', 'b-3', 'b-4', 'b-5', 'b-6','d-1', 'd-2', 'd-3','i-1'];
+  public allTheories = [
+    'b-1',
+    'b-2',
+    'b-3',
+    'b-4',
+    'b-5',
+    'b-6',
+    'd-1',
+    'd-2',
+    'd-3',
+    'i-1',
+  ];
   public solvedTasks: string[] = [];
   public currentInteractable = '';
   public theories = {
@@ -31,17 +42,18 @@ export class TaskService {
     },
     'd-1': {
       type: 'demo',
-      title: 'Demonstration: Variable second moment of area with origin through neutral axis',
-      values: [{ variable: 'θ', unit: '°', min: 100, max: 300}],
+      title:
+        'Demonstration: Variable second moment of area with origin through neutral axis',
+      values: [{ variable: 'θ', unit: '°', min: 100, max: 300 }],
     },
     'i-1': {
       type: 'info',
-      title: 'Exercise description',
-      description:'blababla boriiiiing',
-      image: '../assets/theorySprites/theoryi-1.png', //Change image to Figure of the beam
-      values: [{ variable: 'θ', unit: '°', min: 100, max: 300}],
+      description: 'MISSION DESCRIPTION',
+      content:
+        "The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. The objective of this mission is to determine whether the given conditions will cause failure in the beam.",
+      image: '../assets/taskFigures/info1.png', //Change image to Figure of the beam
+      values: [{ variable: 'θ', unit: '°', min: 100, max: 300 }],
     },
-    
   };
   public tasks = {
     '1-a': {
@@ -105,9 +117,18 @@ export class TaskService {
         '2a) Which of the following free body diagrams describe our system.',
       image: '',
       inputs: [
-        { variable: 'checkbox1', picture: '../assets/taskFigures/pic2-b_1f.png' },
-        { variable: 'checkbox2', picture: '../assets/taskFigures/pic2-b_2f.png' },
-        { variable: 'checkbox3', picture: '../assets/taskFigures/pic2-b_t.png' },
+        {
+          variable: 'checkbox1',
+          picture: '../assets/taskFigures/pic2-b_1f.png',
+        },
+        {
+          variable: 'checkbox2',
+          picture: '../assets/taskFigures/pic2-b_2f.png',
+        },
+        {
+          variable: 'checkbox3',
+          picture: '../assets/taskFigures/pic2-b_t.png',
+        },
       ],
       check: [
         { variable: 'checkbox1', input: false },
@@ -159,15 +180,42 @@ export class TaskService {
         '2d) Identify the correct axial-, shear- and moment diagrams:',
       image: '',
       inputs: [
-        { variable: 'checkbox1N', picture: '../assets/taskFigures/pic2-d_1Nf.png' },
-        { variable: 'checkbox2N', picture: '../assets/taskFigures/pic2-d_2Nf.png' },
-        { variable: 'checkbox3N', picture: '../assets/taskFigures/pic2-d_3Nt.png' },
-        { variable: 'checkbox1V', picture: '../assets/taskFigures/pic2-d_1Vt.png' },
-        { variable: 'checkbox2V', picture: '../assets/taskFigures/pic2-d_2Vf.png' },
-        { variable: 'checkbox3V', picture: '../assets/taskFigures/pic2-d_3Vf.png' },
-        { variable: 'checkbox1M', picture: '../assets/taskFigures/pic2-d_1Mf.png' },
-        { variable: 'checkbox2M', picture: '../assets/taskFigures/pic2-d_2Mt.png' },
-        { variable: 'checkbox3M', picture: '../assets/taskFigures/pic2-d_3Mf.png' },
+        {
+          variable: 'checkbox1N',
+          picture: '../assets/taskFigures/pic2-d_1Nf.png',
+        },
+        {
+          variable: 'checkbox2N',
+          picture: '../assets/taskFigures/pic2-d_2Nf.png',
+        },
+        {
+          variable: 'checkbox3N',
+          picture: '../assets/taskFigures/pic2-d_3Nt.png',
+        },
+        {
+          variable: 'checkbox1V',
+          picture: '../assets/taskFigures/pic2-d_1Vt.png',
+        },
+        {
+          variable: 'checkbox2V',
+          picture: '../assets/taskFigures/pic2-d_2Vf.png',
+        },
+        {
+          variable: 'checkbox3V',
+          picture: '../assets/taskFigures/pic2-d_3Vf.png',
+        },
+        {
+          variable: 'checkbox1M',
+          picture: '../assets/taskFigures/pic2-d_1Mf.png',
+        },
+        {
+          variable: 'checkbox2M',
+          picture: '../assets/taskFigures/pic2-d_2Mt.png',
+        },
+        {
+          variable: 'checkbox3M',
+          picture: '../assets/taskFigures/pic2-d_3Mf.png',
+        },
       ],
       check: [
         { variable: 'checkbox1N', input: false },

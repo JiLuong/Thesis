@@ -68,8 +68,7 @@
   right: 0;
 }
 
-@mixin glowAnimation($color1,$color2,$color3,$animationName ) {
-
+@mixin glowAnimation($color1, $color2, $color3, $animationName) {
   @keyframes #{$animationName} {
     0% {
       box-shadow: 0 0 17px $color1;
@@ -84,12 +83,12 @@
 }
 
 .correctAnswer {
-  @include glowAnimation(rgb(0, 247, 0),green,rgb(0, 167, 0),glowCorrect);
+  @include glowAnimation(rgb(0, 247, 0), green, rgb(0, 167, 0), glowCorrect);
   animation: glowCorrect 0.7s ease-in-out;
 }
 
 .wrongAnswer {
-  @include glowAnimation(red,rgb(255, 94, 0),red,glowWrong);
+  @include glowAnimation(red, rgb(255, 94, 0), red, glowWrong);
   animation: glowWrong 0.5s ease-in-out;
 }
 
@@ -113,6 +112,43 @@
 .modalClose:hover {
   transform: scale(1.1);
   box-shadow: 0 0 rgb(0, 0, 0);
+}
+
+/* VICTORY */
+.win-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.win-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 20px;
+    color: #016fb9;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
 }
 
 .map {
@@ -201,6 +237,7 @@
   transform: scale(1.1);
   box-shadow: 0 0 rgb(0, 0, 0);
 }
+
 /* Map: Paper fold effect */
 span.folds {
   position: absolute;
