@@ -57,7 +57,7 @@ export class TaskService {
   };
   public tasks = {
     '1-a': {
-      location: 'xx',
+      location: 'Storage',
       requirement: '',
       type: 'slider',
       description:
@@ -67,7 +67,7 @@ export class TaskService {
       check: [{ variable: 'θ', input: 60 }],
     },
     '1-b': {
-      location: 'yy',
+      location: 'Chamber',
       requirement: '1-a',
       type: 'input',
       description:
@@ -83,7 +83,7 @@ export class TaskService {
       ],
     },
     '1-c': {
-      location: 'zz',
+      location: 'Class II',
       requirement: '1-b',
       type: 'input',
       description: '1c) Determine the design yielding stress f_d.',
@@ -92,7 +92,7 @@ export class TaskService {
       check: [{ variable: 'f_d', input: 338 }],
     },
     '1-d': {
-      location: 'aa',
+      location: 'Storage',
       requirement: '1-c',
       type: 'checkbox',
       description:
@@ -110,7 +110,7 @@ export class TaskService {
       ],
     },
     '2-a': {
-      location: 'bb',
+      location: 'Chamber',
       requirement: '',
       type: 'checkbox',
       description:
@@ -137,7 +137,7 @@ export class TaskService {
       ],
     },
     '2-b': {
-      location: 'cc',
+      location: 'Lobby',
       requirement: '2-a',
       type: 'input',
       description:
@@ -155,7 +155,7 @@ export class TaskService {
       ],
     },
     '2-c': {
-      location: 'dd',
+      location: 'Class I',
       requirement: '2-b',
       type: 'input',
       description:
@@ -173,7 +173,7 @@ export class TaskService {
       ],
     },
     '2-d': {
-      location: 'ee',
+      location: 'Class IV',
       requirement: '2-c',
       type: 'checkbox',
       description:
@@ -230,7 +230,7 @@ export class TaskService {
       ],
     },
     '2-e': {
-      location: 'ff',
+      location: 'Laboratory',
       requirement: '2-d',
       type: 'checkbox',
       description:
@@ -263,7 +263,7 @@ export class TaskService {
       ],
     },
     '3-a': {
-      location: 'gg',
+      location: 'Class III',
       type: 'slider',
       description:
         '3a) Find the length L of the beam in meters by defining it as the number of sides in a regular hexagon.',
@@ -272,7 +272,7 @@ export class TaskService {
       check: [{ variable: 'L', input: 6 }],
     },
     '3-b': {
-      location: 'hh',
+      location: 'Chamber',
       requirement: '3-a',
       type: 'input',
       description:
@@ -282,7 +282,7 @@ export class TaskService {
       check: [{ variable: 'F', input: 57 }],
     },
     '4-a': {
-      location: 'jj',
+      location: 'Corridor',
       requirement: '',
       type: 'slider',
       description:
@@ -292,7 +292,7 @@ export class TaskService {
       check: [{ variable: 'w(x)', input: 19 }],
     },
     '5-a': {
-      location: 'kk',
+      location: 'Hallway',
       requirement: '',
       type: 'input',
       description:
@@ -312,7 +312,7 @@ export class TaskService {
       ],
     },
     '5-b': {
-      location: 'll',
+      location: 'Playroom',
       requirement: '5-a',
       type: 'input',
       description:
@@ -332,7 +332,7 @@ export class TaskService {
       ],
     },
     '5-c': {
-      location: 'mm',
+      location: 'Class V',
       requirement: '5-b',
       type: 'input',
       description:
@@ -356,7 +356,7 @@ export class TaskService {
       ],
     },
     '5-d': {
-      location: 'nn',
+      location: 'Laboratory',
       requirement: '5-c',
       type: 'input',
       description:
@@ -376,7 +376,7 @@ export class TaskService {
       ],
     },
     '5-e': {
-      location: 'rr',
+      location: 'Canteen',
       requirement: '5-d',
       type: 'checkbox',
       description: '5e) Will the beam fail under the given conditions?',
