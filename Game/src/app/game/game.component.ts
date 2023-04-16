@@ -80,8 +80,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
     this.k.cam;
     // Load sprites and assets
-    this.k.loadSprite('map', '/assets/Rbygghighres.png');
-    this.k.loadSprite('avatar', '/assets/spriteShadowDarker777.png', {
+    this.k.loadSprite('map', '/assets/Rbygghighres2.png');
+    this.k.loadSprite('avatar', '/assets/spriteDarker777.png', {
       // The avatar image contains X frames layed out horizontally. Slicing it into individual frames
       sliceX: 9,
       anims: {
@@ -138,7 +138,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         k.origin('center'),
         k.z(3),
         {
-          id: taskVisuals.id,
+          id: taskVisuals.id, //not in use
           taskClass: taskVisuals.class, // Add class property to sprite object
         },
       ]);
@@ -156,7 +156,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         k.origin('center'),
         k.z(3),
         {
-          id: theoryVisuals.id,
+          id: theoryVisuals.id, //not in use
           theoryClass: theoryVisuals.class, // Add class property to sprite object
         },
       ]);
