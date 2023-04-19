@@ -1,3 +1,7 @@
+<!-- Game -->
+
+<!-- Add background on canvas (behind the map) AND off canvas -->
+
 <div class="canvas">
     <canvas #mycanvas id="myCanvas" width="1500" height="800"></canvas>
     <a class="mapbtn" (click)="toggleMap()"> 
@@ -17,6 +21,8 @@
         </div>
     
 </ng-container>
+
+<!-- Interface -->
 
 <ng-container *ngIf="mapVisible">
     <div class="map" [ngStyle]="{'opacity': opacityToggler ? '0.3' : '1'}">   
@@ -71,7 +77,9 @@
     </div>
 </ng-container>
 
-<!-- VICTORY -->
+<!-- BUTTON: General information about the game mechanics and interactions -->
+
+<!-- Victory -->
 
 <ng-container *ngIf="victory">
     <div class="win-popup">
@@ -82,3 +90,7 @@
         </div>
       </div>
 </ng-container>
+
+<!-- Navigation -->
+
+<!-- Button that prompts a popup to ask user if they want to go back to the lobby -->

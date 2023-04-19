@@ -10,6 +10,13 @@ import kaboom from 'kaboom';
 import LevelMap from '../level-map';
 import { TaskService } from '../shared/task.service';
 
+import { Router } from '@angular/router';
+
+import { levelOne } from '../levels/levelOne';
+import { levelTwo } from '../levels/levelTwo';
+import { levelThree } from '../levels/levelThree';
+import { levelFour } from '../levels/levelFour';
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -45,13 +52,29 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   public victory = false;
 
-  constructor(public taskService: TaskService) {}
+  constructor(public taskService: TaskService, private router: Router) {}
 
   ngOnDestroy(): void {
     console.log('Destroy');
   }
 
   ngAfterViewInit(): void {
+    const allLevels = {
+      levelOne: levelOne,
+      levelTwo: levelTwo,
+      levelThree: levelThree,
+      levelFour: levelFour,
+    };
+
+    const urlSegments = this.router.url.split('/');
+    const levelNumber = urlSegments[urlSegments.length - 1];
+    const level = allLevels[levelNumber];
+
+    this.taskService.currentTask = level.currentTask;
+    this.taskService.allTheories = level.allTheories;
+    this.taskService.theories = level.theories;
+    this.taskService.tasks = level.tasks;
+
     this.initGame();
     this.initPlayer();
     this.initTasks();
@@ -431,6 +454,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.player.speed = this.playerSpeed;
   }
   submitTask() {
+    console.log(this.taskService.currentTask, this.victory);
+
     if (
       this.taskService.checkTaskAnswer(this.taskService.currentInteractable)
     ) {
@@ -446,6 +471,16 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.wrongAnswerSubmitted = false;
       }, 500);
+    }
+
+    //if (this.taskService.currentTask.length == 0) {
+    if (this.taskService.currentTask.length == 4) {
+      //
+      this.victory = true;
+
+      setTimeout(() => {
+        this.router.navigate(['']);
+      }, 8000);
     }
   }
 
@@ -485,15 +520,5 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         }
       }
     });
-
-    if (this.taskService.currentTask.length == 0) {
-      //WIN stuff happening. Win screen and redirect to lobby
-
-      this.victory = true;
-      /*setTimeout(() => {
-        // Redirect to lobby
-        window.location.href = "/lobby";
-      }, 3000); */
-    }
   }
 }

@@ -8,7 +8,7 @@
   if (typeof module === "object" && module && module.exports) {
     module.exports = data;
   }
-})("test", {
+})("mapData", {
   compressionlevel: -1,
   height: 150,
   infinite: true,
