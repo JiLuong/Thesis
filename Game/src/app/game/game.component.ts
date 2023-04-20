@@ -265,7 +265,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           const indexToModify = this.taskSprites.findIndex(
             (sprite) => sprite.taskClass === interactableElement.class
           );
-          if (indexToModify !== -1) {
+          if (
+            indexToModify !== -1 &&
+            (this.taskService.currentTask.includes(interactableElement.class) ||
+              this.taskService.solvedTasks.includes(interactableElement.class))
+          ) {
             this.taskSprites[indexToModify].color = k.rgb(180, 180, 180);
           }
 
@@ -473,14 +477,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }, 500);
     }
 
-    //if (this.taskService.currentTask.length == 0) {
-    if (this.taskService.currentTask.length == 4) {
-      //
+    if (this.taskService.currentTask.length == 0) {
       this.victory = true;
 
       setTimeout(() => {
         this.router.navigate(['']);
-      }, 8000);
+      }, 10000);
     }
   }
 
