@@ -59,18 +59,14 @@
     <!-- Theories -->
 
     <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type =='info'">
-
         <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
             <div class="taskDescription"> {{theory.description}} </div>
-            <div class="theoryContent"> {{theory.content}} </div>
+            <div class="theoryContent" [innerHTML]="theory.content"></div>
             <img src={{theory.image}}>                
         </div>
     </ng-container>
 
-    
-
     <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type =='book'">
-
         <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
             <div>
                 {{theory.title}}

@@ -31,18 +31,25 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private interactables: any[] = [];
   private taskSprites: any[] = [];
   private theorySprites: any[] = [];
-
   private theories: any[] = [];
   private fixedmap: any;
   private mapOverlap: any;
+  private objectOverlap: any;
   private plants: any;
   private sofas: any;
+
   private camera: any;
   private k: any;
 
   public modalVisible = false;
+
   public mapVisible = false;
   public taskListVisible = false;
+  public infoObjectives = false;
+  public infoControls = false;
+
+  public backNavigation = false;
+
   public newestTask = false;
 
   public correctAnswerSubmitted = false;
@@ -103,7 +110,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
     this.k.cam;
     // Load sprites and assets
-    this.k.loadSprite('map', '/assets/Rbygghighres3.png');
+    this.k.loadSprite('map', '/assets/RBygg.png');
     this.k.loadSprite('avatar', '/assets/spriteDarker777.png', {
       // The avatar image contains X frames layed out horizontally. Slicing it into individual frames
       sliceX: 9,
@@ -126,7 +133,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
     this.k.loadSprite('plants', '/assets/passagePlants.png');
     this.k.loadSprite('sofas', '/assets/passageSofas.png');
-    this.k.loadSprite('overlaps', '/assets/RbygghighresOverlaps.png');
+    this.k.loadSprite('mapOverlap', '/assets/RByggMapOverlap.png');
+    this.k.loadSprite('objectOverlap', '/assets/RByggObjectOverlap.png');
 
     //Task sprites
     for (
@@ -183,7 +191,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       k.z(1),
     ]);
 
-    this.mapOverlap = k.add([k.sprite('overlaps'), k.pos(0, 0), k.z(10000)]);
+    this.mapOverlap = k.add([k.sprite('mapOverlap'), k.pos(0, 0), k.z(10000)]);
+    this.objectOverlap = k.add([
+      k.sprite('objectOverlap'),
+      k.pos(0, 0),
+      k.z(10001),
+    ]);
     this.plants = k.add([k.sprite('plants'), k.pos(0, 0), k.z(1175)]);
     this.sofas = k.add([k.sprite('sofas'), k.pos(0, 0), k.z(1140)]);
 
@@ -421,6 +434,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           this.modalVisible = true;
           this.taskListVisible = false;
           this.mapVisible = false;
+          this.infoObjectives = false;
+          this.infoControls = false;
           this.player.speed = 0;
           this.newestTask = true;
         }
@@ -439,6 +454,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           this.modalVisible = true;
           this.taskListVisible = false;
           this.mapVisible = false;
+          this.infoObjectives = false;
+          this.infoControls = false;
           this.newestTask = false;
         }
       } else if (key === 'ArrowLeft' || key === 'a') {
@@ -459,12 +476,55 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  closeModal() {
+  toggleNavigationBack() {
+    this.backNavigation = !this.backNavigation;
+  }
+
+  toggleInfoObjectives() {
+    this.infoObjectives = !this.infoObjectives;
+    this.player.speed = this.playerSpeed;
     this.modalVisible = false;
     this.mapVisible = false;
     this.taskListVisible = false;
-    this.player.speed = this.playerSpeed;
+    this.infoControls = false;
   }
+
+  toggleInfoControls() {
+    this.infoControls = !this.infoControls;
+    this.player.speed = this.playerSpeed;
+    this.modalVisible = false;
+    this.mapVisible = false;
+    this.taskListVisible = false;
+    this.infoObjectives = false;
+  }
+
+  toggleMap() {
+    this.mapVisible = !this.mapVisible;
+    this.player.speed = this.playerSpeed;
+    this.modalVisible = false;
+    this.taskListVisible = false;
+    this.infoObjectives = false;
+    this.infoControls = false;
+  }
+
+  toggleTaskList() {
+    this.taskListVisible = !this.taskListVisible;
+    this.player.speed = this.playerSpeed;
+    this.modalVisible = false;
+    this.mapVisible = false;
+    this.infoObjectives = false;
+    this.infoControls = false;
+  }
+
+  closeModal() {
+    this.player.speed = this.playerSpeed;
+    this.modalVisible = false;
+    this.mapVisible = false;
+    this.taskListVisible = false;
+    this.infoObjectives = false;
+    this.infoControls = false;
+  }
+
   submitTask() {
     console.log(this.taskService.currentTask, this.victory);
 
@@ -498,20 +558,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.router.navigate(['']);
   }
 
-  toggleMap() {
-    this.mapVisible = !this.mapVisible;
-    this.taskListVisible = false;
-    this.modalVisible = false;
-    this.player.speed = this.playerSpeed;
-  }
-
-  toggleTaskList() {
-    this.taskListVisible = !this.taskListVisible;
-    this.mapVisible = false;
-    this.modalVisible = false;
-    this.player.speed = this.playerSpeed;
-  }
-
   render() {
     const k = this.k;
     // Game loop
@@ -526,7 +572,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       const movement = Object.values(this.player.movement).filter(
         (v) => v
       ).length;
-      if (this.mapVisible || this.taskListVisible) {
+      if (
+        this.mapVisible ||
+        this.taskListVisible ||
+        this.infoObjectives ||
+        this.infoControls
+      ) {
         if (movement > 0 && !this.opacityToggler) {
           this.opacityToggler = true;
         } else if (movement == 0 && this.opacityToggler) {

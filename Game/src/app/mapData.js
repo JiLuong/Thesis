@@ -2277,7 +2277,6 @@
       layers: [
         {
           id: 33,
-          image: "../assets/theorySprites/theoryd-1.png",
           name: "d-1",
           offsetx: 3214,
           offsety: 2476,
@@ -2289,7 +2288,6 @@
         },
         {
           id: 37,
-          image: "../assets/theorySprites/theoryi-4.png",
           name: "i-4",
           offsetx: 3740,
           offsety: 904,
@@ -2301,7 +2299,6 @@
         },
         {
           id: 36,
-          image: "../assets/theorySprites/theoryi-3.png",
           name: "i-3",
           offsetx: 2044,
           offsety: 904,
@@ -2313,7 +2310,6 @@
         },
         {
           id: 35,
-          image: "../assets/theorySprites/theoryi-2.png",
           name: "i-2",
           offsetx: 1241,
           offsety: 904,
@@ -2325,7 +2321,6 @@
         },
         {
           id: 34,
-          image: "../assets/theorySprites/theoryi-1.png",
           name: "i-1",
           offsetx: 1945,
           offsety: 1910,
@@ -2337,7 +2332,6 @@
         },
         {
           id: 24,
-          image: "../assets/theorySprites/theoryb-10.png",
           name: "b-10",
           offsetx: 3589,
           offsety: 1538,
@@ -2349,7 +2343,6 @@
         },
         {
           id: 23,
-          image: "../assets/theorySprites/theoryb-9.png",
           name: "b-9",
           offsetx: 3481,
           offsety: 1518,
@@ -2361,7 +2354,6 @@
         },
         {
           id: 22,
-          image: "../assets/theorySprites/theoryb-8.png",
           name: "b-8",
           offsetx: 3349,
           offsety: 1538,
@@ -2373,7 +2365,6 @@
         },
         {
           id: 21,
-          image: "../assets/theorySprites/theoryb-7.png",
           name: "b-7",
           offsetx: 3222,
           offsety: 1518,
@@ -2385,7 +2376,6 @@
         },
         {
           id: 20,
-          image: "../assets/theorySprites/theoryb-6.png",
           name: "b-6",
           offsetx: 3082,
           offsety: 1538,
@@ -2397,7 +2387,6 @@
         },
         {
           id: 19,
-          image: "../assets/theorySprites/theoryb-5.png",
           name: "b-5",
           offsetx: 2960,
           offsety: 1518,
@@ -2409,7 +2398,6 @@
         },
         {
           id: 18,
-          image: "../assets/theorySprites/theoryb-4.png",
           name: "b-4",
           offsetx: 2824,
           offsety: 1538,
@@ -2421,7 +2409,6 @@
         },
         {
           id: 16,
-          image: "../assets/theorySprites/theoryb-3.png",
           name: "b-3",
           offsetx: 2693,
           offsety: 1518,
@@ -2433,7 +2420,6 @@
         },
         {
           id: 15,
-          image: "../assets/theorySprites/theoryb-2.png",
           name: "b-2",
           offsetx: 2563,
           offsety: 1538,
@@ -2445,7 +2431,6 @@
         },
         {
           id: 11,
-          image: "../assets/theorySprites/theoryb-1.png",
           name: "b-1",
           offsetx: 2437,
           offsety: 1518,
@@ -2468,7 +2453,6 @@
       layers: [
         {
           id: 14,
-          image: "../assets/taskSprites/task1-a.png",
           name: "1-a",
           offsetx: 4615,
           offsety: 1668,
@@ -2480,7 +2464,6 @@
         },
         {
           id: 27,
-          image: "../assets/taskSprites/task1-b.png",
           name: "1-b",
           offsetx: 4078,
           offsety: 2360,
@@ -2492,7 +2475,6 @@
         },
         {
           id: 43,
-          image: "../assets/taskSprites/task1-c.png",
           name: "1-c",
           offsetx: 1585,
           offsety: 108,
@@ -2504,7 +2486,6 @@
         },
         {
           id: 25,
-          image: "../assets/taskSprites/task1-d.png",
           name: "1-d",
           offsetx: 4792,
           offsety: 1969,
@@ -2516,7 +2497,6 @@
         },
         {
           id: 29,
-          image: "../assets/taskSprites/task2-a.png",
           name: "2-a",
           offsetx: 4101,
           offsety: 3745,
@@ -2528,7 +2508,6 @@
         },
         {
           id: 26,
-          image: "../assets/taskSprites/task2-b.png",
           name: "2-b",
           offsetx: 4162,
           offsety: 1517,
@@ -2540,7 +2519,6 @@
         },
         {
           id: 42,
-          image: "../assets/taskSprites/task2-c.png",
           name: "2-c",
           offsetx: 774,
           offsety: 108,
@@ -2552,7 +2530,6 @@
         },
         {
           id: 45,
-          image: "../assets/taskSprites/task2-d.png",
           name: "2-d",
           offsetx: 3280,
           offsety: 108,
@@ -2564,7 +2541,6 @@
         },
         {
           id: 40,
-          image: "../assets/taskSprites/task2-e.png",
           name: "2-e",
           offsetx: 5153,
           offsety: 629,
@@ -2576,7 +2552,6 @@
         },
         {
           id: 44,
-          image: "../assets/taskSprites/task3-a.png",
           name: "3-a",
           offsetx: 2448,
           offsety: 108,
@@ -2588,7 +2563,6 @@
         },
         {
           id: 28,
-          image: "../assets/taskSprites/task3-b.png",
           name: "3-b",
           offsetx: 4508,
           offsety: 3009,
@@ -2600,7 +2574,6 @@
         },
         {
           id: 31,
-          image: "../assets/taskSprites/task2-a.png",
           name: "4-a",
           offsetx: 3699,
           offsety: 3186,
@@ -2612,7 +2585,6 @@
         },
         {
           id: 30,
-          image: "../assets/taskSprites/task2-a.png",
           name: "5-a",
           offsetx: 2268,
           offsety: 3058,
@@ -2624,7 +2596,6 @@
         },
         {
           id: 32,
-          image: "../assets/taskSprites/task5-b.png",
           name: "5-b",
           offsetx: 2909,
           offsety: 3110,
@@ -2636,7 +2607,6 @@
         },
         {
           id: 46,
-          image: "../assets/taskSprites/task5-c.png",
           name: "5-c",
           offsetx: 4117,
           offsety: 108,
@@ -2648,7 +2618,6 @@
         },
         {
           id: 41,
-          image: "../assets/taskSprites/task5-d.png",
           name: "5-d",
           offsetx: 4686,
           offsety: 1502,
@@ -2661,7 +2630,6 @@
 
         {
           id: 38,
-          image: "../assets/taskSprites/task5-e.png",
           name: "5-e",
           offsetx: 1658,
           offsety: 2248,

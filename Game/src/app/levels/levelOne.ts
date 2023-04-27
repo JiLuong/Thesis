@@ -48,26 +48,29 @@ export const levelOne = {
       type: 'info',
       description: 'MISSION DESCRIPTION',
       content:
-        "The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. The objective of this mission is to determine whether the given conditions will cause failure in the beam.",
+        "<br>The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. <br><br>The objective of this mission is to determine whether the given conditions will cause failure in the beam.<br><br>",
       image: '../assets/taskFigures/info1.png',
     },
     'i-2': {
       type: 'info',
       description: 'Master Thesis',
-      content: 'LINK info 1 ',
-      image: '../assets/taskFigures/info1.png',
+      content:
+        '<br>This project is part of my master thesis. Stay tuned for more info!<br><br>',
+      image: '../assets/thumbsup.gif',
     },
     'i-3': {
       type: 'info',
       description: 'Master Thesis',
-      content: 'LINK LINK info 2',
-      image: '../assets/taskFigures/info1.png',
+      content:
+        '<br>If you have any questions or feedback regarding this project, please contact me at: jimmynl@stud.ntnu.no<br><br>',
+      image: '../assets/thumbsup.gif',
     },
     'i-4': {
       type: 'info',
       description: 'Master Thesis',
-      content: 'LINK LINK LINK info 3',
-      image: '../assets/taskFigures/info1.png',
+      content:
+        "<br>No I won't give you my phone number for free, but you can have my instagram: @jimmynluong<br><br>",
+      image: '../assets/thumbsup.gif',
     },
   },
   tasks: {
@@ -307,7 +310,7 @@ export const levelOne = {
       check: [{ variable: 'w(x)', input: 16 }],
     },
     '5-a': {
-      location: 'Hallway',
+      location: 'Corridor',
       requirement: '',
       type: 'input',
       description:

@@ -114,8 +114,8 @@
   box-shadow: 0 0 rgb(0, 0, 0);
 }
 
-/* VICTORY */
-.win-popup {
+/* Popups*/
+.popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -125,8 +125,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards 2s; /* Play animation after 2s delay */
 }
 
 @keyframes fadeIn {
@@ -138,7 +136,47 @@
   }
 }
 
-.win-content {
+.win-popup {
+  @extend .popup;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 2s; /* Play animation after 2s delay */
+}
+
+.back-popup {
+  @extend .popup;
+
+  .btn {
+    width: 75px;
+    height: 30px;
+    margin: 0px 10px;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 2px 3px #00000033;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.4s;
+
+    &.no {
+      background-color: rgb(222, 41, 41);
+
+      &:hover {
+        color: white;
+        background-color: rgb(77, 7, 7);
+      }
+    }
+
+    &.yes {
+      background-color: rgb(23, 159, 23);
+
+      &:hover {
+        color: white;
+        background-color: rgb(6, 59, 6);
+      }
+    }
+  }
+}
+
+.popup-content {
   background-color: white;
   padding: 30px;
   border-radius: 10px;
@@ -160,6 +198,42 @@
     margin: 0 auto;
     max-width: 100%;
   }
+}
+
+.info-popup {
+  width: 1118px;
+  height: 720px;
+  outline: 8px solid rgb(255 212 0 / 60%);
+  outline-offset: -20px;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.2) 2px,
+      transparent 2px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 1px);
+  background-size: 100px 70px, 70px 100px, 20px 20px, 20px 20px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.5s ease-in-out;
+  z-index: 5;
+
+  &.I {
+    background-color: #681553;
+  }
+  &.Q {
+    background-color: #0d35a7;
+  }
+}
+
+.info-content {
+  font-size: 26px;
+  width: 91%;
+  height: 93%;
+  margin-left: 50px;
+  margin-top: 45px;
+  color: white;
 }
 
 .map {
@@ -197,7 +271,7 @@
 .taskList {
   width: 400px;
   height: 400px;
-  outline: 8px solid rgba(255, 255, 255, 0.3803921569);
+  outline: 8px solid rgba(255, 255, 255, 0.5);
   outline-offset: -20px;
   background-color: rgb(219 222 191);
   position: absolute;
@@ -231,6 +305,17 @@
   top: 50px;
   left: 50px;
 }
+.infoIbtn {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+}
+
+.infoQbtn {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
 
 .mapbtn {
   position: absolute;
@@ -243,6 +328,8 @@
   right: 50px;
 }
 
+.infoIbtn img,
+.infoQbtn img,
 .backbtn img,
 .mapbtn img,
 .taskListbtn img {
@@ -250,6 +337,8 @@
   height: 60px;
   transition: 0.3s;
 }
+.infoIbtn img:hover,
+.infoQbtn img:hover,
 .backbtn img:hover,
 .mapbtn img:hover,
 .taskListbtn img:hover {
