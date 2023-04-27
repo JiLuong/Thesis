@@ -226,6 +226,12 @@
   margin-left: 3.2rem;
 }
 
+.backbtn {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
 .mapbtn {
   position: absolute;
   top: 150px;
@@ -237,15 +243,17 @@
   right: 50px;
 }
 
+.backbtn img,
 .mapbtn img,
 .taskListbtn img {
-  width: 35px;
-  height: 35px;
+  width: 60px;
+  height: 60px;
   transition: 0.3s;
 }
+.backbtn img:hover,
 .mapbtn img:hover,
 .taskListbtn img:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
   box-shadow: 0 0 rgb(0, 0, 0);
 }
 

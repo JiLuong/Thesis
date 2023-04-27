@@ -9,6 +9,11 @@ export default class LevelMap {
       interactables: mapData.layers.find((l) => l.name === 'Interactables')
         .objects,
       theories: mapData.layers.find((l) => l.name === 'Theories').objects,
+      theorySprites: mapData.layers.find((l) => l.name === 'TheorySprites')
+        .layers,
+      interactableSprites: mapData.layers.find(
+        (l) => l.name === 'InteractableSprites'
+      ).layers,
     };
   }
 }

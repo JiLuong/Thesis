@@ -8,10 +8,15 @@ export const levelOne = {
     'b-4',
     'b-5',
     'b-6',
+    'b-7',
+    'b-8',
+    'b-9',
+    'b-10',
     'd-1',
-    'd-2',
-    'd-3',
     'i-1',
+    'i-2',
+    'i-3',
+    'i-4',
   ],
   theories: {
     'b-1': {
@@ -38,7 +43,6 @@ export const levelOne = {
       type: 'demo',
       title:
         'Demonstration: Variable second moment of area with origin through neutral axis',
-      values: [{ variable: 'θ', unit: '°', min: 100, max: 300 }],
     },
     'i-1': {
       type: 'info',
@@ -46,7 +50,24 @@ export const levelOne = {
       content:
         "The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. The objective of this mission is to determine whether the given conditions will cause failure in the beam.",
       image: '../assets/taskFigures/info1.png',
-      values: [{ variable: 'θ', unit: '°', min: 100, max: 300 }],
+    },
+    'i-2': {
+      type: 'info',
+      description: 'Master Thesis',
+      content: 'LINK info 1 ',
+      image: '../assets/taskFigures/info1.png',
+    },
+    'i-3': {
+      type: 'info',
+      description: 'Master Thesis',
+      content: 'LINK LINK info 2',
+      image: '../assets/taskFigures/info1.png',
+    },
+    'i-4': {
+      type: 'info',
+      description: 'Master Thesis',
+      content: 'LINK LINK LINK info 3',
+      image: '../assets/taskFigures/info1.png',
     },
   },
   tasks: {

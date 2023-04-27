@@ -35,6 +35,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private theories: any[] = [];
   private fixedmap: any;
   private mapOverlap: any;
+  private plants: any;
+  private sofas: any;
   private camera: any;
   private k: any;
 
@@ -77,8 +79,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
     this.initGame();
     this.initPlayer();
-    this.initTasks();
-    this.initTheories();
     this.initLevelMapCollisions();
     this.initLevelInteractables();
     this.initLevelTheories();
@@ -103,7 +103,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
     this.k.cam;
     // Load sprites and assets
-    this.k.loadSprite('map', '/assets/Rbygghighres2.png');
+    this.k.loadSprite('map', '/assets/Rbygghighres3.png');
     this.k.loadSprite('avatar', '/assets/spriteDarker777.png', {
       // The avatar image contains X frames layed out horizontally. Slicing it into individual frames
       sliceX: 9,
@@ -124,6 +124,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         },
       },
     });
+    this.k.loadSprite('plants', '/assets/passagePlants.png');
+    this.k.loadSprite('sofas', '/assets/passageSofas.png');
     this.k.loadSprite('overlaps', '/assets/RbygghighresOverlaps.png');
 
     //Task sprites
@@ -134,7 +136,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     ) {
       let taskNumber = this.levelMap.realfagsbygget.interactables[i];
       this.k.loadSprite(
-        'task' + i,
+        taskNumber.class,
         '/assets/taskSprites/task' + taskNumber.class + '.png'
       );
     }
@@ -142,48 +144,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     for (let i = 0; i < this.levelMap.realfagsbygget.theories.length; i++) {
       let theoryNumber = this.levelMap.realfagsbygget.theories[i];
       this.k.loadSprite(
-        'theory' + i,
+        theoryNumber.class,
         '/assets/theorySprites/theory' + theoryNumber.class + '.png'
       );
-    }
-  }
-  initTasks() {
-    const k = this.k;
-    for (
-      let i = 0;
-      i < this.levelMap.realfagsbygget.interactables.length;
-      i++
-    ) {
-      const taskVisuals = this.levelMap.realfagsbygget.interactables[i];
-      const taskSprite = k.add([
-        k.sprite('task' + i),
-        k.pos(taskVisuals.x + taskVisuals.width / 2, taskVisuals.y),
-        k.origin('center'),
-        k.z(3),
-        {
-          id: taskVisuals.id, //not in use
-          taskClass: taskVisuals.class, // Add class property to sprite object
-        },
-      ]);
-      this.taskSprites.push(taskSprite);
-    }
-  }
-
-  initTheories() {
-    const k = this.k;
-    for (let i = 0; i < this.levelMap.realfagsbygget.theories.length; i++) {
-      const theoryVisuals = this.levelMap.realfagsbygget.theories[i];
-      const theorySprite = k.add([
-        k.sprite('theory' + i),
-        k.pos(theoryVisuals.x + theoryVisuals.width / 2, theoryVisuals.y),
-        k.origin('center'),
-        k.z(3),
-        {
-          id: theoryVisuals.id, //not in use
-          theoryClass: theoryVisuals.class, // Add class property to sprite object
-        },
-      ]);
-      this.theorySprites.push(theorySprite);
     }
   }
 
@@ -217,9 +180,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       k.origin('center'),
       k.pos(120, 80),
       k.follow(this.player, k.vec2(0, 1.25)),
-      k.z(4),
+      k.z(1),
     ]);
-    this.mapOverlap = k.add([k.sprite('overlaps'), k.pos(0, 0), k.z(5)]);
+
+    this.mapOverlap = k.add([k.sprite('overlaps'), k.pos(0, 0), k.z(10000)]);
+    this.plants = k.add([k.sprite('plants'), k.pos(0, 0), k.z(1175)]);
+    this.sofas = k.add([k.sprite('sofas'), k.pos(0, 0), k.z(1140)]);
 
     // Player loop
     this.playerSprite.play('idle');
@@ -246,33 +212,30 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       if (this.player.movement.up) this.player.move(0, -speed);
       if (this.player.movement.down) this.player.move(0, speed);
 
+      this.playerSprite.z = this.playerSprite.pos.y;
+
       let isColliding = false;
+
+      // Check if player is colliding with any TASK sprites
       for (let i = 0; i < this.interactables.length; i++) {
         const interactableElement = this.interactables[i];
 
         // Remove color from all TASK sprites
-        const taskSprite = this.taskSprites.find(
-          (sprite) => sprite.taskClass === interactableElement.class
-        );
-        if (taskSprite) {
-          taskSprite.color = null;
-        }
+        const taskSprite = this.taskSprites[i];
+        taskSprite.color = null;
 
         if (this.player.isColliding(interactableElement)) {
           isColliding = true;
 
           // Change color of TASK sprites
-          const indexToModify = this.taskSprites.findIndex(
-            (sprite) => sprite.taskClass === interactableElement.class
-          );
           if (
-            indexToModify !== -1 &&
-            (this.taskService.currentTask.includes(interactableElement.class) ||
-              this.taskService.solvedTasks.includes(interactableElement.class))
+            this.taskService.currentTask.includes(interactableElement.class) ||
+            this.taskService.solvedTasks.includes(interactableElement.class)
           ) {
-            this.taskSprites[indexToModify].color = k.rgb(180, 180, 180);
+            taskSprite.color = k.rgb(100, 100, 100);
           }
 
+          // Change currentInteractable if player is colliding with a TASK sprite
           if (
             this.taskService.currentInteractable !== interactableElement.class
           ) {
@@ -281,10 +244,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         }
       }
 
+      // Reset currentInteractable if player is not colliding with any TASK sprites
       if (!isColliding && this.taskService.currentInteractable != '') {
         this.taskService.currentInteractable = '';
       }
 
+      // Check if player is colliding with THEORY sprites
       for (let j = 0; j < this.theories.length; j++) {
         const theoryElement = this.theories[j];
 
@@ -301,12 +266,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           this.taskService.currentInteractable = theoryElement.class;
 
           // Change color of THEORY sprites
-          const indexToModify = this.theorySprites.findIndex(
-            (sprite) => sprite.theoryClass === theoryElement.class
-          );
-          if (indexToModify !== -1) {
-            this.theorySprites[indexToModify].color = k.rgb(180, 180, 180);
-          }
+          theorySprite.color = k.rgb(100, 100, 100);
         }
       }
     });
@@ -338,6 +298,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       i++
     ) {
       const interactable = this.levelMap.realfagsbygget.interactables[i];
+
+      // Create interactable collision
       const interactableEntity = k.add([
         k.pos(interactable.x, interactable.y),
         k.rect(interactable.width, interactable.height),
@@ -349,6 +311,29 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         },
       ]);
       this.interactables.push(interactableEntity);
+
+      // Create interactable sprite
+      let interactableVisuals =
+        this.levelMap.realfagsbygget.interactableSprites.find(
+          (i) => i.name === interactable.class
+        );
+      if (interactableVisuals) {
+        interactableVisuals.class = interactableEntity.class;
+        interactableVisuals.x = interactableVisuals.offsetx;
+        interactableVisuals.y = interactableVisuals.offsety;
+      } else {
+        interactableVisuals = interactableEntity;
+      }
+      let interactableSprite = k.add([
+        k.sprite(interactable.class),
+        k.pos(interactableVisuals.x, interactableVisuals.y),
+        k.origin('topleft'),
+        k.z(3),
+        {
+          class: interactable.class,
+        },
+      ]);
+      this.taskSprites.push(interactableSprite);
     }
   }
 
@@ -356,10 +341,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     const k = this.k;
     for (let i = 0; i < this.levelMap.realfagsbygget.theories.length; i++) {
       const theory = this.levelMap.realfagsbygget.theories[i];
+
+      // Create theory collision
       const theoryEntities = k.add([
         k.pos(theory.x, theory.y),
         k.rect(theory.width, theory.height),
-        k.rotate(theory.rotation),
         k.opacity(0),
         k.area(),
         {
@@ -367,6 +353,28 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         },
       ]);
       this.theories.push(theoryEntities);
+
+      // Create theory sprite
+      let theoryVisuals = this.levelMap.realfagsbygget.theorySprites.find(
+        (t) => t.name === theory.class
+      );
+      if (theoryVisuals) {
+        theoryVisuals.class = theoryEntities.class;
+        theoryVisuals.x = theoryVisuals.offsetx;
+        theoryVisuals.y = theoryVisuals.offsety;
+      } else {
+        theoryVisuals = theoryEntities;
+      }
+      const theorySprite = k.add([
+        k.sprite(theory.class),
+        k.pos(theoryVisuals.x, theoryVisuals.y),
+        k.origin('topleft'),
+        k.z(3),
+        {
+          theoryClass: theory.class, // Add class property to sprite object
+        },
+      ]);
+      this.theorySprites.push(theorySprite);
     }
   }
 
@@ -481,9 +489,13 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       this.victory = true;
 
       setTimeout(() => {
-        this.router.navigate(['']);
+        this.navigateToHome();
       }, 10000);
     }
+  }
+
+  navigateToHome() {
+    this.router.navigate(['']);
   }
 
   toggleMap() {
