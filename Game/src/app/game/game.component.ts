@@ -392,7 +392,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
 
   initInputController() {
-    // Controles / user input
+    // Controls / user input
     window.addEventListener('keydown', (event) => {
       const { key } = event;
       if (this.modalVisible) return;
@@ -423,6 +423,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     window.addEventListener('keyup', (event) => {
       const { key } = event;
       if (key === ' ') {
+        if (this.backNavigation) return;
         if (
           this.taskService.currentTask.includes(
             this.taskService.currentInteractable
@@ -457,6 +458,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           this.infoObjectives = false;
           this.infoControls = false;
           this.newestTask = false;
+          this.player.speed = 0;
         }
       } else if (key === 'ArrowLeft' || key === 'a') {
         this.player.movement.left = false;
@@ -478,6 +480,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   toggleNavigationBack() {
     this.backNavigation = !this.backNavigation;
+    this.player.speed = this.playerSpeed;
+    this.modalVisible = false;
+    this.mapVisible = false;
+    this.taskListVisible = false;
+    this.infoObjectives = false;
+    this.infoControls = false;
   }
 
   toggleInfoObjectives() {
@@ -526,19 +534,17 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
 
   submitTask() {
-    console.log(this.taskService.currentTask, this.victory);
-
     if (
       this.taskService.checkTaskAnswer(this.taskService.currentInteractable)
     ) {
-      //Soundeffect: Correct
+      //Add Soundeffect: Correct
       this.correctAnswerSubmitted = true;
       setTimeout(() => {
         this.correctAnswerSubmitted = false;
         this.closeModal();
       }, 900);
     } else {
-      //Soundeffect: Wrong
+      //Add Soundeffect: Wrong
       this.wrongAnswerSubmitted = true;
       setTimeout(() => {
         this.wrongAnswerSubmitted = false;
