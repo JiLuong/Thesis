@@ -32,6 +32,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private taskSprites: any[] = [];
   private theorySprites: any[] = [];
   private theories: any[] = [];
+  private background: any;
   private fixedmap: any;
   private mapOverlap: any;
   private objectOverlap: any;
@@ -110,6 +111,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
     this.k.cam;
     // Load sprites and assets
+    this.k.loadSprite('background', '/assets/background.png');
     this.k.loadSprite('map', '/assets/RBygg.png');
     this.k.loadSprite('avatar', '/assets/spriteDarker777.png', {
       // The avatar image contains X frames layed out horizontally. Slicing it into individual frames
@@ -162,6 +164,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     const k = this.k;
     /* k.debug.inspect = true; */
     // Create player
+    this.background = k.add([k.sprite('background'), k.pos(-50, -250)]);
     this.fixedmap = k.add([k.sprite('map'), k.pos(0, 0)]);
     this.player = k.add([
       k.rect(80, 110),
