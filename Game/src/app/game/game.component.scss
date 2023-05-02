@@ -46,6 +46,12 @@
   z-index: 15;
 }
 
+.submit:hover {
+  background-color: #b09f79;
+  transform: scale(1.1);
+  box-shadow: 0 0 rgb(0, 0, 0);
+}
+
 .submit span {
   cursor: pointer;
   display: inline-block;
@@ -59,6 +65,7 @@
   opacity: 0;
   top: 0;
   right: -20px;
+  top: -2px;
   transition: 0.5s;
 }
 
@@ -115,6 +122,7 @@
 .modalClose:hover {
   transform: scale(1.1);
   box-shadow: 0 0 rgb(0, 0, 0);
+  background-color: #b09f79;
 }
 
 /* Popups*/
@@ -124,7 +132,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.69);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,7 +169,7 @@
     transition: background-color 0.4s;
 
     &.no {
-      background-color: rgb(23, 159, 23);
+      background-color: white;
 
       &:hover {
         color: white;
@@ -170,7 +178,7 @@
     }
 
     &.yes {
-      background-color: rgb(222, 41, 41);
+      background-color: #b09f79;
 
       &:hover {
         color: white;
@@ -181,14 +189,14 @@
 }
 
 .popup-content {
-  background-color: white;
+  background-color: rgb(255, 255, 255, 0.85);
   padding: 30px;
   border-radius: 10px;
   text-align: center;
 
   h2 {
     margin-bottom: 20px;
-    color: #016fb9;
+    color: #9b824a;
   }
 
   p {
@@ -207,7 +215,7 @@
 .info-popup {
   width: 1118px;
   height: 720px;
-  outline: 8px solid rgb(255 212 0 / 60%);
+  outline: 8px solid rgb(203 182 135 / 69%);
   outline-offset: -20px;
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.2) 2px,
@@ -247,7 +255,7 @@
   width: 1030px;
   height: 700px;
   /* background: linear-gradient(45deg, #ddb132, #c39239); */
-  background-color: #efc06c;
+  background-color: #eac37d;
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.65) 2px,
       transparent 2px

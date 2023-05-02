@@ -1,5 +1,5 @@
 export const levelTwo = {
-  name: 'levelTwo',
+  name: 'LevelTwo',
   currentTask: ['1-a', '2-a', '3-a', '4-a', '5-a'],
   allTheories: [
     'b-1',
@@ -8,10 +8,15 @@ export const levelTwo = {
     'b-4',
     'b-5',
     'b-6',
+    'b-7',
+    'b-8',
+    'b-9',
+    'b-10',
     'd-1',
-    'd-2',
-    'd-3',
     'i-1',
+    'i-2',
+    'i-3',
+    'i-4',
   ],
   theories: {
     'b-1': {
@@ -34,19 +39,68 @@ export const levelTwo = {
       title: 'Theory 4 Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
+    'b-5': {
+      type: 'book',
+      title: 'Theory 5 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-6': {
+      type: 'book',
+      title: 'Theory 6 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-7': {
+      type: 'book',
+      title: 'Theory 7 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-8': {
+      type: 'book',
+      title: 'Theory 8 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-9': {
+      type: 'book',
+      title: 'Theory 9 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-10': {
+      type: 'book',
+      title: 'Theory 10 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
     'd-1': {
       type: 'demo',
       title:
         'Demonstration: Variable second moment of area with origin through neutral axis',
-      values: [{ variable: 'θ', unit: '°', min: 100, max: 300 }],
     },
     'i-1': {
       type: 'info',
       description: 'MISSION DESCRIPTION',
       content:
-        "The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. The objective of this mission is to determine whether the given conditions will cause failure in the beam.",
+        "<br>The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. <br><br>The objective of this mission is to determine whether the given conditions will cause failure in the beam.<br><br>",
       image: '../assets/taskFigures/info1.png',
-      values: [{ variable: 'θ', unit: '°', min: 100, max: 300 }],
+    },
+    'i-2': {
+      type: 'info',
+      description: 'Master Thesis',
+      content:
+        '<br>This project is part of my master thesis. Stay tuned for more info!<br><br>',
+      image: '../assets/thumbsup.gif',
+    },
+    'i-3': {
+      type: 'info',
+      description: 'Master Thesis',
+      content:
+        '<br>If you have any questions or feedback regarding this project, please contact me at: jimmynl@stud.ntnu.no<br><br>',
+      image: '../assets/thumbsup.gif',
+    },
+    'i-4': {
+      type: 'info',
+      description: 'Master Thesis',
+      content:
+        "<br>No I won't give you my phone number for free, but you can have my instagram: @jimmynluong<br><br>",
+      image: '../assets/thumbsup.gif',
     },
   },
   tasks: {
@@ -55,7 +109,7 @@ export const levelTwo = {
       requirement: '',
       type: 'slider',
       description:
-        '1a) TWOFind the angle θ in degrees when it is defined as the product of the first two prime numbers and a multiple of 10.',
+        '1a) XAXAFind the angle θ in degrees when it is defined as the product of the first two prime numbers and a multiple of 10.',
       image: '',
       inputs: [{ variable: 'θ', unit: '°', min: 0, max: 360, step: 5 }],
       check: [{ variable: 'θ', input: 60 }],
@@ -82,7 +136,7 @@ export const levelTwo = {
       type: 'input',
       description: '1c) Determine the design yielding stress f_d.',
       image: '',
-      inputs: [{ variable: 'f_d', unit: 'N/mm²' }],
+      inputs: [{ variable: 'f_d', unit: ',09 N/mm²' }],
       check: [{ variable: 'f_d', input: 338 }],
     },
     '1-d': {
@@ -286,7 +340,7 @@ export const levelTwo = {
       check: [{ variable: 'w(x)', input: 16 }],
     },
     '5-a': {
-      location: 'Hallway',
+      location: 'Corridor',
       requirement: '',
       type: 'input',
       description:

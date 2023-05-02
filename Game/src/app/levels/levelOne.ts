@@ -39,6 +39,36 @@ export const levelOne = {
       title: 'Theory 4 Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
+    'b-5': {
+      type: 'book',
+      title: 'Theory 5 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-6': {
+      type: 'book',
+      title: 'Theory 6 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-7': {
+      type: 'book',
+      title: 'Theory 7 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-8': {
+      type: 'book',
+      title: 'Theory 8 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-9': {
+      type: 'book',
+      title: 'Theory 9 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
+    'b-10': {
+      type: 'book',
+      title: 'Theory 10 Second moment of area',
+      doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
+    },
     'd-1': {
       type: 'demo',
       title:
@@ -106,7 +136,7 @@ export const levelOne = {
       type: 'input',
       description: '1c) Determine the design yielding stress f_d.',
       image: '',
-      inputs: [{ variable: 'f_d', unit: 'N/mm²' }],
+      inputs: [{ variable: 'f_d', unit: ',09 N/mm²' }],
       check: [{ variable: 'f_d', input: 338 }],
     },
     '1-d': {

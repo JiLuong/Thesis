@@ -577,7 +577,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       );
       k.camPos(this.camera);
 
-      //Popups transparency for when the character is moving
+      //'Map' and 'Task list' transparency for when the character is moving
       const movement = Object.values(this.player.movement).filter(
         (v) => v
       ).length;
