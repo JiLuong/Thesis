@@ -58,9 +58,16 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   public opacityToggler = false;
 
-  public playerSpeed = 400;
+  public playerSpeed = 450;
+
+  public hideContainer = false;
+  public outOfTime = false;
+  public timerStarted = false;
+  public remainingTime = 15300000; //4h*60min*60sec=14400sec
 
   public victory = false;
+  public clearAfterTime = false;
+  public clearTime = 0;
 
   constructor(public taskService: TaskService, private router: Router) {}
 
@@ -93,6 +100,13 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.initInputController();
     this.camera = this.player.pos;
     this.render();
+
+    setTimeout(() => {
+      if (!this.timerStarted) {
+        this.updateTimer();
+        this.timerStarted = true;
+      }
+    }, 4000); //Wait 4 seconds before starting the timer countdown
 
     (window as any).sqrt = Math.sqrt;
     (window as any).sin = Math.sin;
@@ -548,6 +562,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }, 900);
     } else {
       //Add Soundeffect: Wrong
+      this.remainingTime -= 10000;
       this.wrongAnswerSubmitted = true;
       setTimeout(() => {
         this.wrongAnswerSubmitted = false;
@@ -555,11 +570,18 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     }
 
     if (this.taskService.currentTask.length == 0) {
-      this.victory = true;
+      if (this.outOfTime) {
+        this.clearAfterTime = true;
+        this.clearTime = this.remainingTime;
 
-      setTimeout(() => {
-        this.navigateToHome();
-      }, 10000);
+        setTimeout(() => {
+          this.navigateToHome();
+        }, 10000);
+      } else if (!this.outOfTime) {
+        this.victory = true;
+
+        //HIGHSCORE STUFF  Open panel to submit player name
+      }
     }
   }
 
@@ -594,5 +616,27 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         }
       }
     });
+  }
+
+  updateTimer() {
+    setInterval(() => {
+      this.remainingTime -= 1000;
+      if (this.remainingTime <= 0) {
+        this.outOfTime = true;
+      }
+    }, 1000);
+  }
+
+  getFormattedTime(time: number): string {
+    const hours = Math.floor(Math.abs(time) / (60 * 60 * 1000))
+      .toString()
+      .padStart(2, '0');
+    const minutes = Math.floor((Math.abs(time) / (60 * 1000)) % 60)
+      .toString()
+      .padStart(2, '0');
+    const seconds = Math.floor((Math.abs(time) / 1000) % 60)
+      .toString()
+      .padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
   }
 }

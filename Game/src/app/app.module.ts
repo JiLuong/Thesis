@@ -10,6 +10,7 @@ import { ConvertToBlankPipe } from './shared/convert-to-blank.pipe';
 import { ConvertToSpacePipe } from './shared/convert-to-space.pipe';
 import { ConvertToDoubleSpacePipe } from './shared/convert-to-double-space.pipe';
 import { LobbyComponent } from './lobby/lobby.component';
+import { HighscoreComponent } from './highscore/highscore.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LobbyComponent } from './lobby/lobby.component';
     ConvertToSpacePipe,
     ConvertToDoubleSpacePipe,
     LobbyComponent,
+    HighscoreComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

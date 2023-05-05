@@ -78,7 +78,7 @@ export const levelOne = {
       type: 'info',
       description: 'MISSION DESCRIPTION',
       content:
-        "<br>The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. <br><br>The objective of this mission is to determine whether the given conditions will cause failure in the beam.<br><br>",
+        "<br>The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. The objective of this mission is to determine whether the given conditions will cause failure in the beam.<br> <sub><small><strong>PS</strong>: Make sure you have understood the <em>game objectives</em> and <em>game controls</em>. Use the <em>task list</em> to view all accessible tasks and the <em>map</em> to locate the tasks. Maybe you can find something useful in your favorite facility, the library? </small></sub></br></br>",
       image: '../assets/taskFigures/info1.png',
     },
     'i-2': {

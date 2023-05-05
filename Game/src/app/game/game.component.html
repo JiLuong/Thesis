@@ -5,15 +5,19 @@
 <div class="canvas">
     <canvas #mycanvas id="myCanvas" width="1500" height="800"></canvas>
     <a class="backbtn" (click)="toggleNavigationBack()" title="Navigate back"> 
-        <img src="../assets/interface/backArrow-icon.png" alt="Back Icon"> </a>
+        <img src="../assets/interface/backArrow-icon.png" alt="Back Icon"> <p>Back</p> </a>
     <a class="infoIbtn" (click)="toggleInfoObjectives()" title="Game objectives"> 
-        <img src="../assets/interface/information-icon.png" alt="Info Icon"> </a>
+        <img src="../assets/interface/information-icon.png" alt="Info Icon"> <p>Objectives</p></a>
     <a class="infoQbtn" (click)="toggleInfoControls()" title="Game controls"> 
-        <img src="../assets/interface/question-icon.png" alt="Info Icon"> </a>
+        <img src="../assets/interface/question-icon.png" alt="Info Icon"><p>Controls</p> </a>
     <a class="mapbtn" (click)="toggleMap()" title="Map"> 
-        <img src="../assets/interface/map-icon.png" alt="Map Icon"> </a>
+        <img src="../assets/interface/map-icon.png" alt="Map Icon"><p>Map</p> </a>
     <a class="taskListbtn" (click)="toggleTaskList()" title="Task list"> 
-        <img src="../assets/interface/taskList-icon.png" alt="Task Icon"> </a>
+        <img src="../assets/interface/taskList-icon.png" alt="Task Icon"><p>Task list</p> </a>
+
+    <div class="timer" [ngClass]="{'out-of-time': outOfTime}">
+        &#x23F1; {{ getFormattedTime(remainingTime) }}
+    </div>
 </div>
 
 <ng-container *ngIf="modalVisible">   
@@ -84,15 +88,15 @@
     <div class="info-popup I" [ngStyle]="{'opacity': opacityToggler ? '0.3' : '1'}">
         <button class="modalClose" (click)="closeModal()">[ x ]</button>
         <div class="info-content"> 
-            <p> <strong> Game Objectives </strong>
-                <br><br> Our world is filled with many difficult challenges that we have to face. With your help, we can shape the future. It's up to you to embark on a heroic mission to save humanity. Find the mission of this level and solve its task to save the world.
-                <br><br> Explore the campus and uncover hidden clues to unravel the mystery behind the impending disaster. During your journey, you will encounter multiple obstacles and challenges. You will have to solve many fun and cozy tasks to be able to progress.
-                <br><br> Use your amazing skills in analysis and calculation to defeat any problems. Maybe you will use the legendary items, pen and paper, to take notes and log this exciting adventure?
-                <br><br> Navigate this wonderful game design with the help of the map and task list.
-                <br><br> It might be a good idea to take a look at the controls before you start.
+            <p> <strong> <em> <u> Game Objectives </u> </em> </strong>
+                <br><br> Our world is filled with many difficult challenges that we have to face. With your help, we can shape the future. It's up to you to embark on a heroic mission to save humanity. <strong><u>Find the mission</u></strong> of this level and solve its task before the <strong><u>time</u></strong> runs out to save the world.
+                <br><br> Explore the campus and uncover <strong><u>hidden clues</u></strong> to unravel the mystery behind the impending disaster. During your journey, you will encounter multiple obstacles and challenges. You will have to solve many fun and cozy tasks to be able to progress.
+                <br><br> Defeat any problems with your amazing skills in analysis and calculation. Use the legendary items, pen and paper, to <strong><u>take notes</u></strong> and log this exciting adventure.
+                <br><br> Navigate this wonderful game design with the help of the <strong><u>map</u></strong> and <strong><u>task list</u></strong>.
+                <br><br> It might be a good idea to take a look at the <strong><u>controls</u></strong> before you start.
                 <br><br> Good luck!
                 <br><br> Best regards,
-                <br> <em>Jimmy the cool guy</em> </p>
+                <br> <em> Jimmy the cool guy </em> </p>
         </div> 
     </div>
 </ng-container>
@@ -101,26 +105,26 @@
     <div class="info-popup Q" [ngStyle]="{'opacity': opacityToggler ? '0.3' : '1'}">
         <button class="modalClose" (click)="closeModal()">[ x ]</button>
         <div class="info-content"> 
-            <p> <strong> Game Controls </strong>
+            <p> <strong> <em> <u> Game Controls </u> </em> </strong>
                 <br><br> As an aspiring engineering student, you must have full control of the controls to navigate through the challenges and save the day. Here are the controls you need to know:
-                <br><br> Use 'w' 'a' 's' 'd' or the arrow keys to move around the campus and explore different areas. Be cautious of obstacles and tricky pathways.
-                <br><br> Use the spacebar to interact with objects and gather important information. Pay attention to every detail, as it might hold the key to accomplishing the mission.
-                <br><br> Sharpen your analytical skills and use the enter key to submit your answers to the tasks. In times of danger you might want to use the escape key to escape the tasks. Show off your problem-solving abilities and prove your engineering prowess.
+                <br><br> Use '<strong><u>w</u></strong>' '<strong><u>a</u></strong>' '<strong><u>s</u></strong>' '<strong><u>d</u></strong>' or the <strong><u>arrow keys</u></strong> to move around the campus and explore different areas. Be cautious of obstacles and tricky pathways.
+                <br><br> Use the <strong><u>spacebar</u></strong> to interact with objects and gather important information. Pay attention to every <strong><u>detail</u></strong>, as it might hold the key to accomplishing the mission.
+                <br><br> Sharpen your analytical skills and use the <strong><u>enter key</u></strong> to submit your answers to the tasks. In times of danger you might want to use the <strong><u>escape key</u></strong> to escape the tasks. Show off your problem-solving abilities and prove your engineering prowess.
                 <br><br> Now that you know the controls, it's time to embark on this thrilling adventure. 
                 <br><br> Best of luck, and may your engineering skills shine bright!
                 <br><br> Engineering regards,
-                <br> <em>Jimmy the dopest of all</em> </p>
+                <br> <em> Jimmy the dopest of all</em> </p>
         </div> 
     </div>
 </ng-container>
 
 <ng-container *ngIf="backNavigation">
-    <div class="back-popup">
+    <div class="choice-popup">
         <div class="popup-content">
           <h2>Are you sure you want to leave this level and go back to the lobby?</h2>
           <p>You will lose all progress if you proceed to the lobby.</p>
-          <button class="btn no" (click)="toggleNavigationBack()"><span>No, stay</span></button>
-          <button class="btn yes"(click)="navigateToHome()"><span>Yes, leave</span></button>
+          <button class="btn accent" (click)="toggleNavigationBack()"><span>No, stay</span></button>
+          <button class="btn primary"(click)="navigateToHome()"><span>Yes, leave</span></button>
         </div>
     </div>
 </ng-container>
@@ -132,6 +136,31 @@
         <div class="popup-content">
           <h2>Mission Completed!</h2>
           <p>You have solved all tasks and saved the planet. Knowledge for a better world!</p>
+          <img src="../assets/thumbsup.gif" alt="congratulations GIF">
+        </div>
+      </div>
+</ng-container>
+
+<!-- Defeat -->
+
+<ng-container *ngIf="outOfTime">
+  <div class="choice-popup" [style.display]="hideContainer ? 'none' : ''">
+    <div class="popup-content">
+      <h2>Mission Failed!</h2>
+      <p>The planet has collapsed... Do you want to continue and make the best out of it?</p>
+      <button class="btn accent" (click)="hideContainer = true"><span>Yes, continue</span></button>
+      <button class="btn primary" (click)="navigateToHome()"><span>No, escape</span></button>
+    </div>
+  </div>
+</ng-container>
+
+<!-- Defeat Clear -->
+
+<ng-container *ngIf="clearAfterTime">
+    <div class="win-popup">
+        <div class="popup-content">
+          <h2>Good job!</h2>
+          <p>Even though the world burned down you still managed to salvage some of it! Try again and save an another planet!</p>
           <img src="../assets/thumbsup.gif" alt="congratulations GIF">
         </div>
       </div>

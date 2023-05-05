@@ -1,0 +1,96 @@
+<div class="highscore-container">
+    <div class="highscore-card">
+
+      <a class="backbtn" (click)="navigateToHome()" title="Navigate back"> 
+        <img src="../assets/interface/backArrow-icon.png" alt="Back Icon"></a>
+      <h1>Highscores</h1>
+  
+      <!-- Tab headers -->
+      <div class="tab-headers">
+        <div class="tab-header" [class.active]="activeTab === 'levelOne'" (click)="activeTab = 'levelOne'">Mechanics 1</div>
+        <div class="tab-header" [class.active]="activeTab === 'levelTwo'" (click)="activeTab = 'levelTwo'">Mechanics 2</div>
+        <div class="tab-header" [class.active]="activeTab === 'levelThree'" (click)="activeTab = 'levelThree'">Mechanics 3</div>
+        <div class="tab-header" [class.active]="activeTab === 'levelFour'" (click)="activeTab = 'levelFour'">Mechanics 4</div>
+      </div>
+  
+      <!-- Tab content -->
+        <div class="tab-content">
+
+            <ng-container class="tab-pane" *ngIf="activeTab === 'levelOne'">
+                <h3>Mechanics 1</h3>
+            <div class="highscore-table">
+                <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                </tr>
+                <tr *ngFor="let highscore of highscores; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{highscore.player}}</td>
+                    <td>{{highscore.score}}</td>
+                </tr>
+                </table>
+            </div>
+            </ng-container>
+            
+            <ng-container class="tab-pane" *ngIf="activeTab === 'levelTwo'">
+                <h3>Mechanics 2</h3>
+            <div class="highscore-table">
+                <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                </tr>
+                <tr *ngFor="let highscore of highscores; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{highscore.player}}</td>
+                    <td>{{highscore.score}}</td>
+                </tr>
+                </table>
+            </div>
+            </ng-container>
+            
+            <ng-container class="tab-pane" *ngIf="activeTab === 'levelThree'">
+                <h3>Mechanics 3</h3>
+                <div class="highscore-table">
+                <table>
+                    <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                    </tr>
+                    <tr *ngFor="let highscore of highscores; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{highscore.player}}</td>
+                    <td>{{highscore.score}}</td>
+                    </tr>
+                </table>
+                </div>
+            </ng-container>
+            
+            <ng-container class="tab-pane" *ngIf="activeTab === 'levelFour'">
+                <h3>Mechanics 4</h3>
+                <div class="highscore-table">
+                <table>
+                    <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                    </tr>
+                    <tr *ngFor="let highscore of highscores; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{highscore.player}}</td>
+                    <td>{{highscore.score}}</td>
+                    </tr>
+                </table>
+                </div>
+            </ng-container>
+
+        </div>
+
+    </div>
+  </div>
+  
+  
