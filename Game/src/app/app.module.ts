@@ -11,6 +11,8 @@ import { ConvertToSpacePipe } from './shared/convert-to-space.pipe';
 import { ConvertToDoubleSpacePipe } from './shared/convert-to-double-space.pipe';
 import { LobbyComponent } from './lobby/lobby.component';
 import { HighscoreComponent } from './highscore/highscore.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ConvertMsToHhmmssPipe } from './shared/convert-ms-to-hhmmss.pipe';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,11 @@ import { HighscoreComponent } from './highscore/highscore.component';
     ConvertToBlankPipe,
     ConvertToSpacePipe,
     ConvertToDoubleSpacePipe,
+    ConvertMsToHhmmssPipe,
     LobbyComponent,
     HighscoreComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

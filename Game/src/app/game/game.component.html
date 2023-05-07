@@ -15,8 +15,8 @@
     <a class="taskListbtn" (click)="toggleTaskList()" title="Task list"> 
         <img src="../assets/interface/taskList-icon.png" alt="Task Icon"><p>Task list</p> </a>
 
-    <div class="timer" [ngClass]="{'out-of-time': outOfTime}">
-        &#x23F1; {{ getFormattedTime(remainingTime) }}
+    <div class="timer" [ngClass]="{'out-of-time': outOfTime}" title="Big bomb Æææ!">
+        &#x23F1; {{ remainingTime | convertMsToHhmmss }}
     </div>
 </div>
 
@@ -137,13 +137,17 @@
           <h2>Mission Completed!</h2>
           <p>You have solved all tasks and saved the planet. Knowledge for a better world!</p>
           <img src="../assets/thumbsup.gif" alt="congratulations GIF">
+          <h3>This is the time you have left. What is the name behind this amazing performance?</h3>
+          <input type="text" [(ngModel)]="playerName" maxlength="16" title="Please enter a name between 1 and 16 characters" placeholder="Jimmy the edgy" required> {{clearTime | convertMsToHhmmss}}
+          <button class="btn subScore" (click)="submitScore()" [disabled]="!playerName"><span>Submit score</span></button>
+          <button class="btn navBack" (click)="navigateToHome()"><span>Back to lobby</span></button>
         </div>
       </div>
 </ng-container>
 
 <!-- Defeat -->
 
-<ng-container *ngIf="outOfTime">
+<ng-container *ngIf="outOfTime && !victory">
   <div class="choice-popup" [style.display]="hideContainer ? 'none' : ''">
     <div class="popup-content">
       <h2>Mission Failed!</h2>

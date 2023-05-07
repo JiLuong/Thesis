@@ -38,30 +38,30 @@
 
 .backbtn {
   position: absolute;
-  top: 50px;
-  left: 50px;
+  top: 25px;
+  left: 25px;
 }
 .infoIbtn {
   position: absolute;
-  bottom: 160px;
-  left: 46px;
+  bottom: 115px;
+  left: 21px;
 }
 
 .infoQbtn {
   position: absolute;
-  bottom: 50px;
-  left: 50px;
+  bottom: 5px;
+  left: 25px;
 }
 
 .mapbtn {
   position: absolute;
-  top: 160px;
-  right: 50px;
+  top: 135px;
+  right: 25px;
 }
 .taskListbtn {
   position: absolute;
-  top: 50px;
-  right: 50px;
+  top: 25px;
+  right: 25px;
 }
 
 .timer {
@@ -222,6 +222,49 @@
   @extend .popup;
   opacity: 0;
   animation: fadeIn 1s ease forwards 2s; /* Play animation after 2s delay */
+  input {
+    width: 200px;
+    height: 30px;
+  }
+  .btn {
+    width: 150px;
+    height: 30px;
+    margin: 0px 10px;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 2px 3px #00000033;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.4s;
+
+    &.subScore {
+      background-color: white;
+      margin-bottom: 69px;
+
+      &:hover {
+        color: white;
+        background-color: rgb(6, 59, 6);
+      }
+
+      &:disabled:hover {
+        color: rgba(0, 0, 0, 0.3);
+        background-color: gray;
+        cursor: not-allowed;
+      }
+    }
+
+    &.navBack {
+      background-color: #b09f79;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 200%);
+
+      &:hover {
+        color: white;
+        background-color: rgb(77, 7, 7);
+      }
+    }
+  }
 }
 
 .choice-popup {
@@ -266,6 +309,11 @@
 
   h2 {
     margin-bottom: 20px;
+    color: #9b824a;
+  }
+
+  h3 {
+    margin: 25px;
     color: #9b824a;
   }
 

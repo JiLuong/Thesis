@@ -9,6 +9,7 @@ import {
 import kaboom from 'kaboom';
 import LevelMap from '../level-map';
 import { TaskService } from '../shared/task.service';
+import { GoogleSheetService } from '../shared/google-sheet.service';
 
 import { Router } from '@angular/router';
 
@@ -42,6 +43,10 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private camera: any;
   private k: any;
 
+  public level: string = '';
+  public levelNumberToInt: number = 1;
+  public playerName: string = '';
+
   public modalVisible = false;
 
   public mapVisible = false;
@@ -58,18 +63,22 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   public opacityToggler = false;
 
-  public playerSpeed = 450;
+  public playerSpeed = 490;
 
   public hideContainer = false;
   public outOfTime = false;
   public timerStarted = false;
-  public remainingTime = 15300000; //4h*60min*60sec=14400sec
+  public remainingTime = 15300000; //15300000 ms = 4h 15min
 
   public victory = false;
   public clearAfterTime = false;
   public clearTime = 0;
 
-  constructor(public taskService: TaskService, private router: Router) {}
+  constructor(
+    public taskService: TaskService,
+    private googleSheetService: GoogleSheetService,
+    private router: Router
+  ) {}
 
   ngOnDestroy(): void {
     console.log('Destroy');
@@ -87,10 +96,14 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     const levelNumber = urlSegments[urlSegments.length - 1];
     const level = allLevels[levelNumber];
 
+    this.level = levelNumber;
+
     this.taskService.currentTask = level.currentTask;
     this.taskService.allTheories = level.allTheories;
     this.taskService.theories = level.theories;
     this.taskService.tasks = level.tasks;
+
+    console.log(Object.keys(this.taskService.tasks).length); // 17 = number of tasks
 
     this.initGame();
     this.initPlayer();
@@ -412,7 +425,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Controls / user input
     window.addEventListener('keydown', (event) => {
       const { key } = event;
-      if (this.modalVisible) return;
+      if (this.modalVisible || this.victory) return;
 
       if (key === ' ') {
         if (
@@ -440,7 +453,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     window.addEventListener('keyup', (event) => {
       const { key } = event;
       if (key === ' ') {
-        if (this.backNavigation) return;
+        if (this.backNavigation || this.victory) return;
         if (
           this.taskService.currentTask.includes(
             this.taskService.currentInteractable
@@ -579,14 +592,29 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         }, 10000);
       } else if (!this.outOfTime) {
         this.victory = true;
-
-        //HIGHSCORE STUFF  Open panel to submit player name
+        this.clearTime = this.remainingTime;
       }
     }
   }
 
   navigateToHome() {
     this.router.navigate(['']);
+  }
+
+  submitScore() {
+    if (this.level == 'levelOne') this.levelNumberToInt = 1;
+    else if (this.level == 'levelTwo') this.levelNumberToInt = 2;
+    else if (this.level == 'levelThree') this.levelNumberToInt = 3;
+    else if (this.level == 'levelFour') this.levelNumberToInt = 4;
+    console.log(this.levelNumberToInt, this.playerName, this.clearTime);
+
+    this.googleSheetService.postScore(
+      this.levelNumberToInt,
+      this.playerName,
+      this.clearTime
+    );
+
+    this.navigateToHome();
   }
 
   render() {
@@ -625,18 +653,5 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.outOfTime = true;
       }
     }, 1000);
-  }
-
-  getFormattedTime(time: number): string {
-    const hours = Math.floor(Math.abs(time) / (60 * 60 * 1000))
-      .toString()
-      .padStart(2, '0');
-    const minutes = Math.floor((Math.abs(time) / (60 * 1000)) % 60)
-      .toString()
-      .padStart(2, '0');
-    const seconds = Math.floor((Math.abs(time) / 1000) % 60)
-      .toString()
-      .padStart(2, '0');
-    return `${hours}:${minutes}:${seconds}`;
   }
 }
