@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    cursor: pointer;
 
     justify-content: center;
     img {
@@ -36,6 +37,14 @@
   }
 }
 
+.progressBar {
+  position: absolute;
+  top: 27px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: default;
+}
+
 .backbtn {
   position: absolute;
   top: 25px;
@@ -46,13 +55,11 @@
   bottom: 115px;
   left: 21px;
 }
-
 .infoQbtn {
   position: absolute;
   bottom: 5px;
   left: 25px;
 }
-
 .mapbtn {
   position: absolute;
   top: 135px;
@@ -61,6 +68,16 @@
 .taskListbtn {
   position: absolute;
   top: 25px;
+  right: 25px;
+}
+.musicbtn {
+  position: absolute;
+  bottom: 175px;
+  right: 25px;
+}
+.soundbtn {
+  position: absolute;
+  bottom: 65px;
   right: 25px;
 }
 
@@ -78,6 +95,7 @@
 .out-of-time {
   background: linear-gradient(140deg, red, #6a1a1a);
 }
+
 .taskContainer {
   width: 1250px;
   height: 650px;

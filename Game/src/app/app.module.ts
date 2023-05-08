@@ -13,6 +13,7 @@ import { LobbyComponent } from './lobby/lobby.component';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConvertMsToHhmmssPipe } from './shared/convert-ms-to-hhmmss.pipe';
+import { ProgressbarComponent } from './progressbar/progressbar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ConvertMsToHhmmssPipe } from './shared/convert-ms-to-hhmmss.pipe';
     ConvertMsToHhmmssPipe,
     LobbyComponent,
     HighscoreComponent,
+    ProgressbarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

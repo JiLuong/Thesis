@@ -4,53 +4,75 @@
 
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='input'">
         <div class="input" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
-            <div class="taskDescription">
-                {{task.description}}
-            </div>
+           
+            <div class="taskDescription" [innerHTML]="task.description">
+                </div>        
+            
             <div class="taskContent">
                 <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''"
                     src={{task.image}} />
-                <div class="userinteraction">
+                
+                <div *ngIf="this.newestTask">
                     <p *ngFor="let input of task.inputs">
-                        {{input.variable | convertToDoubleSpace:"~"|convertToSpace:"¨"}} = <input class="inputText"
-                            type="text" id={{input.variable}} />{{input.unit}}
+                         <span [innerHTML]="input.variable | convertToDoubleSpace:'~'"></span> = <input class="inputText"
+                            type="text" id={{input.variable}} /> <span [innerHTML]="input.unit"></span> 
                     </p>
                 </div>
+                <div *ngIf="!this.newestTask">
+                    <p *ngFor="let input of task.inputs">
+                        <span [innerHTML]="input.variable | convertToDoubleSpace:'~'"></span> = {{input.answer}}<span [innerHTML]="input.unit"></span>
+                    </p>
+                </div>
+            
             </div>
+
         </div>
     </ng-container>
 
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='slider'">
         <div class="slider" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
-            <div class="taskDescription">
-                {{task.description}}
-            </div>
+            
+            <div class="taskDescription" [innerHTML]="task.description">
+                </div>
+            
             <div class="taskContent">
                 <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''"
                     src={{task.image}} />
-                <div class="userinteraction">
+                
+                <div *ngIf="this.newestTask">
                     <p *ngFor="let input of task.inputs">
-                        {{input.variable}} = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}}
+                        <span [innerHTML]="input.variable"></span> = <input type="range" min={{input.min}} max={{input.max}} step={{input.step}}
                             id={{input.variable}} [(ngModel)]="sliderValue" />{{sliderValue}}{{input.unit}}
                     </p>
-
                 </div>
+                <div *ngIf="!this.newestTask">
+                    <p *ngFor="let input of task.inputs">
+                        <span [innerHTML]="input.variable"></span> = {{input.answer}}{{input.unit}}
+                    </p>
+                </div>
+
             </div>
+            
         </div>
     </ng-container>
 
     <ng-container *ngIf="this.taskService.tasks[this.taskService.currentInteractable]?.type =='checkbox'">
         <div class="checkbox" *ngFor="let task of [this.taskService.tasks[this.taskService.currentInteractable]]">
-            <div class="taskDescription">
-                {{task.description}}
-            </div>
-            <!-- <img class="figure" *ngIf="this.taskService.tasks[this.taskService.currentInteractable].image !== ''" src={{task.image}} /> -->
-            <div class="userinteraction">
+            
+            <div class="taskDescription"> {{task.description}} 
+                </div>
+
+            <div class="userinteraction" *ngIf="this.newestTask">
                 <p *ngFor="let input of task.inputs">
                     <input type="checkbox" id={{input.variable}} /> {{input.display}} <img *ngIf="input.picture !==''"
                         src={{input.picture}} />
                 </p>
-
+            </div>
+            <div class="userinteraction" *ngIf="!this.newestTask">
+                <p *ngFor="let input of task.inputs">
+                    <input type="checkbox" id={{input.variable}} [checked]="input.answer ? true : false" [disabled]="true"/> {{input.display}} <img *ngIf="input.picture !==''"
+                        src={{input.picture}} />
+                </p>
             </div>
 
         </div>

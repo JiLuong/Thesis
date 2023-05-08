@@ -63,7 +63,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   public opacityToggler = false;
 
-  public playerSpeed = 490;
+  public playerSpeed = 475;
 
   public hideContainer = false;
   public outOfTime = false;
@@ -74,6 +74,10 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   public clearAfterTime = false;
   public clearTime = 0;
 
+  public isBackgroundMusicMuted = false;
+  public backgroundMusic: any;
+  public isSoundsMuted = false;
+
   constructor(
     public taskService: TaskService,
     private googleSheetService: GoogleSheetService,
@@ -82,6 +86,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('Destroy');
+    this.stopBackgroundMusic();
   }
 
   ngAfterViewInit(): void {
@@ -103,8 +108,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.taskService.theories = level.theories;
     this.taskService.tasks = level.tasks;
 
-    console.log(Object.keys(this.taskService.tasks).length); // 17 = number of tasks
-
     this.initGame();
     this.initPlayer();
     this.initLevelMapCollisions();
@@ -113,6 +116,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.initInputController();
     this.camera = this.player.pos;
     this.render();
+    this.backgroundMusicSound();
 
     setTimeout(() => {
       if (!this.timerStarted) {
@@ -122,8 +126,22 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     }, 4000); //Wait 4 seconds before starting the timer countdown
 
     (window as any).sqrt = Math.sqrt;
-    (window as any).sin = Math.sin;
-    (window as any).cos = Math.cos;
+    (window as any).sin = this.sinDeg;
+    (window as any).cos = this.cosDeg;
+    (window as any).tan = this.tanDeg;
+  }
+
+  sinDeg(degrees: number) {
+    const radians = degrees * (Math.PI / 180);
+    return Math.sin(radians);
+  }
+  cosDeg(degrees: number) {
+    const radians = degrees * (Math.PI / 180);
+    return Math.cos(radians);
+  }
+  tanDeg(degrees: number) {
+    const radians = degrees * (Math.PI / 180);
+    return Math.tan(radians);
   }
 
   initGame() {
@@ -462,6 +480,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
             this.taskService.currentInteractable
           )
         ) {
+          this.openModalSound();
           this.modalVisible = true;
           this.taskListVisible = false;
           this.mapVisible = false;
@@ -482,6 +501,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
             this.taskService.currentInteractable
           )
         ) {
+          this.openModalSound();
           this.modalVisible = true;
           this.taskListVisible = false;
           this.mapVisible = false;
@@ -501,6 +521,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       } else if (key === 'Escape') {
         this.closeModal();
       } else if (key === 'Enter') {
+        if (this.victory) return;
         if (this.newestTask) {
           this.submitTask();
         }
@@ -516,8 +537,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.taskListVisible = false;
     this.infoObjectives = false;
     this.infoControls = false;
+    this.buttonClickSound();
   }
-
   toggleInfoObjectives() {
     this.infoObjectives = !this.infoObjectives;
     this.player.speed = this.playerSpeed;
@@ -525,8 +546,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.mapVisible = false;
     this.taskListVisible = false;
     this.infoControls = false;
+    this.buttonClickSound();
   }
-
   toggleInfoControls() {
     this.infoControls = !this.infoControls;
     this.player.speed = this.playerSpeed;
@@ -534,8 +555,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.mapVisible = false;
     this.taskListVisible = false;
     this.infoObjectives = false;
+    this.buttonClickSound();
   }
-
   toggleMap() {
     this.mapVisible = !this.mapVisible;
     this.player.speed = this.playerSpeed;
@@ -543,8 +564,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.taskListVisible = false;
     this.infoObjectives = false;
     this.infoControls = false;
+    this.buttonClickSound();
   }
-
   toggleTaskList() {
     this.taskListVisible = !this.taskListVisible;
     this.player.speed = this.playerSpeed;
@@ -552,29 +573,33 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.mapVisible = false;
     this.infoObjectives = false;
     this.infoControls = false;
+    this.buttonClickSound();
   }
-
-  closeModal() {
+  closeModal(playSound = true) {
     this.player.speed = this.playerSpeed;
     this.modalVisible = false;
     this.mapVisible = false;
     this.taskListVisible = false;
     this.infoObjectives = false;
     this.infoControls = false;
+
+    if (playSound) {
+      this.buttonClickSound();
+    }
   }
 
   submitTask() {
     if (
       this.taskService.checkTaskAnswer(this.taskService.currentInteractable)
     ) {
-      //Add Soundeffect: Correct
+      this.correctAnswerSound();
       this.correctAnswerSubmitted = true;
       setTimeout(() => {
         this.correctAnswerSubmitted = false;
-        this.closeModal();
+        this.closeModal(false);
       }, 900);
     } else {
-      //Add Soundeffect: Wrong
+      this.incorrectAnswerSound();
       this.remainingTime -= 10000;
       this.wrongAnswerSubmitted = true;
       setTimeout(() => {
@@ -601,12 +626,72 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.router.navigate(['']);
   }
 
+  buttonClickSound() {
+    if (this.isSoundsMuted) return;
+    const buttonClick = new Audio('../assets/audio/ButtonClick.mp3');
+    buttonClick.play();
+  }
+  openModalSound() {
+    if (this.isSoundsMuted) return;
+    const openModal = new Audio('../assets/audio/Paper.mp3');
+    openModal.play();
+  }
+  correctAnswerSound() {
+    if (this.isSoundsMuted) return;
+    const correctSounds = [
+      '../assets/audio/Wow.mp3',
+      '../assets/audio/Tadah.mp3',
+      '../assets/audio/Airhorns.mp3',
+    ];
+    const randomCorrectIndex = Math.floor(Math.random() * correctSounds.length);
+    const correctAudio = new Audio(correctSounds[randomCorrectIndex]);
+    correctAudio.play();
+  }
+  incorrectAnswerSound() {
+    if (this.isSoundsMuted) return;
+    const incorrectSounds = [
+      '../assets/audio/Bruh.mp3',
+      '../assets/audio/Nani.mp3',
+      '../assets/audio/Quack.mp3',
+      '../assets/audio/Oof.mp3',
+      '../assets/audio/Nope.mp3',
+    ];
+    const randomIncorrectIndex = Math.floor(
+      Math.random() * incorrectSounds.length
+    );
+    const incorrectAudio = new Audio(incorrectSounds[randomIncorrectIndex]);
+    incorrectAudio.play();
+  }
+  backgroundMusicSound() {
+    this.backgroundMusic = new Audio(
+      '../assets/audio/Lineage2BackgroundMusic.mp3'
+    );
+    this.backgroundMusic.loop = true;
+    this.backgroundMusic.play();
+  }
+  stopBackgroundMusic() {
+    this.backgroundMusic.pause();
+  }
+  toggleBackgroundMusic() {
+    this.buttonClickSound();
+    if (this.isBackgroundMusicMuted) {
+      this.backgroundMusic.play();
+    } else {
+      this.backgroundMusic.pause();
+    }
+    this.isBackgroundMusicMuted = !this.isBackgroundMusicMuted;
+  }
+  muteSounds() {
+    this.isSoundsMuted = !this.isSoundsMuted;
+    const buttonClick = new Audio('../assets/audio/ButtonClick.mp3');
+    buttonClick.play();
+  }
+
   submitScore() {
     if (this.level == 'levelOne') this.levelNumberToInt = 1;
     else if (this.level == 'levelTwo') this.levelNumberToInt = 2;
     else if (this.level == 'levelThree') this.levelNumberToInt = 3;
     else if (this.level == 'levelFour') this.levelNumberToInt = 4;
-    console.log(this.levelNumberToInt, this.playerName, this.clearTime);
 
     this.googleSheetService.postScore(
       this.levelNumberToInt,

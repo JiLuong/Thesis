@@ -4,6 +4,9 @@
 
 <div class="canvas">
     <canvas #mycanvas id="myCanvas" width="1500" height="800"></canvas>
+    
+    <app-progressbar class="progressBar" [solvedTasks]="taskService.solvedTasks"></app-progressbar>
+
     <a class="backbtn" (click)="toggleNavigationBack()" title="Navigate back"> 
         <img src="../assets/interface/backArrow-icon.png" alt="Back Icon"> <p>Back</p> </a>
     <a class="infoIbtn" (click)="toggleInfoObjectives()" title="Game objectives"> 
@@ -18,11 +21,23 @@
     <div class="timer" [ngClass]="{'out-of-time': outOfTime}" title="Big bomb Æææ!">
         &#x23F1; {{ remainingTime | convertMsToHhmmss }}
     </div>
+
+    <a class="musicbtn" (click)="toggleBackgroundMusic()" title="Background music"> 
+        <img *ngIf="!isBackgroundMusicMuted" src="../assets/interface/music-icon.png" alt="Music On Icon">
+        <img *ngIf="isBackgroundMusicMuted" src="../assets/interface/disabled-music-icon.png" alt="Music Off Icon">
+        <p>Music</p>
+    </a>
+    
+    <a class="soundbtn" (click)="muteSounds()" title="Sound effects"> 
+        <img *ngIf="!isSoundsMuted" src="../assets/interface/sound-icon.png" alt="Sound On Icon">
+        <img *ngIf="isSoundsMuted" src="../assets/interface/disabled-sound-icon.png" alt="Sound Off Icon">
+        <p>Sound</p>
+    </a>
 </div>
 
 <ng-container *ngIf="modalVisible">   
     <div [ngClass]="{'taskContainer': true, 'show': modalVisible, 'correctAnswer': correctAnswerSubmitted, 'wrongAnswer': wrongAnswerSubmitted}">
-            <app-modal></app-modal>   
+            <app-modal [newestTask]="newestTask"></app-modal>   
             <button class="modalClose" (click)="closeModal()">[ x ]</button>
             <div *ngIf="newestTask">
                 <button class="submit" (click)="submitTask()"><span>Submit</span></button>
@@ -34,40 +49,39 @@
 <ng-container>
     <div class="map" [ngStyle]="{'display': mapVisible ? 'block' : 'none', 'opacity': opacityToggler ? '0.3' : '1'}">   
         <button class="modalClose" (click)="closeModal()">[ x ]</button>
-        <img src="../assets/RByggStations.png" alt="Map"> <!-- Optimize image resolution for loading -->
+        <img src="../assets/RByggStations.png" alt="Map">
         <!-- Map: Paper fold effect -->
         <div>
-        <span class="folds main">
-            <span class="cell main-1"></span>
-            <span class="cell main-2"></span>
-            <span class="cell main-1"></span>
-            <span class="cell main-2"></span>
-            <span class="cell main-1"></span>
+          <span class="folds main">
+             <span class="cell main-1"></span>
+             <span class="cell main-2"></span>
+             <span class="cell main-1"></span>
+             <span class="cell main-2"></span>
+             <span class="cell main-1"></span>
           </span>
           
           <span class="folds vertical">
-            <span class="cell vertical-1"></span>
-            <span class="cell vertical-2"></span>
-            <span class="cell vertical-3"></span>
-            <span class="cell vertical-4"></span>
-            <span class="cell vertical-5"></span>
+             <span class="cell vertical-1"></span>
+             <span class="cell vertical-2"></span>
+             <span class="cell vertical-3"></span>
+             <span class="cell vertical-4"></span>
+             <span class="cell vertical-5"></span>
           </span> 
           
           <span class="folds horizontal">
-            <span class="cell horizontal-1"></span>
-            <span class="cell horizontal-2"></span>
-            <span class="cell horizontal-1"></span>
-            <span class="cell horizontal-2"></span>
-            <span class="cell horizontal-1"></span>
-            <span class="cell horizontal-3"></span>
-            <span class="cell horizontal-4"></span>
-            <span class="cell horizontal-3"></span>
-            <span class="cell horizontal-4"></span>
-            <span class="cell horizontal-3"></span>
+             <span class="cell horizontal-1"></span>
+             <span class="cell horizontal-2"></span>
+             <span class="cell horizontal-1"></span>
+             <span class="cell horizontal-2"></span>
+             <span class="cell horizontal-1"></span>
+             <span class="cell horizontal-3"></span>
+             <span class="cell horizontal-4"></span>
+             <span class="cell horizontal-3"></span>
+             <span class="cell horizontal-4"></span>
+             <span class="cell horizontal-3"></span>
           </span>
         </div>
     </div>
-    
 </ng-container>
 
 <ng-container *ngIf="taskListVisible">

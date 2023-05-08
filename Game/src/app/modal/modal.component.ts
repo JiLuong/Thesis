@@ -1,6 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 import { TaskService } from '../shared/task.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { GameComponent } from '../game/game.component';
 
 @Component({
   selector: 'app-modal',
@@ -9,6 +15,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent implements OnInit {
+  @Input() newestTask: boolean;
+
   public sliderValue = 0;
   public rectangleValue = 200;
   public rectangleStaticValue = 100;
@@ -16,14 +24,15 @@ export class ModalComponent implements OnInit {
 
   constructor(
     public taskService: TaskService,
-    private sanitizer: DomSanitizer
-  ) {}
+    private sanitizer: DomSanitizer,
+    private gameComponent: GameComponent
+  ) {
+    this.newestTask = this.gameComponent.newestTask;
+  }
 
   public getTrustedUrl(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   ngOnInit(): void {}
-
- 
 }

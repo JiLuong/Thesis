@@ -26,17 +26,32 @@ export class TaskService {
         element.variable
       ) as HTMLInputElement;
       let value: any = '';
+
       try {
         if (input.type === 'checkbox') {
           value = input.checked;
+          if (check[element.variable] !== value) {
+            correctAnswer = false;
+            break; // Stop checking the rest of the checkboxes
+          }
         } else {
           value = eval(input.value);
-        }
-        if (check[element.variable] != value) {
-          correctAnswer = false;
+          const expected = check[element.variable];
+          if (typeof value === 'number' && typeof expected === 'number') {
+            if (Math.abs(value - expected) > 0.1) {
+              correctAnswer = false;
+              break; // Stop checking the rest of the inputs
+            }
+          } else {
+            if (value !== expected) {
+              correctAnswer = false;
+              break; // Stop checking the rest of the inputs
+            }
+          }
         }
       } catch (error) {
         correctAnswer = false;
+        break; // Stop checking the rest of the inputs
       }
     }
 
@@ -47,6 +62,7 @@ export class TaskService {
       return false;
     }
   }
+
   updateSolvedTask(taskId: string) {
     const taskIndex = this.currentTask.indexOf(taskId);
     const task = this.currentTask.splice(taskIndex, 1)[0];

@@ -1,0 +1,37 @@
+.progress {
+  display: flex;
+  height: 35px;
+  width: 888px;
+  border: 3px solid black;
+
+  .progress-bar {
+    flex-grow: 1;
+    transition: background-color 1s;
+
+    &.bg-success {
+      animation: blink-bg-success 1s ease-out;
+      background-color: #4fd31c;
+    }
+
+    &.bg-secondary {
+      background-color: rgb(255 255 255 / 50%);
+    }
+  }
+}
+
+@keyframes blink-bg-success {
+  0%,
+  60% {
+    background-color: transparent;
+  }
+  30%,
+  100% {
+    background-color: #4fd31c;
+  }
+}
+
+.task-name {
+  position: relative;
+  top: 25%;
+  left: 30%;
+}

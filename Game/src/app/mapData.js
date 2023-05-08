@@ -1469,7 +1469,7 @@
           y: 875,
         },
         {
-          height: 111.33,
+          height: 123,
           id: 176,
           name: "",
           rotation: 0,
@@ -1477,7 +1477,7 @@
           visible: true,
           width: 16,
           x: 4728,
-          y: 1530,
+          y: 1518,
         },
         {
           height: 16,
@@ -1499,7 +1499,7 @@
           visible: true,
           width: 92,
           x: 5217,
-          y: 1418,
+          y: 1351,
         },
         {
           height: 10,
@@ -1535,7 +1535,7 @@
           y: 1200,
         },
         {
-          height: 127,
+          height: 60,
           id: 183,
           name: "",
           rotation: 0,
@@ -2251,7 +2251,7 @@
           visible: true,
           width: 15,
           x: 4747,
-          y: 1562,
+          y: 1545,
         },
 
         {

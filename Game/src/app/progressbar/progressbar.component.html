@@ -1,0 +1,13 @@
+<div class="progress">
+    <div
+      *ngFor="let task of tasks"
+      class="progress-bar"
+      [ngClass]="{
+        'bg-success': isTaskSolved(task),
+        'bg-secondary': !isTaskSolved(task)
+      }"
+    >
+      <span class="task-name" [ngClass]="{ 'solved': isTaskSolved(task) }">{{ task }}</span>
+    </div>
+  </div>
+  
