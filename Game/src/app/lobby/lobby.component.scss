@@ -1,3 +1,7 @@
+h1 {
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
 .lobby-container {
   display: flex;
   flex-direction: column;
@@ -14,7 +18,7 @@
 .lobby-card {
   background-color: #ffffffe6;
   width: 404px;
-  height: 606px;
+  height: 685px;
   display: flex;
   flex-direction: column;
   align-items: center;

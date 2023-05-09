@@ -445,6 +445,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Controls / user input
     window.addEventListener('keydown', (event) => {
       const { key } = event;
+
+      // User input to initialize backgroundMusic if it was not played
+      // due to audio consent policy: Web browser AudioContext
       if (this.backgroundMusic?.paused) this.backgroundMusic.play();
 
       if (this.modalVisible || this.victory) return;
@@ -683,7 +686,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.5;
     this.backgroundMusic.play();
-    console.log(this.backgroundMusic.paused);
   }
   stopBackgroundMusic() {
     this.backgroundMusic.pause();
