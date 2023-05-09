@@ -14,6 +14,7 @@ import { HighscoreComponent } from './highscore/highscore.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConvertMsToHhmmssPipe } from './shared/convert-ms-to-hhmmss.pipe';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
+import { NotebookComponent } from './notebook/notebook.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ProgressbarComponent } from './progressbar/progressbar.component';
     LobbyComponent,
     HighscoreComponent,
     ProgressbarComponent,
+    NotebookComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

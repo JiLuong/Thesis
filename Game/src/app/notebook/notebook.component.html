@@ -1,0 +1,17 @@
+<div class="notebook">
+    <ng-container *ngIf="solvedTasks.length > 0; else noNotes">
+      <ng-container *ngFor="let task of tasks">
+        <div class="notebook-page" *ngIf="isTaskSolved(task)">
+          <img [src]="getTaskImage(task)" alt="{{task}}" class="notebook-image" />
+        </div>
+      </ng-container>
+    </ng-container>
+  
+    <ng-template #noNotes>
+      <div class="notebook-page">
+        <p class="no-notes-text">No notes taken yet..</p>
+      </div>
+    </ng-template>
+  </div>
+  
+  

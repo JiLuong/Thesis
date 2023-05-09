@@ -37,6 +37,13 @@
   }
 }
 
+.notes {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .progressBar {
   position: absolute;
   top: 27px;
@@ -52,23 +59,33 @@
 }
 .infoIbtn {
   position: absolute;
-  bottom: 115px;
+  bottom: 225px;
   left: 21px;
 }
 .infoQbtn {
   position: absolute;
+  bottom: 115px;
+  left: 25px;
+}
+.tipsbtn {
+  position: absolute;
   bottom: 5px;
   left: 25px;
+}
+.taskListbtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
 }
 .mapbtn {
   position: absolute;
   top: 135px;
   right: 25px;
 }
-.taskListbtn {
+.noteBookbtn {
   position: absolute;
-  top: 25px;
-  right: 25px;
+  top: 245px;
+  right: 22px;
 }
 .musicbtn {
   position: absolute;
@@ -188,6 +205,41 @@
 .wrongAnswer {
   @include glowAnimation(red, rgb(255, 94, 0), red, glowWrong);
   animation: glowWrong 0.5s ease-in-out;
+}
+.wrongAnswerNotification {
+  $color: rgb(131, 28, 28);
+  z-index: 5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: white;
+  opacity: 0;
+  text-shadow: 1px 0 4px red, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color;
+  animation: wrongAnswerNotification 1s ease-in-out forwards;
+}
+
+@keyframes wrongAnswerNotification {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
 }
 
 .modalClose {
@@ -348,7 +400,7 @@
   }
 }
 
-.info-popup {
+.modal-popup {
   width: 1118px;
   height: 720px;
   outline: 8px solid rgb(203 182 135 / 69%);
@@ -371,7 +423,13 @@
     background-color: #681553;
   }
   &.Q {
-    background-color: #0d35a7;
+    background-color: #002795;
+  }
+  &.tips {
+    background-color: #503506;
+  }
+  &.note {
+    background-color: #0d501a;
   }
 }
 

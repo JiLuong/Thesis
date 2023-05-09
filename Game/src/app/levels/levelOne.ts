@@ -217,7 +217,7 @@ export const levelOne = {
       requirement: '2-b',
       type: 'input',
       description:
-        '2c) Find the internal forces of the beam using the intersection method. What are the internal forces of the beam at point L/3 from A',
+        '2c) Find the internal forces of the beam using the intersection method. What are the internal forces of the beam at point L/3 from A?',
       image: '../assets/taskFigures/fig2-c.png',
       inputs: [
         { variable: 'N(L/3)', unit: 'F', answer: '1/2 ' },
@@ -441,7 +441,7 @@ export const levelOne = {
       requirement: '5-c',
       type: 'input',
       description:
-        "5d) Identify the maximum and minimum normal stresses in the beam at points 2 meters and 4 meters along its length using I<sub>y</sub> = 54,8 ∙ 10⁶ mm⁴. Hint: Use Navier's equation σ = σ<sub>N</sub> + σ<sub>M</sub>",
+        "5d) Identify the maximum and minimum normal stresses in the beam at points 2 meters and 4 meters along its length using I<sub>y</sub> = 54,8 ∙ 10⁶ mm⁴. Hint: Identify the forces and moments at the relevant points. Then use Navier's equation σ = σ<sub>N</sub> + σ<sub>M</sub>",
       image: '../assets/taskFigures/fig5-d.png',
       inputs: [
         {

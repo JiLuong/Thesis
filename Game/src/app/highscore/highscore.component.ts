@@ -38,4 +38,12 @@ export class HighscoreComponent implements OnInit {
   navigateToHome() {
     this.router.navigate(['']);
   }
+  buttonClickSound() {
+    const buttonClick = new Audio('../assets/audio/ButtonClick.mp3');
+    buttonClick.play();
+  }
+  buttonHoverSound() {
+    const buttonHover = new Audio('../assets/audio/ButtonHover.mp3');
+    buttonHover.play();
+  }
 }

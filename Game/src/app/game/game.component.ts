@@ -49,10 +49,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   public modalVisible = false;
 
-  public mapVisible = false;
   public taskListVisible = false;
+  public mapVisible = false;
+  public noteBookVisible = false;
   public infoObjectives = false;
   public infoControls = false;
+  public infoTips = false;
 
   public backNavigation = false;
 
@@ -68,7 +70,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   public hideContainer = false;
   public outOfTime = false;
   public timerStarted = false;
-  public remainingTime = 15300000; //15300000 ms = 4h 15min
+  public remainingTime = 8100000; //15300000 ms = 4h 15min
 
   public victory = false;
   public clearAfterTime = false;
@@ -443,6 +445,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Controls / user input
     window.addEventListener('keydown', (event) => {
       const { key } = event;
+      if (this.backgroundMusic?.paused) this.backgroundMusic.play();
+
       if (this.modalVisible || this.victory) return;
 
       if (key === ' ') {
@@ -481,13 +485,13 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           )
         ) {
           this.openModalSound();
-          this.modalVisible = true;
-          this.taskListVisible = false;
-          this.mapVisible = false;
-          this.infoObjectives = false;
-          this.infoControls = false;
-          this.player.speed = 0;
+          this.toggleFunction({
+            propToDisable: 'modalVisible',
+            force: true,
+            value: true,
+          });
           this.newestTask = true;
+          this.player.speed = 0;
         }
         if (
           this.taskService.solvedTasks.includes(
@@ -502,11 +506,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           )
         ) {
           this.openModalSound();
-          this.modalVisible = true;
-          this.taskListVisible = false;
-          this.mapVisible = false;
-          this.infoObjectives = false;
-          this.infoControls = false;
+          this.toggleFunction({
+            propToDisable: 'modalVisible',
+            force: true,
+            value: true,
+          });
+
           this.newestTask = false;
           this.player.speed = 0;
         }
@@ -529,60 +534,69 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  toggleFunction({ propToDisable = '', force = false, value = false }) {
+    const arr = [
+      'modalVisible',
+      'taskListVisible',
+      'mapVisible',
+      'noteBookVisible',
+      'infoObjectives',
+      'infoControls',
+      'infoTips',
+    ];
+    for (let i = 0; i < arr.length; i++) {
+      const prop = arr[i];
+      // Disable all properties except the one that was passed in
+      if (prop !== propToDisable) {
+        this[prop] = false;
+      }
+    }
+    // Toggle the property that was passed in
+    if (propToDisable !== '') {
+      // If force is true, set the property to the value that was passed in
+      // If force is false, toggle the property
+      this[propToDisable] = force ? value : !this[propToDisable];
+    }
+  }
+
   toggleNavigationBack() {
-    this.backNavigation = !this.backNavigation;
     this.player.speed = this.playerSpeed;
-    this.modalVisible = false;
-    this.mapVisible = false;
-    this.taskListVisible = false;
-    this.infoObjectives = false;
-    this.infoControls = false;
-    this.buttonClickSound();
-  }
-  toggleInfoObjectives() {
-    this.infoObjectives = !this.infoObjectives;
-    this.player.speed = this.playerSpeed;
-    this.modalVisible = false;
-    this.mapVisible = false;
-    this.taskListVisible = false;
-    this.infoControls = false;
-    this.buttonClickSound();
-  }
-  toggleInfoControls() {
-    this.infoControls = !this.infoControls;
-    this.player.speed = this.playerSpeed;
-    this.modalVisible = false;
-    this.mapVisible = false;
-    this.taskListVisible = false;
-    this.infoObjectives = false;
-    this.buttonClickSound();
-  }
-  toggleMap() {
-    this.mapVisible = !this.mapVisible;
-    this.player.speed = this.playerSpeed;
-    this.modalVisible = false;
-    this.taskListVisible = false;
-    this.infoObjectives = false;
-    this.infoControls = false;
+    this.toggleFunction({ propToDisable: 'backNavigation' });
     this.buttonClickSound();
   }
   toggleTaskList() {
-    this.taskListVisible = !this.taskListVisible;
     this.player.speed = this.playerSpeed;
-    this.modalVisible = false;
-    this.mapVisible = false;
-    this.infoObjectives = false;
-    this.infoControls = false;
+    this.toggleFunction({ propToDisable: 'taskListVisible' });
+    this.buttonClickSound();
+  }
+  toggleMap() {
+    this.player.speed = this.playerSpeed;
+    this.toggleFunction({ propToDisable: 'mapVisible' });
+    this.buttonClickSound();
+  }
+  toggleNoteBook() {
+    this.player.speed = this.playerSpeed;
+    this.toggleFunction({ propToDisable: 'noteBookVisible' });
+    this.buttonClickSound();
+  }
+  toggleInfoObjectives() {
+    this.player.speed = this.playerSpeed;
+    this.toggleFunction({ propToDisable: 'infoObjectives' });
+    this.buttonClickSound();
+  }
+  toggleInfoControls() {
+    this.player.speed = this.playerSpeed;
+    this.toggleFunction({ propToDisable: 'infoControls' });
+    this.buttonClickSound();
+  }
+  toggleTips() {
+    this.player.speed = this.playerSpeed;
+    this.toggleFunction({ propToDisable: 'infoTips' });
     this.buttonClickSound();
   }
   closeModal(playSound = true) {
     this.player.speed = this.playerSpeed;
-    this.modalVisible = false;
-    this.mapVisible = false;
-    this.taskListVisible = false;
-    this.infoObjectives = false;
-    this.infoControls = false;
-
+    this.toggleFunction({});
     if (playSound) {
       this.buttonClickSound();
     }
@@ -667,7 +681,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       '../assets/audio/Lineage2BackgroundMusic.mp3'
     );
     this.backgroundMusic.loop = true;
+    this.backgroundMusic.volume = 0.5;
     this.backgroundMusic.play();
+    console.log(this.backgroundMusic.paused);
   }
   stopBackgroundMusic() {
     this.backgroundMusic.pause();
@@ -717,10 +733,12 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         (v) => v
       ).length;
       if (
-        this.mapVisible ||
         this.taskListVisible ||
+        this.mapVisible ||
+        this.noteBookVisible ||
         this.infoObjectives ||
-        this.infoControls
+        this.infoControls ||
+        this.infoTips
       ) {
         if (movement > 0 && !this.opacityToggler) {
           this.opacityToggler = true;
