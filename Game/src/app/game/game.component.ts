@@ -76,8 +76,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   public clearAfterTime = false;
   public clearTime = 0;
 
-  public isBackgroundMusicMuted = false;
   public backgroundMusic: any;
+  public isBackgroundMusicPlayed = false;
+  public isBackgroundMusicMuted = false;
   public isSoundsMuted = false;
 
   constructor(
@@ -447,8 +448,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       const { key } = event;
 
       // User input to initialize backgroundMusic if it was not played
-      // due to audio consent policy: Web browser AudioContext
-      if (this.backgroundMusic?.paused) this.backgroundMusic.play();
+      // due to audio consent policy: Web browser AudioContext is not allowed to autoplay
+      if (!this.isBackgroundMusicPlayed && this.backgroundMusic?.paused) {
+        this.backgroundMusic.play();
+        this.isBackgroundMusicPlayed = true;
+      }
 
       if (this.modalVisible || this.victory) return;
 

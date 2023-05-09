@@ -21,9 +21,11 @@
 }
 
 .highscore-table {
-  height: 313px;
+  height: 308px;
   overflow: auto;
   margin-bottom: 42px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 
   table {
     width: 100%;
@@ -31,10 +33,11 @@
 
     th,
     td {
-      padding: 12px 20px; // Adjust the padding values as per your preference
+      padding: 12px 20px;
     }
     th {
       background-color: #b09f79;
+      border: 2px solid black;
     }
     tr:nth-child(even) {
       background-color: #292e3128;
