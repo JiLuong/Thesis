@@ -646,7 +646,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }, 500);
     }
 
-    if (this.taskService.currentTask.length == 4) {
+    if (this.taskService.currentTask.length == 0) {
       if (this.outOfTime) {
         this.clearAfterTime = true;
         this.clearTime = this.remainingTime;
