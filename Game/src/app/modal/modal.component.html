@@ -100,7 +100,7 @@
     <ng-container *ngIf="this.taskService.theories[this.taskService.currentInteractable]?.type == 'demo'">
         <div *ngFor="let theory of [this.taskService.theories[this.taskService.currentInteractable]]">
             {{theory.title}}
-            <div class="demomonstration">
+            <div class="demonstration">
                 <div class="rectangles">
                     <p>N.A.</p>
                     <div class="rectangle1" [style.width.px]="100" [style.height.px]="rectangleValue">
@@ -120,7 +120,7 @@
             </div>
 
             <div class="interaction">
-                <div>Adjust this parameter <input type="range" min=100 max=300 [(ngModel)]="rectangleValue" /> {{rectangleValue}} mm </div>
+                <div>Try adjusting this parameter <input type="range" min=100 max=300 [(ngModel)]="rectangleValue" /> {{rectangleValue}} mm </div>
                 <div class="formula"> I<sub>y</sub> = ⅟₁₂ · w · h³ </div>
             </div>
 

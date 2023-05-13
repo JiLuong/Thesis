@@ -21,64 +21,64 @@ export const levelOne = {
   theories: {
     'b-1': {
       type: 'book',
-      title: 'Theory 1 Second moment of area',
+      title: 'Book 1: Second moment of area',
       doc: '../assets/docus/2StatiskLikevekt.pdf',
     },
     'b-2': {
       type: 'book',
-      title: 'Theory 2 Second moment of area',
+      title: 'Book 2: Second moment of area',
       doc: '../assets/docus/6Lastvirkningsdiagram.pdf',
     },
     'b-3': {
       type: 'book',
-      title: 'Theory 3 Second moment of area',
+      title: 'Book 3: Second moment of area',
       doc: '../assets/docus/7IntroduksjonTilFasthetslære.pdf',
     },
     'b-4': {
       type: 'book',
-      title: 'Theory 4 Second moment of area',
+      title: 'Book 4: Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
     'b-5': {
       type: 'book',
-      title: 'Theory 5 Second moment of area',
+      title: 'Book 5: Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
     'b-6': {
       type: 'book',
-      title: 'Theory 6 Second moment of area',
+      title: 'Book 6: Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
     'b-7': {
       type: 'book',
-      title: 'Theory 7 Second moment of area',
+      title: 'Book 7: Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
     'b-8': {
       type: 'book',
-      title: 'Theory 8 Second moment of area',
+      title: 'Book 8: Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
     'b-9': {
       type: 'book',
-      title: 'Theory 9 Second moment of area',
+      title: 'Book 9: Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
     'b-10': {
       type: 'book',
-      title: 'Theory 10 Second moment of area',
+      title: 'Book 10: Second moment of area',
       doc: '../assets/docus/8Tverrsnittskonstanter.pdf',
     },
     'd-1': {
       type: 'demo',
       title:
-        'Demonstration: Variable second moment of area with origin through neutral axis',
+        'DEMONSTRATION: Variable second moment of area with origin through neutral axis',
     },
     'i-1': {
       type: 'info',
       description: 'MISSION DESCRIPTION',
       content:
-        "<br>The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. The objective of this mission is to determine whether the given conditions will cause failure in the beam.<br> <sub><small><strong>PS</strong>: Make sure you have understood the <em><u>game objectives</u></em> and <em><u>game controls</u></em>. Use the <em><u>task list</u></em> to view all accessible tasks and the <em><u>map</u></em> to locate the tasks. Maybe you can find something useful in your favorite facility, the library? </small></sub></br></br>",
+        "<br>The figure illustrates a simply supported beam that is subject to an indeterminate force F at an unknown angle θ. The beam's length is also unknown. The objective of this mission is to determine whether the given conditions will cause failure in the beam.<br> <sub><small><strong>PS</strong>: Make sure you have understood the <em><u>game objectives</u></em> and <em><u>game controls</u></em>. Use the <em><u>task list</u></em> to view all accessible tasks and the <em><u>map</u></em> to locate the tasks. <br/> Maybe you can find something useful in your favorite facility, the library? </small></sub></br></br>",
       image: '../assets/taskFigures/info1.png',
     },
     'i-2': {
@@ -106,6 +106,7 @@ export const levelOne = {
   tasks: {
     '1-a': {
       location: 'Storage',
+      theory: 'Book 1',
       requirement: '',
       type: 'slider',
       description:
@@ -118,6 +119,7 @@ export const levelOne = {
     },
     '1-b': {
       location: 'Chamber',
+      theory: 'Book 1',
       requirement: '1-a',
       type: 'input',
       description:
@@ -134,6 +136,7 @@ export const levelOne = {
     },
     '1-c': {
       location: 'Class II',
+      theory: 'Book 2',
       requirement: '1-b',
       type: 'input',
       description: '1c) Determine the design yielding stress f<sub>d</sub>.',
@@ -143,6 +146,7 @@ export const levelOne = {
     },
     '1-d': {
       location: 'Storage',
+      theory: 'Book 6',
       requirement: '1-c',
       type: 'checkbox',
       description:
@@ -166,6 +170,7 @@ export const levelOne = {
     },
     '2-a': {
       location: 'Chamber',
+      theory: 'Book 3',
       requirement: '',
       type: 'checkbox',
       description:
@@ -196,6 +201,7 @@ export const levelOne = {
     },
     '2-b': {
       location: 'Lobby',
+      theory: 'Book 4',
       requirement: '2-a',
       type: 'input',
       description:
@@ -214,6 +220,7 @@ export const levelOne = {
     },
     '2-c': {
       location: 'Class I',
+      theory: 'Book 5',
       requirement: '2-b',
       type: 'input',
       description:
@@ -232,6 +239,7 @@ export const levelOne = {
     },
     '2-d': {
       location: 'Class IV',
+      theory: 'Book 5',
       requirement: '2-c',
       type: 'checkbox',
       description:
@@ -298,6 +306,7 @@ export const levelOne = {
     },
     '2-e': {
       location: 'Laboratory',
+      theory: 'Book 5',
       requirement: '2-d',
       type: 'checkbox',
       description:
@@ -322,7 +331,7 @@ export const levelOne = {
           variable: 'checkbox3',
           picture: '',
           display:
-            'Because the beam is subjected t a point-load the moment diagram is linear.',
+            'Because the beam is subjected to a point-load the moment diagram is linear.',
           answer: true,
         },
       ],
@@ -334,6 +343,7 @@ export const levelOne = {
     },
     '3-a': {
       location: 'Class III',
+      theory: 'Book 1',
       type: 'slider',
       description:
         '3a) Find the length L of the beam in meters by defining it as the number of sides in a regular hexagon.',
@@ -345,6 +355,7 @@ export const levelOne = {
     },
     '3-b': {
       location: 'Chamber',
+      theory: 'Book 1',
       requirement: '3-a',
       type: 'input',
       description:
@@ -355,6 +366,7 @@ export const levelOne = {
     },
     '4-a': {
       location: 'Corridor',
+      theory: 'Book 7',
       requirement: '',
       type: 'slider',
       description:
@@ -374,6 +386,7 @@ export const levelOne = {
     },
     '5-a': {
       location: 'Corridor',
+      theory: 'Book 7',
       requirement: '',
       type: 'input',
       description:
@@ -394,6 +407,7 @@ export const levelOne = {
     },
     '5-b': {
       location: 'Playroom',
+      theory: 'Book 8',
       requirement: '5-a',
       type: 'input',
       description:
@@ -414,6 +428,7 @@ export const levelOne = {
     },
     '5-c': {
       location: 'Class V',
+      theory: 'Book 9',
       requirement: '5-b',
       type: 'input',
       description:
@@ -438,6 +453,7 @@ export const levelOne = {
     },
     '5-d': {
       location: 'Laboratory',
+      theory: 'Book 10',
       requirement: '5-c',
       type: 'input',
       description:
@@ -474,6 +490,7 @@ export const levelOne = {
     },
     '5-e': {
       location: 'Canteen',
+      theory: 'Everything',
       requirement: '5-d',
       type: 'checkbox',
       description: '5e) Will the beam fail under the given conditions?',

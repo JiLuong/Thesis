@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
 })
 export class PlaceholderComponent {}
 
-//DELETE THIS COMPONENT WHEN THE LEVELS HAVE BEN IMPLEMENTED
+//DELETE THIS COMPONENT WHEN ALL OF THE LEVELS HAVE BEN IMPLEMENTED

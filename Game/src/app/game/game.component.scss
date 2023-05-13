@@ -1,3 +1,7 @@
+#myCanvas {
+  width: 1500px;
+  height: 800px;
+}
 .canvas {
   position: absolute;
   top: 50%;
@@ -420,16 +424,16 @@
   z-index: 5;
 
   &.I {
-    background-color: #681553;
+    background-color: #440334;
   }
   &.Q {
-    background-color: #002795;
+    background-color: #00175a;
   }
   &.tips {
-    background-color: #503506;
+    background-color: #382503;
   }
   &.note {
-    background-color: #0d501a;
+    background-color: #04400f;
   }
 }
 
@@ -637,4 +641,68 @@ span.horizontal-4 {
     rgba(76, 53, 73, 0.18) 94%,
     rgba(76, 53, 73, 0.02) 100%
   );
+}
+
+//media query
+@media (max-width: 1500px) {
+  #myCanvas {
+    width: 1200px;
+    height: 640px;
+  }
+  .canvas {
+    height: 640px;
+  }
+  .taskList {
+    width: 360px;
+    height: 360px;
+    font-size: 20px;
+  }
+  .map {
+    width: 730px;
+    height: 500px;
+  }
+  .info-content {
+    font-size: 18px;
+  }
+  .modal-popup {
+    width: 1000px;
+    height: 500px;
+  }
+  .taskContainer {
+    width: 1000px;
+    height: 500px;
+  }
+  .taskContainer ::ng-deep app-modal * {
+    font-size: 20px;
+  }
+  .taskContainer ::ng-deep app-modal .container {
+    width: 90%;
+  }
+  .taskContainer ::ng-deep app-modal img {
+    max-width: 59%;
+    max-height: 190px;
+  }
+  .taskContainer ::ng-deep app-modal .userinteraction {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 352px;
+    width: 325px;
+    column-gap: 25px;
+    row-gap: 8px;
+  }
+  .taskContainer ::ng-deep app-modal .demonstration {
+    height: 345px;
+  }
+  .taskContainer ::ng-deep app-modal .output {
+    flex-direction: column;
+  }
+  .taskContainer ::ng-deep app-modal .docuView {
+    height: 380px;
+    width: 895px;
+  }
+  .modal-popup.note ::ng-deep app-notebook .notebook {
+    width: 560px;
+    max-height: 381px;
+  }
 }

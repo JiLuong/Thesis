@@ -3,7 +3,7 @@
 <!-- Interface -->
 
 <div class="canvas">
-    <canvas #mycanvas id="myCanvas" width="1500" height="800"></canvas>
+    <canvas #mycanvas id="myCanvas"></canvas>
     
     <app-progressbar class="progressBar" [solvedTasks]="taskService.solvedTasks"></app-progressbar>
 
@@ -75,7 +75,7 @@
         <div class="info-content"> 
             <p> <strong> <em> <u> Game Controls </u> </em> </strong>
                 <br><br> As an aspiring engineering student, you must have full control of the controls to navigate through the challenges and save the day. Here are the controls you need to know:
-                <br><br> Use '<strong><u>w</u></strong>' '<strong><u>a</u></strong>' '<strong><u>s</u></strong>' '<strong><u>d</u></strong>' or the <strong><u>arrow keys</u></strong> to move around the campus and explore different areas. Be cautious of obstacles and tricky pathways.
+                <br><br> Use '<strong><u>w</u></strong>' '<strong><u>a</u></strong>' '<strong><u>s</u></strong>' '<strong><u>d</u></strong>' or the <strong><u>arrow keys</u></strong> to move around the campus and explore different areas. <br/> Use '<strong><u>t</u></strong>' '<strong><u>m</u></strong>' '<strong><u>n</u></strong>' to access the tasklist, map and notebook.
                 <br><br> Use the <strong><u>spacebar</u></strong> to interact with objects and gather important information. Pay attention to every <strong><u>detail</u></strong>, as it might hold the key to accomplishing the mission.
                 <br><br> Sharpen your analytical skills and use the <strong><u>enter key</u></strong> to submit your answers to the tasks. In times of danger you might want to use the <strong><u>escape key</u></strong> to escape the tasks. Show off your problem-solving abilities and prove your engineering prowess.
                 <br><br> Now that you know the controls, it's time to onset this thrilling adventure. 
@@ -94,7 +94,7 @@
                 <br><br> Before you start, make sure to carefully review the game objectives and controls. It's important to understand everything before embarking on your mission to save humanity!
                 <br><br> Find the mission description and explore the tools at your disposal. After solving a task, you can always review your submission. As an elegant and clever adventurer, you always take notes of your findings, which can be found in the notebook!
                 <br><br> As you enter each room, be cautious of your surroundings. If you're stuck, try interacting with objects in the room. You might find a clue that will help you solve the task. 
-                <br><br> The library contains endless knowledge and wisdom, so if you ponder upon a vigorous challenge, try finding a book that might help you.
+                <br><br> The library contains endless knowledge, so if you ponder upon a vigorous challenge, try finding a book that might help you. Use the task list to find the relevant book for the task and its location!
                 <br><br> You only have a limited amount of time so be careful of wrongful task submissions!
                 <br><br> GL, HF, GG, EZ! 
                 <br><br> Tipsy regards,
@@ -109,8 +109,8 @@
         <div class="taskListContent">
             <p>Tasklist:</p>
             <div class="" *ngFor="let task of this.taskService.currentTask">
-                <div class="" *ngFor="let loc of [this.taskService.tasks[task]]">
-                    <p> &nbsp; ‣ {{task | convertToBlank:"-"}} : {{loc.location}}</p>
+                <div class="" *ngFor="let element of [this.taskService.tasks[task]]">
+                    <p> &nbsp; ‣ {{task | convertToBlank:"-"}} : {{element.location}} — {{element.theory}} </p>
                 </div>    
             </div>
         </div>

@@ -151,8 +151,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Create game
     this.k = kaboom({
       global: false,
-      width: 1500,
-      height: 800,
       font: 'sinko',
       canvas: this.canvas.nativeElement,
       background: [0, 0, 0],
@@ -256,10 +254,14 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.playerSprite.onUpdate(() => {
       // Update player
       let speed = this.player.speed;
+
+      // Count how many movement keys are pressed
       const movement = Object.values(this.player.movement).filter(
         (v) => v
       ).length;
+      // If more than one movement key: Reduce speed (for diagonal movement)
       if (movement > 1) speed *= 0.71;
+
       if (movement > 0 && this.playerSprite.curAnim() !== 'run')
         this.playerSprite.play('run');
       else if (movement == 0 && this.playerSprite.curAnim() !== 'idle')
@@ -276,6 +278,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       if (this.player.movement.up) this.player.move(0, -speed);
       if (this.player.movement.down) this.player.move(0, speed);
 
+      // Update player z-index based on y-position
+      // for correct layering of sprites (player behind objects)
       this.playerSprite.z = this.playerSprite.pos.y;
 
       let isColliding = false;
@@ -326,10 +330,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           theorySprite.color = null;
         }
 
+        // Change color of THEORY sprites
         if (this.player.isColliding(theoryElement)) {
           this.taskService.currentInteractable = theoryElement.class;
-
-          // Change color of THEORY sprites
           theorySprite.color = k.rgb(100, 100, 100);
         }
       }
@@ -443,7 +446,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
 
   initInputController() {
-    // Controls / user input
     window.addEventListener('keydown', (event) => {
       const { key } = event;
 
@@ -452,6 +454,18 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       if (!this.isBackgroundMusicPlayed && this.backgroundMusic?.paused) {
         this.backgroundMusic.play();
         this.isBackgroundMusicPlayed = true;
+      }
+
+      if (document.activeElement?.classList.contains('inputText')) {
+        console.log("Yay, I'm focused!");
+      } else {
+        if (key === 't' || key === 'T') {
+          this.toggleTaskList();
+        } else if (key === 'm' || key === 'M') {
+          this.toggleMap();
+        } else if (key === 'n' || key === 'N') {
+          this.toggleNoteBook();
+        }
       }
 
       if (this.modalVisible || this.victory) return;
@@ -467,15 +481,15 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         ) {
           this.player.speed = 0;
         }
-      } else if (key === 'ArrowLeft' || key === 'a') {
+      } else if (key === 'ArrowLeft' || key === 'a' || key === 'A') {
         this.player.movement.left = true;
         this.player.facing = 0;
-      } else if (key === 'ArrowUp' || key === 'w') {
+      } else if (key === 'ArrowUp' || key === 'w' || key === 'W') {
         this.player.movement.up = true;
-      } else if (key === 'ArrowRight' || key === 'd') {
+      } else if (key === 'ArrowRight' || key === 'd' || key === 'D') {
         this.player.movement.right = true;
         this.player.facing = 1;
-      } else if (key === 'ArrowDown' || key === 's') {
+      } else if (key === 'ArrowDown' || key === 's' || key === 'S') {
         this.player.movement.down = true;
       }
     });
@@ -493,9 +507,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         ) {
           this.openModalSound();
           this.toggleFunction({
-            propToDisable: 'modalVisible',
-            force: true,
-            value: true,
+            propToNotDisable: 'modalVisible',
+            forceAValue: true,
+            setNewValue: true,
           });
           this.newestTask = true;
           this.player.speed = 0;
@@ -514,21 +528,21 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         ) {
           this.openModalSound();
           this.toggleFunction({
-            propToDisable: 'modalVisible',
-            force: true,
-            value: true,
+            propToNotDisable: 'modalVisible',
+            forceAValue: true,
+            setNewValue: true,
           });
 
           this.newestTask = false;
           this.player.speed = 0;
         }
-      } else if (key === 'ArrowLeft' || key === 'a') {
+      } else if (key === 'ArrowLeft' || key === 'a' || key === 'A') {
         this.player.movement.left = false;
-      } else if (key === 'ArrowUp' || key === 'w') {
+      } else if (key === 'ArrowUp' || key === 'w' || key === 'W') {
         this.player.movement.up = false;
-      } else if (key === 'ArrowRight' || key === 'd') {
+      } else if (key === 'ArrowRight' || key === 'd' || key === 'D') {
         this.player.movement.right = false;
-      } else if (key === 'ArrowDown' || key === 's') {
+      } else if (key === 'ArrowDown' || key === 's' || key === 'S') {
         this.player.movement.down = false;
       } else if (key === 'Escape') {
         this.closeModal();
@@ -541,7 +555,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  toggleFunction({ propToDisable = '', force = false, value = false }) {
+  toggleFunction({
+    propToNotDisable = '',
+    forceAValue = false,
+    setNewValue = false,
+  }) {
     const arr = [
       'modalVisible',
       'taskListVisible',
@@ -554,51 +572,53 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     for (let i = 0; i < arr.length; i++) {
       const prop = arr[i];
       // Disable all properties except the one that was passed in
-      if (prop !== propToDisable) {
+      if (prop !== propToNotDisable) {
         this[prop] = false;
       }
     }
     // Toggle the property that was passed in
-    if (propToDisable !== '') {
-      // If force is true, set the property to the value that was passed in
-      // If force is false, toggle the property
-      this[propToDisable] = force ? value : !this[propToDisable];
+    if (propToNotDisable !== '') {
+      // If forceAValue is true, set the property to the value passed in
+      // Otherwise, toggle the property
+      this[propToNotDisable] = forceAValue
+        ? setNewValue
+        : !this[propToNotDisable];
     }
   }
 
   toggleNavigationBack() {
     this.player.speed = this.playerSpeed;
-    this.toggleFunction({ propToDisable: 'backNavigation' });
+    this.toggleFunction({ propToNotDisable: 'backNavigation' });
     this.buttonClickSound();
   }
   toggleTaskList() {
     this.player.speed = this.playerSpeed;
-    this.toggleFunction({ propToDisable: 'taskListVisible' });
+    this.toggleFunction({ propToNotDisable: 'taskListVisible' });
     this.buttonClickSound();
   }
   toggleMap() {
     this.player.speed = this.playerSpeed;
-    this.toggleFunction({ propToDisable: 'mapVisible' });
+    this.toggleFunction({ propToNotDisable: 'mapVisible' });
     this.buttonClickSound();
   }
   toggleNoteBook() {
     this.player.speed = this.playerSpeed;
-    this.toggleFunction({ propToDisable: 'noteBookVisible' });
+    this.toggleFunction({ propToNotDisable: 'noteBookVisible' });
     this.buttonClickSound();
   }
   toggleInfoObjectives() {
     this.player.speed = this.playerSpeed;
-    this.toggleFunction({ propToDisable: 'infoObjectives' });
+    this.toggleFunction({ propToNotDisable: 'infoObjectives' });
     this.buttonClickSound();
   }
   toggleInfoControls() {
     this.player.speed = this.playerSpeed;
-    this.toggleFunction({ propToDisable: 'infoControls' });
+    this.toggleFunction({ propToNotDisable: 'infoControls' });
     this.buttonClickSound();
   }
   toggleTips() {
     this.player.speed = this.playerSpeed;
-    this.toggleFunction({ propToDisable: 'infoTips' });
+    this.toggleFunction({ propToNotDisable: 'infoTips' });
     this.buttonClickSound();
   }
   closeModal(playSound = true) {
@@ -734,7 +754,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       );
       k.camPos(this.camera);
 
-      //'Map' and 'Task list' transparency for when the character is moving
+      //Popup transparency for when the character is moving
       const movement = Object.values(this.player.movement).filter(
         (v) => v
       ).length;
