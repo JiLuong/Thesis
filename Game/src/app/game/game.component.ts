@@ -456,9 +456,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         this.isBackgroundMusicPlayed = true;
       }
 
-      if (document.activeElement?.classList.contains('inputText')) {
-        console.log("Yay, I'm focused!");
-      } else {
+      if (!document.activeElement?.classList.contains('inputText')) {
         if (key === 't' || key === 'T') {
           this.toggleTaskList();
         } else if (key === 'm' || key === 'M') {
@@ -648,7 +646,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }, 500);
     }
 
-    if (this.taskService.currentTask.length == 0) {
+    if (this.taskService.currentTask.length == 4) {
       if (this.outOfTime) {
         this.clearAfterTime = true;
         this.clearTime = this.remainingTime;
