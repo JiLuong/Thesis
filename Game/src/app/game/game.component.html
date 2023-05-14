@@ -26,6 +26,10 @@
         &#x23F1; {{ remainingTime | convertMsToHhmmss }}
     </div>
 
+    <div class="star">
+        <p>✨</p> {{starCounter}} {{starCap}}
+    </div>
+
     <a class="musicbtn" (click)="toggleBackgroundMusic()" title="Background music"> 
         <img *ngIf="!isBackgroundMusicMuted" src="../assets/interface/music-icon.png" alt="Music On Icon">
         <img *ngIf="isBackgroundMusicMuted" src="../assets/interface/disabled-music-icon.png" alt="Music Off Icon">
@@ -39,7 +43,7 @@
     </a>
 </div>
 
-<!-- Popups -->
+<!-- Interface Popups -->
 
 <ng-container *ngIf="backNavigation">
     <div class="choice-popup">
@@ -175,7 +179,35 @@
     <div class="wrongAnswerNotification" *ngIf="wrongAnswerSubmitted">
       &#x23F1; - 10 sec
     </div>
+    <div class="correctAnswerNotification" *ngIf="correctAnswerSubmitted">
+        ✨ + 1
+    </div>
+
+
+    ✨
   </ng-container>
+
+  <ng-container *ngIf="pickAvatarColor">
+    <div class="choice-popup">
+      <div class="popup-content">
+        <h2>Pick a color</h2>
+        <p>This will be your new hair color!</p>
+        <div class="hairColors">
+          <div class="color-row">
+            <span class="color-option yellow" (click)="colorFunction('avatarYellow')">Yellow</span>
+            <span class="color-option black" (click)="colorFunction('avatarBlack')">Black</span>
+            <span class="color-option pink" (click)="colorFunction('avatarPink')">Pink</span>
+          </div>
+          <div class="color-row">
+            <span class="color-option red" (click)="colorFunction('avatarRed')">Red</span>
+            <span class="color-option green" (click)="colorFunction('avatarGreen')">Green</span>
+            <span class="color-option blue" (click)="colorFunction('avatarBlue')">Blue</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  
 
 <!-- Victory -->
 

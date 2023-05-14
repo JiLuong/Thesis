@@ -43,6 +43,10 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private camera: any;
   private k: any;
 
+  public pickAvatarColor = false;
+  public starCounter: string | number = 0;
+  public starCap = '/ 5';
+
   public level: string = '';
   public levelNumberToInt: number = 1;
   public playerName: string = '';
@@ -159,30 +163,44 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     // Load sprites and assets
     this.k.loadSprite('background', '/assets/background.png');
     this.k.loadSprite('map', '/assets/RBygg.png');
-    this.k.loadSprite('avatar', '/assets/spriteDarker777.png', {
-      // The avatar image contains X frames layed out horizontally. Slicing it into individual frames
-      sliceX: 9,
-      anims: {
-        idle: {
-          // Starts from frame 0, ends at frame 10
-          from: 0,
-          to: 0,
-          // Frame per second
-          speed: 10,
-          loop: true,
-        },
-        run: {
-          from: 1,
-          to: 8,
-          speed: 11,
-          loop: true,
-        },
-      },
-    });
     this.k.loadSprite('plants', '/assets/passagePlants.png');
     this.k.loadSprite('sofas', '/assets/passageSofas.png');
     this.k.loadSprite('mapOverlap', '/assets/RByggMapOverlap.png');
     this.k.loadSprite('objectOverlap', '/assets/RByggObjectOverlap.png');
+
+    // Load game character sprites
+    const loadAvatarSprite = (spriteName: string, imagePath: string) => {
+      this.k.loadSprite(spriteName, imagePath, {
+        sliceX: 9,
+        anims: {
+          idle: {
+            from: 0,
+            to: 0,
+            speed: 10,
+            loop: true,
+          },
+          run: {
+            from: 1,
+            to: 8,
+            speed: 11,
+            loop: true,
+          },
+        },
+      });
+    };
+    const avatarColors = [
+      'avatarYellow',
+      'avatarRed',
+      'avatarGreen',
+      'avatarBlue',
+      'avatarPink',
+      'avatarBlack',
+    ];
+    avatarColors.forEach((avatarColor) => {
+      const spriteName = `${avatarColor}`;
+      const imagePath = `/assets/characterSprites/${avatarColor}.png`;
+      loadAvatarSprite(spriteName, imagePath);
+    });
 
     //Task sprites
     for (
@@ -233,7 +251,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       },
     ]);
     this.playerSprite = k.add([
-      k.sprite('avatar'),
+      k.sprite('avatarYellow'),
       k.origin('center'),
       k.pos(120, 80),
       k.follow(this.player, k.vec2(0, 1.25)),
@@ -627,6 +645,11 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  colorFunction(pickedColor: string) {
+    this.playerSprite.use(this.k.sprite(pickedColor));
+    this.pickAvatarColor = false;
+  }
+
   submitTask() {
     if (
       this.taskService.checkTaskAnswer(this.taskService.currentInteractable)
@@ -636,7 +659,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.correctAnswerSubmitted = false;
         this.closeModal(false);
-      }, 900);
+      }, 1000);
     } else {
       this.incorrectAnswerSound();
       this.remainingTime -= 10000;
@@ -646,6 +669,32 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }, 500);
     }
 
+    // Game cosmetic rewards
+    const stars = this.taskService.solvedTasks.length;
+    this.starCounter = stars;
+    if (stars === 5 || stars == 10 || stars === 15) {
+      setTimeout(() => {
+        this.pickAvatarColor = true;
+      }, 2500);
+
+      if (stars >= 5) {
+        setTimeout(() => {
+          this.starCap = '/ 10';
+        }, 3000);
+      }
+      if (stars >= 10) {
+        setTimeout(() => {
+          this.starCap = '/ 15';
+        }, 3000);
+      }
+      if (stars >= 15) {
+        setTimeout(() => {
+          this.starCap = '';
+        }, 3000);
+      }
+    }
+
+    // Game clear
     if (this.taskService.currentTask.length == 0) {
       if (this.outOfTime) {
         this.clearAfterTime = true;

@@ -366,7 +366,7 @@ export const levelOne = {
     },
     '4-a': {
       location: 'Corridor',
-      theory: 'Book 7',
+      theory: 'Book 6',
       requirement: '',
       type: 'slider',
       description:

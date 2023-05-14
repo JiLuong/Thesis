@@ -102,6 +102,22 @@
   right: 25px;
 }
 
+.star {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  bottom: 22px;
+  right: 200px;
+  text-shadow: 1px 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black,
+    0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black,
+    0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black,
+    0 0 4px black, 0 0 4px black, 0 0 4px black;
+  p {
+    display: contents;
+    text-shadow: 1px 0 4px black, 0 0 4px black;
+  }
+}
+
 .timer {
   border: 3px solid black;
   border-radius: 6px;
@@ -205,6 +221,23 @@
   @include glowAnimation(rgb(0, 247, 0), green, rgb(0, 167, 0), glowCorrect);
   animation: glowCorrect 0.7s ease-in-out;
 }
+.correctAnswerNotification {
+  $color: rgb(28, 131, 30);
+  z-index: 5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: white;
+  opacity: 0;
+  text-shadow: 1px 0 4px green, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color;
+  animation: AnswerNotification 1s ease-in-out forwards;
+}
 
 .wrongAnswer {
   @include glowAnimation(red, rgb(255, 94, 0), red, glowWrong);
@@ -225,10 +258,10 @@
     0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
     0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
     0 0 4px $color;
-  animation: wrongAnswerNotification 1s ease-in-out forwards;
+  animation: AnswerNotification 1s ease-in-out forwards;
 }
 
-@keyframes wrongAnswerNotification {
+@keyframes AnswerNotification {
   0% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(1);
@@ -401,6 +434,58 @@
     display: block;
     margin: 0 auto;
     max-width: 100%;
+  }
+}
+
+.hairColors {
+  display: flex;
+  flex-direction: column;
+}
+.color-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  column-gap: 45px;
+}
+.color-option {
+  $color: black;
+  width: 100px;
+  border: 4px solid white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.4s;
+  text-shadow: 1px 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color, 0 0 4px $color, 0 0 4px $color, 0 0 4px $color,
+    0 0 4px $color;
+
+  &.yellow {
+    background-color: #dcab00;
+  }
+  &.black {
+    background-color: #212121;
+  }
+  &.pink {
+    background-color: #d800b9;
+  }
+  &.red {
+    background-color: #ef0000;
+  }
+  &.green {
+    background-color: #62da00;
+  }
+  &.blue {
+    background-color: #00afd9;
+  }
+
+  &:hover {
+    transform: scale(1.25);
   }
 }
 
