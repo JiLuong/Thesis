@@ -176,16 +176,14 @@
         <button class="submit" (click)="submitTask()"><span>Submit</span></button>
       </div>
     </div>
+    
     <div class="wrongAnswerNotification" *ngIf="wrongAnswerSubmitted">
       &#x23F1; - 10 sec
     </div>
     <div class="correctAnswerNotification" *ngIf="correctAnswerSubmitted">
         ✨ + 1
     </div>
-
-
-    ✨
-  </ng-container>
+</ng-container>
 
   <ng-container *ngIf="pickAvatarColor">
     <div class="choice-popup">

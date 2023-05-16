@@ -74,7 +74,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   public hideContainer = false;
   public outOfTime = false;
   public timerStarted = false;
-  public remainingTime = 8100000; //15300000 ms = 4h 15min
+  public remainingTime = 10800000; //3 hours in milliseconds
 
   public victory = false;
   public clearAfterTime = false;

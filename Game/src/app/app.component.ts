@@ -7,13 +7,9 @@ import LevelMap from './level-map';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'Game';
   levelMap = new LevelMap();
 
-  ngOnInit(): void {
-    console.log(this.levelMap.realfagsbygget)
-
-  }
-
+  ngOnInit(): void {}
 }
