@@ -85,14 +85,13 @@ export const levelOne = {
       type: 'info',
       description: 'Master Thesis',
       content:
-        '<br>This project is part of my master thesis. Stay tuned for more info!<br><br>',
-      image: '../assets/thumbsup.gif',
+        "<br> Designer's Den is a project that is part of my Master's thesis in Structural Engineering. <br><br>This level is predicated upon the syllabi of the courses TKT4116/TKT4118 Mechanics 1 offered at NTNU - Norwegian University of Science and Technology. The coursework encapsulates the principles of equilibrium in statically determinate structures. This level is primarily concerned with beam elements and their corresponding internal forces, as well as the mechanics of materials and the resultant internal stresses experienced by the elements. <br><br> Students will learn to apply various analytical methods to solve problems related to the deformation and failure of beam structures. The course also covers the properties of materials used in engineering design and their behavior under various loading conditions. <br><br> This project has been authored by Jimmy Luong<br><br>",
     },
     'i-3': {
       type: 'info',
       description: 'Master Thesis',
       content:
-        '<br>If you have any questions or feedback regarding this project, please contact me at: jimmynl@stud.ntnu.no<br><br>',
+        '<br>If you have any questions or feedback regarding this project, please contact me at: jimmynl@stud.ntnu.no<br><br> Stay tuned for more updates! <br><br> ',
       image: '../assets/thumbsup.gif',
     },
     'i-4': {
