@@ -25,16 +25,16 @@ Feel free to explore the game, provide feedback, and enjoy the immersive learnin
 To run Designer's Den locally on your machine, follow these steps:
 
 1. Clone the repository to your local machine:
-git clone https://github.com/your-username/your-repo.git
+`git clone https://github.com/your-username/your-repo.git`
 
-2. Navigate to the `/Game` directory:
-cd Game
+2. Navigate to the /Game directory:
+`cd Game`
 
 3. Install the required dependencies:
-npm install
+`npm install`
 
 4. Start the game:
-npm start
+`npm start`
 
 5. Open your web browser and visit `http://localhost:4200` to access the game.
 
@@ -48,5 +48,5 @@ Feel free to explore and customize the game further, and don't hesitate to reach
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://opensource.org/license/mit/).
 
