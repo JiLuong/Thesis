@@ -22,7 +22,7 @@ Feel free to explore the game, provide feedback, and enjoy the immersive learnin
 
 ## Getting Started
 
-To run Designer's Den locally on your machine, follow these steps:
+To run Designer's Den locally on your machine, follow these steps in a terminal:
 
 1. Clone the repository to your local machine:
 `git clone https://github.com/your-username/your-repo.git`
@@ -48,5 +48,5 @@ Feel free to explore and customize the game further, and don't hesitate to reach
 
 ## License
 
-This project is licensed under the [MIT License](https://opensource.org/license/mit/).
+This project is licensed under the [MIT License](LICENSE).
 
