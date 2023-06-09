@@ -4,13 +4,13 @@ Welcome to Designer's Den, an educational game developed as part of my Master's 
 
 ## About the Game
 
-Designer's Den is a web-based game developed using Angular and Typescript with the help of KaboomJS. It incorporates game-based learning principles to teach and reinforce fundamental concepts in structural engineering. The game features various levels, each corresponding to a specific course within structural mechanics offered at NTNU - Norwegian University of Science and Technology. Players solve tasks, analyze structures, and apply their knowledge to progress through the game.
+Designer's Den is a web-based game developed using Angular and TypeScript with the help of KaboomJS. It incorporates game-based learning principles to teach and reinforce fundamental concepts in structural engineering. The game features various levels, each corresponding to a specific course within structural mechanics offered at NTNU - Norwegian University of Science and Technology. Players solve tasks, analyze structures, and apply their knowledge to progress through the game.
 
 ## Master's Thesis
 
 This game is the outcome of my Master's thesis, titled "Game-Based Learning in Structural Engineering Education." In this thesis, I explore the effectiveness of game-based learning as a tool to enhance student engagement and comprehension in structural engineering education. The thesis delves into the design process, pedagogical considerations, game mechanics, and evaluation of the game.
 
-You can read the full Master's thesis [here](link-to-your-thesis-pdf).
+You can read the full Master's thesis [here](https://drive.google.com/file/d/1c2i8zcZmR-wSbQGb3FnwmvULpqxffxiX/view?usp=drive_link).
 
 ## Deployment
 
