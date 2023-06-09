@@ -406,7 +406,7 @@ export const levelOne = {
     },
     '5-b': {
       location: 'Playroom',
-      theory: 'Book 8',
+      theory: 'Book 8 & 9',
       requirement: '5-a',
       type: 'input',
       description:
@@ -427,7 +427,7 @@ export const levelOne = {
     },
     '5-c': {
       location: 'Class V',
-      theory: 'Book 9',
+      theory: 'Book 8 & 9',
       requirement: '5-b',
       type: 'input',
       description:
