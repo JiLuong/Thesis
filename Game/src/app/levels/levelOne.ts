@@ -83,7 +83,7 @@ export const levelOne = {
     },
     'i-2': {
       type: 'info',
-      description: 'Master Thesis',
+      description: 'Master Project',
       content:
         "<br> Designer's Den is a project that is part of my Master's thesis in Structural Engineering. <br><br>This level is predicated upon the syllabi of the courses TKT4116/TKT4118 Mechanics 1 offered at NTNU - Norwegian University of Science and Technology. The coursework encapsulates the principles of equilibrium in statically determinate structures. This level is primarily concerned with beam elements and their corresponding internal forces, as well as the mechanics of materials and the resultant internal stresses experienced by the elements. <br><br> Students will learn to apply various analytical methods to solve problems related to the deformation and failure of beam structures. The course also covers the properties of materials used in engineering design and their behavior under various loading conditions. <br><br> This project has been authored by Jimmy Luong<br><br>",
     },
@@ -91,14 +91,14 @@ export const levelOne = {
       type: 'info',
       description: 'Master Thesis',
       content:
-        '<br>If you have any questions or feedback regarding this project, please contact me at: jimmynl@stud.ntnu.no<br><br> Stay tuned for more updates! <br><br> ',
+        '<br>You can read the whole master thesis <a href="https://drive.google.com/file/d/1c2i8zcZmR-wSbQGb3FnwmvULpqxffxiX/view?usp=drive_link">here</a>. <br><br>If you have any questions or feedback regarding this project, please contact me at: jimmynl@stud.ntnu.no<br><br> Stay tuned for more updates! <br><br> ',
       image: '../assets/thumbsup.gif',
     },
     'i-4': {
       type: 'info',
-      description: 'Master Thesis',
+      description: 'Unspoken Rizz',
       content:
-        "<br>No I won't give you my phone number for free, but you can have my instagram: @jimmynluong<br><br>",
+        "<br>No, I won't give you my phone number for free, but you can have my instagram: @jimmynluong<br><br>",
       image: '../assets/thumbsup.gif',
     },
   },
