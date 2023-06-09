@@ -16,7 +16,7 @@ You can read the full Master's thesis [here](https://drive.google.com/file/d/1c2
 
 The game is deployed and accessible online. You can play the game by visiting the following link:
 
-[Play Designer's Den](https://silly-douhua-cdfe30.netlify.app/)
+[Play Designer's Den](https://https://designersden.netlify.app/)
 
 Feel free to explore the game, provide feedback, and enjoy the immersive learning experience!
 
